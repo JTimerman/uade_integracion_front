@@ -21,7 +21,9 @@ server.post("/signin", (req, res) => {
   );
 
   if (possibleUser) {
-    res.status(200).json(possibleUser.roles);
+    const { id, password, ...sentData } = possibleUser;
+
+    res.status(200).json(sentData);
   } else {
     res.status(401).json([]);
   }

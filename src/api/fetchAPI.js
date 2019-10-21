@@ -1,5 +1,5 @@
 export default (url, method, body) => {
-  if (method == "GET") {
+  if (method === "GET") {
     return fetch(url);
   } else {
     return fetch(url, {

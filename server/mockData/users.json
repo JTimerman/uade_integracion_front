@@ -2,36 +2,36 @@
   {
     "id": "jtimerman",
     "name": "Joaquin",
-    "surname": "Timerman",
+    "lastname": "Timerman",
     "password": "jtimerman",
-    "roles": ["admin"]
+    "role": "ADMIN"
   },
   {
     "id": "dbalestri",
     "name": "Denis",
-    "surname": "Balestri",
+    "lastname": "Balestri",
     "password": "dbalestri",
-    "roles": ["admin", "student"]
+    "role": "STUDENT"
   },
   {
     "id": "jantonaz",
     "name": "Juan Pablo",
-    "surname": "Antonaz",
+    "lastname": "Antonaz",
     "password": "jantonaz",
-    "roles": ["admin", "holder"]
+    "role": "EMPLOYEE"
   },
   {
     "id": "mberrueta",
     "name": "Matias",
-    "surname": "Berrueta",
+    "lastname": "Berrueta",
     "password": "mberrueta",
-    "roles": ["admin", "employee"]
+    "role": "HOLDER"
   },
   {
     "id": "dcrespi",
     "name": "Damian",
-    "surname": "Crespi",
+    "lastname": "Crespi",
     "password": "dcrespi",
-    "roles": ["admin", "holder"]
+    "role": "ADMIN"
   }
 ]
