@@ -19,6 +19,7 @@ function App() {
           <Route path="/login" component={SignIn} />
           <Route exact path="/logout" component={Logout} />
           <PrivateRoute exact path="/register" component={Home} />
+          <PrivateRoute default path="/" component={Home} />
         </Switch>
       </BrowserRouter>
     </Provider>
