@@ -1,5 +1,4 @@
 import React from "react";
-import authService from "./authService";
 import { ROLES_NAVBAR_ITEMS } from "./config";
 import { Redirect } from "react-router-dom";
 
