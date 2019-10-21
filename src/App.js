@@ -5,7 +5,7 @@ import "./App.css";
 import Home from "./Home";
 import Test from "./Test";
 import { PrivateRoute } from "./PrivateRoute";
-import SignIn from "./SignIn/signIn";
+import SignIn from "./components/SignIn/signIn";
 import Logout from "./Logout";
 import store from "./redux/store";
 window.store = store;
