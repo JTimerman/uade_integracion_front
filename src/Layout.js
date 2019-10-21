@@ -17,11 +17,14 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Avatar from "react-avatar";
-import { Button } from "@material-ui/core";
+import { Button, Icon } from "@material-ui/core";
 import styles from "./Layout.module.css";
 import { ROLES_NAVBAR_ITEMS } from "./config";
 import { Link } from "react-router-dom";
 import authService from "./authService";
+
+import HouseIcon from "@material-ui/icons/House";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 
 const drawerWidth = 240;
 const user = {
@@ -99,6 +102,10 @@ const Layout = ({ children }) => {
     setOpen(false);
   };
 
+  const handlerClick = () => {
+    console.log("aca");
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -158,14 +165,32 @@ const Layout = ({ children }) => {
         </div>
         <Divider />
         <List>
-          {currentUserNavbarItems.map(({ path, name }, index) => (
-            <ListItem button component={Link} to={path} key={name}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={name} />
-            </ListItem>
-          ))}
+          {currentUserNavbarItems.map(({ path, name, icon }, index) => {
+            let IconComponent;
+
+            switch (icon) {
+              case "GroupAddIcon":
+                IconComponent = <GroupAddIcon />;
+                break;
+              case "HouseIcon":
+                IconComponent = <HouseIcon />;
+                break;
+              default:
+                IconComponent = null;
+            }
+            return (
+              <ListItem
+                button
+                component={Link}
+                to={path}
+                key={name}
+                onClick={handlerClick}
+              >
+                <ListItemIcon>{IconComponent}</ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            );
+          })}
         </List>
       </Drawer>
       <main

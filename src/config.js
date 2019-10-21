@@ -1,6 +1,25 @@
 export const NAVBAR_ITEMS = {
   LOGOUT: { path: "/logout", name: "Salir" },
-  REGISTER: { path: "/register", name: "Registrar usuario" },
+  REGISTERSTUDENT: {
+    path: "/registerStudent",
+    name: "Register Student",
+    icon: "GroupAddIcon"
+  },
+  REGISTEREMPLOYEE: {
+    path: "/registerEmployee",
+    name: "Register Employee",
+    icon: "GroupAddIcon"
+  },
+  REGISTERHOLDER: {
+    path: "/registerHolder",
+    name: "Register Holder",
+    icon: "GroupAddIcon"
+  },
+  HOMEADMIN: {
+    path: "/homeADMIN",
+    name: "Home Admin",
+    icon: "HouseIcon"
+  },
   ASSOCIATE_STUDENT: {
     path: "/associate-student",
     name: "Asociar alumno"
@@ -31,7 +50,12 @@ export const ROLES_DESCRIPTION = {
 };
 
 export const ROLES_NAVBAR_ITEMS = {
-  ADMIN: [NAVBAR_ITEMS.REGISTER],
+  ADMIN: [
+    NAVBAR_ITEMS.HOMEADMIN,
+    NAVBAR_ITEMS.REGISTERSTUDENT,
+    NAVBAR_ITEMS.REGISTEREMPLOYEE,
+    NAVBAR_ITEMS.REGISTERHOLDER
+  ],
   HOLDER: [NAVBAR_ITEMS.ASSOCIATE_STUDENT],
   STUDENT: [NAVBAR_ITEMS.STUDENT_DETAILS],
   EMPLOYEE: [NAVBAR_ITEMS.EMPLOYEE_DETAILS]
