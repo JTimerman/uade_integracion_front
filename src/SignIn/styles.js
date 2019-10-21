@@ -21,5 +21,14 @@ export default makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  margin: {
+    margin: theme.spacing(1)
+  },
+  p: {
+    color: "red",
+    marginTop: "3%",
+    textAlign: "center",
+    fontSize: "13px"
   }
 }));

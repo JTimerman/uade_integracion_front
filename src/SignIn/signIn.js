@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import Snackbar from "@material-ui/core/Snackbar";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -14,12 +14,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-
+import Alert from "../components/Alert/Alert";
 import signInService from "../services/signIn";
 
 const SignIn = () => {
   const classes = useStyles();
   const [values, setValues] = React.useState({});
+  const [error, setError] = React.useState(false);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -27,10 +28,9 @@ const SignIn = () => {
 
   const handleClick = event => {
     event.preventDefault();
-
     signInService()
       .then(response => response.json())
-      .catch(error => console.error("Error:", error));
+      .catch(err => setError(true));
   };
 
   return (
@@ -43,8 +43,10 @@ const SignIn = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+
         <form className={classes.form} noValidate>
           <TextField
+            error={error}
             variant="outlined"
             margin="normal"
             required
@@ -57,6 +59,7 @@ const SignIn = () => {
             onChange={handleChange("username")}
           />
           <TextField
+            error={error}
             variant="outlined"
             margin="normal"
             required
@@ -68,6 +71,9 @@ const SignIn = () => {
             autoComplete="current-password"
             onChange={handleChange("password")}
           />
+          {error && (
+            <p className={classes.p}>{"Username or Password is incorrect!"}</p>
+          )}
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
