@@ -1,34 +1,27 @@
 import React from "react";
-import logo from "./logo.svg";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-
-import store from "./redux/store";
-
 import "./App.css";
-
+import Home from "./Home";
+import Test from "./Test";
+import { PrivateRoute } from "./PrivateRoute";
+import Logout from "./Logout";
+import store from "./redux/store";
 window.store = store;
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={Test} />
+          <Route exact path="/logout" component={Logout} />
+          <PrivateRoute exact path="/" component={Home} />>
+          <PrivateRoute path="/register" component={Test} />
+          <PrivateRoute path="/associate-student" component={Test} />
+        </Switch>
+      </BrowserRouter>
     </Provider>
   );
 }
-
 export default App;
