@@ -1,21 +1,19 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import authService from "./authService";
-import { ROLES, ROLES_NAVBAR_ITEMS } from "./config";
-import Layout from "./components/Layout";
+import { ROLES, ROLES_NAVBAR_ITEMS } from "../../config";
+import Layout from "../Layout";
 
 export const PrivateRoute = ({
   component: Component,
   children,
-  roles,
+  role,
   ...rest
 }) => (
   <Route
     {...rest}
     render={props => {
-      const currentUser = authService.getCurrentUser();
-      if (!currentUser) {
+      if (!role) {
         // not logged in so redirect to login page with the return url
         return (
           <Redirect
@@ -27,8 +25,8 @@ export const PrivateRoute = ({
       // check if route is restricted by role
       if (
         props.location.pathname !== "/" &&
-        ROLES[currentUser.rolId] &&
-        !ROLES_NAVBAR_ITEMS[currentUser.rolId].find(
+        ROLES[role] &&
+        !ROLES_NAVBAR_ITEMS[role].find(
           ({ path }) => path === props.location.pathname
         )
       ) {
