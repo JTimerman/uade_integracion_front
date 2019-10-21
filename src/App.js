@@ -4,9 +4,9 @@ import { Provider } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
+import Logout from "./components/Logout";
 
 import Test from "./Test";
-import Logout from "./Logout";
 import store from "./redux/store";
 import "./App.css";
 
