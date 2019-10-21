@@ -6,7 +6,6 @@ import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Logout from "./components/Logout";
 
-import Test from "./Test";
 import store from "./redux/store";
 import "./App.css";
 
@@ -19,9 +18,7 @@ function App() {
         <Switch>
           <Route path="/login" component={SignIn} />
           <Route exact path="/logout" component={Logout} />
-          <PrivateRoute exact path="/" component={Home} />>
-          <PrivateRoute path="/register" component={Test} />
-          <PrivateRoute path="/associate-student" component={Test} />
+          <PrivateRoute exact path="/register" component={Home} />
         </Switch>
       </BrowserRouter>
     </Provider>
