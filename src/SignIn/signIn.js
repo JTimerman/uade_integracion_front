@@ -14,10 +14,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
 import Alert from "../components/Alert/Alert";
 import signInService from "../services/signIn";
 
-const SignIn = () => {
+const SignIn = props => {
   const classes = useStyles();
   const [values, setValues] = React.useState({});
   const [error, setError] = React.useState(false);
@@ -28,9 +29,14 @@ const SignIn = () => {
 
   const handleClick = event => {
     event.preventDefault();
-    signInService()
-      .then(response => response.json())
-      .catch(err => setError(true));
+    const { username, password } = values;
+
+    signInService(username, password)
+      .then(() => {
+        props.history.push("/");
+      })
+
+      .catch(() => setError(true));
   };
 
   return (
@@ -94,4 +100,6 @@ const SignIn = () => {
     </Container>
   );
 };
-export default withStyles(useStyles)(SignIn);
+const styledComponent = withStyles(useStyles)(SignIn);
+
+export default withRouter(styledComponent);

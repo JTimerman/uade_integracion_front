@@ -8,6 +8,6 @@ export default (url, method, body) => {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then(response => response.JSON());
+    });
   }
 };
