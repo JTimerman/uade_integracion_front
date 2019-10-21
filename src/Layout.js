@@ -24,7 +24,11 @@ import { Link } from "react-router-dom";
 import authService from "./authService";
 
 const drawerWidth = 240;
-const user = authService.getCurrentUser();
+const user = {
+  name: "Nombre",
+  rolId: "ADMIN",
+  rolDescription: "description"
+};
 const currentUserNavbarItems = user && ROLES_NAVBAR_ITEMS[user.rolId];
 
 const useStyles = makeStyles(theme => ({
