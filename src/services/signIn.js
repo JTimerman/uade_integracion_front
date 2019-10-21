@@ -8,13 +8,6 @@ export default (username, password) => {
     if (response.status === 401) {
       return Promise.reject();
     } else {
-      const user = {
-        name: "Nombre",
-        rolId: "ADMIN",
-        rolDescription: "description"
-      };
-
-      window.localStorage.setItem("currentUser", JSON.stringify(user));
       return response.json();
     }
   });
