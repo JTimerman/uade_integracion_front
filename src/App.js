@@ -3,8 +3,8 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
 import SignIn from "./components/SignIn";
+import Home from "./components/Home";
 
-import Home from "./Home";
 import Test from "./Test";
 import Logout from "./Logout";
 import store from "./redux/store";
