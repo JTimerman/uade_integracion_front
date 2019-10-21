@@ -20,13 +20,10 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { ROLES_NAVBAR_ITEMS } from "../../config";
-import authService from "../../authService";
-
-const user = authService.getCurrentUser();
-const currentUserNavbarItems = user && ROLES_NAVBAR_ITEMS[user.rolId];
 
 const Layout = ({ children, classes, name, surname, role }) => {
   const [open, setOpen] = React.useState(true);
+  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role];
 
   const handleDrawerOpen = () => {
     setOpen(true);

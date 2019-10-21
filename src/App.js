@@ -5,6 +5,7 @@ import "./App.css";
 import Home from "./Home";
 import Test from "./Test";
 import { PrivateRoute } from "./PrivateRoute";
+import SignIn from "./components/SignIn/signIn";
 import Logout from "./Logout";
 import store from "./redux/store";
 window.store = store;
@@ -14,7 +15,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/login" component={Test} />
+          <Route path="/login" component={SignIn} />
           <Route exact path="/logout" component={Logout} />
           <PrivateRoute exact path="/" component={Home} />>
           <PrivateRoute path="/register" component={Test} />

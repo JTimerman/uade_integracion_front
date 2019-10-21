@@ -1,0 +1,4 @@
+{
+  "BASE_URL": "http://localhost:3200",
+  "SIGN_IN": "/signin"
+}
