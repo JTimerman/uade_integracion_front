@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import { ROLES, ROLES_NAVBAR_ITEMS } from "../../config";
+import roles from "../../constants/roles.json";
+import { ROLES_NAVBAR_ITEMS } from "../../config";
 import Layout from "../Layout";
 
 export const PrivateRoute = ({
@@ -25,7 +26,7 @@ export const PrivateRoute = ({
       // check if route is restricted by role
       if (
         props.location.pathname !== "/" &&
-        ROLES[role] &&
+        roles[role] &&
         !ROLES_NAVBAR_ITEMS[role].find(
           ({ path }) => path === props.location.pathname
         )
