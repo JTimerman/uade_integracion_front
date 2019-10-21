@@ -1,0 +1,37 @@
+[
+  {
+    "id": "jtimerman",
+    "name": "Joaquin",
+    "surname": "Timerman",
+    "password": "jtimerman",
+    "roles": ["admin"]
+  },
+  {
+    "id": "dbalestri",
+    "name": "Denis",
+    "surname": "Balestri",
+    "password": "dbalestri",
+    "roles": ["admin", "student"]
+  },
+  {
+    "id": "jantonaz",
+    "name": "Juan Pablo",
+    "surname": "Antonaz",
+    "password": "jantonaz",
+    "roles": ["admin", "holder"]
+  },
+  {
+    "id": "mberrueta",
+    "name": "Matias",
+    "surname": "Berrueta",
+    "password": "mberrueta",
+    "roles": ["admin", "employee"]
+  },
+  {
+    "id": "dcrespi",
+    "name": "Damian",
+    "surname": "Crespi",
+    "password": "dcrespi",
+    "roles": ["admin", "holder"]
+  }
+]
