@@ -7,7 +7,6 @@ import Home from "./components/Home";
 import Logout from "./components/Logout";
 
 import store from "./redux/store";
-import "./App.css";
 
 window.store = store;
 
