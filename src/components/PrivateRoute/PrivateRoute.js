@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 import roles from "../../constants/roles.json";
-import { ROLES_NAVBAR_ITEMS } from "../../config";
+import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 import Layout from "../Layout";
 
 export const PrivateRoute = ({

@@ -19,7 +19,7 @@ import Avatar from "react-avatar";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-import { ROLES_NAVBAR_ITEMS } from "../../config";
+import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
 const Layout = ({ children, classes, name, surname, role }) => {
   const [open, setOpen] = React.useState(true);

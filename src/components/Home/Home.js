@@ -1,5 +1,5 @@
 import React from "react";
-import { ROLES_NAVBAR_ITEMS } from "../../config";
+import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 import { Redirect } from "react-router-dom";
 
 const Home = ({ role }) => {
