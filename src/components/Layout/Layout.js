@@ -25,7 +25,7 @@ import authService from "../../authService";
 const user = authService.getCurrentUser();
 const currentUserNavbarItems = user && ROLES_NAVBAR_ITEMS[user.rolId];
 
-const Layout = ({ children, classes }) => {
+const Layout = ({ children, classes, name, surname, role }) => {
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -76,12 +76,12 @@ const Layout = ({ children, classes }) => {
         </div>
         <Divider />
         <div className={classes.profile}>
-          <Avatar name={user.name} round="100px" />
+          <Avatar name={name} round="100px" />
           <Typography variant="h6" noWrap>
-            {user.name}
+            {`${name} ${surname}`}
           </Typography>
           <Typography variant="subtitle1" noWrap>
-            {user.rolDescription}
+            {role}
           </Typography>
           <Button
             variant="contained"

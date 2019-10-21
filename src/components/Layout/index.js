@@ -5,6 +5,7 @@ import {
   getUserName,
   getUserSurname
 } from "../../redux/selectors/personalData";
+import { getUserRole } from "../../redux/selectors/role";
 
 import Layout from "./Layout";
 
@@ -75,7 +76,8 @@ const styledComponent = withStyles(styles)(Layout);
 
 const mapStateToProps = store => ({
   name: getUserName(store),
-  surname: getUserSurname(store)
+  surname: getUserSurname(store),
+  role: getUserRole(store)
 });
 
 export default connect(mapStateToProps)(styledComponent);
