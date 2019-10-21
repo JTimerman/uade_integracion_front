@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
-const Layout = ({ children, classes, name, surname, role }) => {
+const Layout = ({ children, classes, name, lastname, role }) => {
   const [open, setOpen] = React.useState(true);
   const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role] || [];
 
@@ -75,7 +75,7 @@ const Layout = ({ children, classes, name, surname, role }) => {
         <div className={classes.profile}>
           <Avatar name={name} round="100px" />
           <Typography variant="h6" noWrap>
-            {`${name} ${surname}`}
+            {`${name} ${lastname}`}
           </Typography>
           <Typography variant="subtitle1" noWrap>
             {role}

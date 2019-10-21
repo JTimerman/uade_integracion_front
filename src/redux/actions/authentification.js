@@ -8,7 +8,7 @@ export const authenticateUser = (username, password) => {
       .then(user => {
         const personalData = {
           name: user.name,
-          surname: user.surname
+          lastname: user.lastname
         };
 
         dispatch(setPersonalData(personalData));

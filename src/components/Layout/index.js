@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import {
   getUserName,
-  getUserSurname
+  getUserLastname
 } from "../../redux/selectors/personalData";
 import { getUserRole } from "../../redux/selectors/role";
 
@@ -76,7 +76,7 @@ const styledComponent = withStyles(styles)(Layout);
 
 const mapStateToProps = store => ({
   name: getUserName(store),
-  surname: getUserSurname(store),
+  lastname: getUserLastname(store),
   role: getUserRole(store)
 });
 
