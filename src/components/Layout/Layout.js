@@ -23,7 +23,7 @@ import { ROLES_NAVBAR_ITEMS } from "../../config";
 
 const Layout = ({ children, classes, name, surname, role }) => {
   const [open, setOpen] = React.useState(true);
-  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role];
+  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role] || [];
 
   const handleDrawerOpen = () => {
     setOpen(true);
