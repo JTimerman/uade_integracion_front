@@ -4,34 +4,34 @@
     "name": "Joaquin",
     "surname": "Timerman",
     "password": "jtimerman",
-    "role": "admin"
+    "role": "ADMIN"
   },
   {
     "id": "dbalestri",
     "name": "Denis",
     "surname": "Balestri",
     "password": "dbalestri",
-    "role": "student"
+    "role": "STUDENT"
   },
   {
     "id": "jantonaz",
     "name": "Juan Pablo",
     "surname": "Antonaz",
     "password": "jantonaz",
-    "role": "employee"
+    "role": "EMPLOYEE"
   },
   {
     "id": "mberrueta",
     "name": "Matias",
     "surname": "Berrueta",
     "password": "mberrueta",
-    "role": "tutor"
+    "role": "HOLDER"
   },
   {
     "id": "dcrespi",
     "name": "Damian",
     "surname": "Crespi",
     "password": "dcrespi",
-    "role": "admin"
+    "role": "ADMIN"
   }
 ]
