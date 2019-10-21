@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -18,73 +17,15 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Avatar from "react-avatar";
 import { Button } from "@material-ui/core";
-import styles from "./Layout.module.css";
-import { ROLES_NAVBAR_ITEMS } from "./config";
 import { Link } from "react-router-dom";
-import authService from "./authService";
 
-const drawerWidth = 240;
+import { ROLES_NAVBAR_ITEMS } from "../../config";
+import authService from "../../authService";
+
 const user = authService.getCurrentUser();
 const currentUserNavbarItems = user && ROLES_NAVBAR_ITEMS[user.rolId];
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex"
-  },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginLeft: -drawerWidth
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginLeft: 0
-  }
-}));
-
-const Layout = ({ children }) => {
-  const classes = useStyles();
+const Layout = ({ children, classes }) => {
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -134,7 +75,7 @@ const Layout = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <div className={styles.profile}>
+        <div className={classes.profile}>
           <Avatar name={user.name} round="100px" />
           <Typography variant="h6" noWrap>
             {user.name}

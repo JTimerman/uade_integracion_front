@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 import authService from "./authService";
 import { ROLES, ROLES_NAVBAR_ITEMS } from "./config";
-import Layout from "./Layout";
+import Layout from "./components/Layout";
 
 export const PrivateRoute = ({
   component: Component,
