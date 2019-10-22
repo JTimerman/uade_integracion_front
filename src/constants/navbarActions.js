@@ -18,7 +18,7 @@ const NAVBAR_ITEMS = {
   HOMEADMIN: {
     path: "/homeADMIN",
     name: "Home Admin",
-    icon: "HouseIcon"
+    icon: "HomeIcon"
   },
   ASSOCIATE_STUDENT: {
     path: "/associate-student",

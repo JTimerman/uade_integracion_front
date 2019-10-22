@@ -16,7 +16,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "react-avatar";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import HomeIcon from "@material-ui/icons/Home";
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
 const Layout = ({ children, classes, name, lastname, role }) => {
@@ -102,7 +103,7 @@ const Layout = ({ children, classes, name, lastname, role }) => {
                 IconComponent = <GroupAddIcon />;
                 break;
               case "HouseIcon":
-                IconComponent = <HouseIcon />;
+                IconComponent = <HomeIcon />;
                 break;
               default:
                 IconComponent = null;
