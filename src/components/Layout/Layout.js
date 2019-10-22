@@ -102,7 +102,7 @@ const Layout = ({ children, classes, name, lastname, role }) => {
               case "GroupAddIcon":
                 IconComponent = <GroupAddIcon />;
                 break;
-              case "HouseIcon":
+              case "HomeIcon":
                 IconComponent = <HomeIcon />;
                 break;
               default:
