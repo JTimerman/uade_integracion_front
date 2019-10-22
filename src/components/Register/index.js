@@ -1,7 +1,9 @@
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
+import { createEmployee } from "../../redux/actions/employees";
 import { createStudent } from "../../redux/actions/students";
+import { createHolder } from "../../redux/actions/holders";
 import { getHolders } from "../../redux/actions/holders";
 
 import Register from "./Register";
@@ -34,7 +36,9 @@ const styles = theme => ({
 const styledComponent = withStyles(styles)(Register);
 
 const mapDispatchToProps = {
+  createEmployee,
   createStudent,
+  createHolder,
   getHolders
 };
 

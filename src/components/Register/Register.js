@@ -18,7 +18,14 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 import Dialog from "../Dialog";
 
-const RegisterForm = ({ location, classes, createStudent, getHolders }) => {
+const RegisterForm = ({
+  location,
+  classes,
+  createStudent,
+  getHolders,
+  createEmployee,
+  createHolder
+}) => {
   const initialValues = {
     name: "",
     lastname: "",
@@ -31,7 +38,7 @@ const RegisterForm = ({ location, classes, createStudent, getHolders }) => {
   };
   const [values, setValues] = React.useState(initialValues);
   const [open, setOpen] = React.useState(false);
-  const [selectedDate, setSelectedDate] = React.useState();
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
   const path = location.pathname;
 
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
@@ -71,28 +78,55 @@ const RegisterForm = ({ location, classes, createStudent, getHolders }) => {
 
   const handlerClickRegister = event => {
     event.preventDefault();
+    const {
+      name,
+      lastname,
+      phone,
+      scholarshipType,
+      address,
+      holderid
+    } = values;
 
     switch (values.role) {
       case "Student":
-        const {
-          name,
-          lastname,
-          phone,
-          scholarshipType,
-          address,
-          holderid
-        } = values;
         const student = {
           name,
           last_name: lastname,
           phone,
           scholarship_type: scholarshipType,
           address,
-          email: `${name[0] + lastname}@school.edu.ar`,
+          email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
           holder_id: holderid
         };
 
         createStudent(student);
+        break;
+
+      case "Employee":
+        const { salary } = values;
+        const employee = {
+          name,
+          last_name: lastname,
+          phone,
+          start_date: selectedDate.toISOString(),
+          address,
+          email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
+          salary
+        };
+
+        createEmployee(employee);
+        break;
+
+      case "Holder":
+        const holder = {
+          name,
+          last_name: lastname,
+          phone,
+          address,
+          email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
+        };
+
+        createHolder(holder);
         break;
       default:
         console.log(values.role);
@@ -107,7 +141,7 @@ const RegisterForm = ({ location, classes, createStudent, getHolders }) => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Register User
+        Register {values.role}
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
