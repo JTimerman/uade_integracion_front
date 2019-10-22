@@ -1,4 +1,5 @@
 {
   "BASE_URL": "http://localhost:3200",
+  "HOLDERS": "/holders",
   "SIGN_IN": "/signin"
 }
