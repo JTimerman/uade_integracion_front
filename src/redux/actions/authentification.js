@@ -8,13 +8,23 @@ export const CURRENT_USER_KEY = "currentUser";
 export const authenticateUser = (username, password) => {
   return dispatch => {
     return signInService(username, password)
-      .then(user => {
-        window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-        generateAuthClient(user.token);
-        const { roles, ...personalData } = user;
+      .then(response => {
+        window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(response));
+        const { user, token } = response;
+        const roles = response.roles.map(role =>
+          role.substring(0, role.indexOf("_")).toUpperCase()
+        );
+        const personalData = {
+          ...user[response.roles[0]],
+          lastname: user[response.roles[0]].last_name,
+          last_name: undefined
+        };
+
+        generateAuthClient(token);
         dispatch(setPersonalData(personalData));
         dispatch(setRoles(roles));
-        return user;
+
+        return Promise.resolve();
       })
       .catch(() => Promise.reject(false));
   };
