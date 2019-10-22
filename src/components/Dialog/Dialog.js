@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 
 import Button from "@material-ui/core/Button";
 import DialogUI from "@material-ui/core/Dialog";
@@ -9,50 +9,52 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import useStyles from "./styles";
 import IconButton from "@material-ui/core/IconButton";
+import Grid from "@material-ui/core/Grid";
 
 export default function Dialog(props) {
   const classes = useStyles();
 
-  const handlerAccept = () => {
-    console.log("accept");
-  };
   return (
-    <div>
-      <DialogUI
-        open={props.open}
-        onClose={props.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{""}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            We' ve found that !
-            {props.parents.map((parent, index) => {
-              return (
-                <Fragment key={index}>
-                  <p>
-                    Name : {parent.name} , LastName: {parent.lastName} , Parent
-                    ID: {parent.parentId}, Address: {parent.address}{" "}
-                  </p>
-                  <IconButton
-                    color="secondary"
-                    className={classes.button}
-                    onClick={handlerAccept}
-                  >
-                    <CheckCircleIcon />
-                  </IconButton>
-                </Fragment>
-              );
-            })}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.handleClose} color="primary" autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </DialogUI>
-    </div>
+    <DialogUI
+      open={props.open}
+      onClose={props.handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">{""}</DialogTitle>
+      <DialogContent>
+        {props.parents.map((parent, index) => {
+          return (
+            <Fragment key={index}>
+              <Grid item xs={12} className={classes.grid}>
+                <p>
+                  <span className={classes.fieldLabel}>Name:</span>
+                  <span className={classes.fieldContent}>{parent.name}</span>
+                  <span className={classes.fieldLabel}>Lastname:</span>
+                  <span className={classes.fieldContent}>
+                    {parent.lastName}
+                  </span>
+                  <span className={classes.fieldLabel}>Address:</span>
+                  <span className={classes.fieldContent}>{parent.address}</span>
+                </p>
+                <IconButton
+                  color="secondary"
+                  className={classes.button}
+                  name={parent.parentId}
+                  onClick={props.handlerAccept}
+                >
+                  <CheckCircleIcon />
+                </IconButton>
+              </Grid>
+            </Fragment>
+          );
+        })}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={props.handleClose} color="primary" autoFocus>
+          Close
+        </Button>
+      </DialogActions>
+    </DialogUI>
   );
 }

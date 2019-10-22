@@ -14,5 +14,13 @@ export default makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1)
+  },
+  select: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    marginTop: "5%"
+  },
+  input: {
+    marginTop: "2%"
   }
 }));
