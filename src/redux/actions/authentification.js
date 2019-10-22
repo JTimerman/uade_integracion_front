@@ -9,7 +9,6 @@ export const authenticateUser = (username, password) => {
   return dispatch => {
     return signInService(username, password)
       .then(response => {
-        window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(response));
         const { user, token } = response;
         const roles = response.roles.map(role =>
           role.split("_")[0].toUpperCase()
@@ -19,6 +18,10 @@ export const authenticateUser = (username, password) => {
           lastname: user[response.roles[0]].last_name,
           last_name: undefined
         };
+        window.localStorage.setItem(
+          CURRENT_USER_KEY,
+          JSON.stringify({ ...personalData, token, roles })
+        );
 
         console.log("personalData: ", personalData);
 
