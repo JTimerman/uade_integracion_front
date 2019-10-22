@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import Logout from "./components/Logout";
 
 import store from "./redux/store";
-
+import Register from "./components/Register/Register";
 window.store = store;
 
 function App() {
@@ -17,8 +17,11 @@ function App() {
         <Switch>
           <Route path="/login" component={SignIn} />
           <Route exact path="/logout" component={Logout} />
-          <PrivateRoute exact path="/register" component={Home} />
-          <PrivateRoute default path="/" component={Home} />
+          <PrivateRoute exact path="/" component={Home} />>
+          <PrivateRoute path="/homeADMIN" component={Home} />
+          <PrivateRoute path="/registerStudent" component={Register} />
+          <PrivateRoute path="/registerHolder" component={Register} />
+          <PrivateRoute path="/registerEmployee" component={Register} />
         </Switch>
       </BrowserRouter>
     </Provider>

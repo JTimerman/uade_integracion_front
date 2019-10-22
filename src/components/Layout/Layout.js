@@ -13,12 +13,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import Avatar from "react-avatar";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import HomeIcon from "@material-ui/icons/Home";
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
 const Layout = ({ children, classes, name, lastname, role }) => {
@@ -32,6 +31,8 @@ const Layout = ({ children, classes, name, lastname, role }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handlerClick = () => {};
 
   return (
     <div className={classes.root}>
@@ -92,14 +93,32 @@ const Layout = ({ children, classes, name, lastname, role }) => {
         </div>
         <Divider />
         <List>
-          {currentUserNavbarItems.map(({ path, name }, index) => (
-            <ListItem button component={Link} to={path} key={name}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={name} />
-            </ListItem>
-          ))}
+          {currentUserNavbarItems.map(({ path, name, icon }, index) => {
+            let IconComponent;
+
+            switch (icon) {
+              case "GroupAddIcon":
+                IconComponent = <GroupAddIcon />;
+                break;
+              case "HomeIcon":
+                IconComponent = <HomeIcon />;
+                break;
+              default:
+                IconComponent = null;
+            }
+            return (
+              <ListItem
+                button
+                component={Link}
+                to={path}
+                key={name}
+                onClick={handlerClick}
+              >
+                <ListItemIcon>{IconComponent}</ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            );
+          })}
         </List>
       </Drawer>
       <main
