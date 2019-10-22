@@ -12,8 +12,6 @@ import HomeHolder from "./components/HomeHolder/HomeHolder";
 import PayAmount from "./components/PayAmount/PayAmount";
 import Payments from "./components/Payments/Payments";
 
-import EmployeeData from "./components/EmployeeData/EmployeeData";
-
 import StudentData from "./components/StudentData/";
 
 window.store = store;
