@@ -8,6 +8,8 @@ import Logout from "./components/Logout";
 
 import store from "./redux/store";
 import Register from "./components/Register/Register";
+import HomeHolder from "./components/HomeHolder/HomeHolder";
+import PayMount from "./components/PayMount/PayMount";
 window.store = store;
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route exact path="/logout" component={Logout} />
           <PrivateRoute exact path="/" component={Home} />>
           <PrivateRoute path="/homeADMIN" component={Home} />
+          <PrivateRoute path="/HomeHolder" component={HomeHolder} />
+          <PrivateRoute path="/PayMount" component={PayMount} />
           <PrivateRoute path="/registerStudent" component={Register} />
           <PrivateRoute path="/registerHolder" component={Register} />
           <PrivateRoute path="/registerEmployee" component={Register} />
