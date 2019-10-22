@@ -12,6 +12,7 @@ import HomeHolder from "./components/HomeHolder/HomeHolder";
 import PayAmount from "./components/PayAmount/PayAmount";
 import Payments from "./components/Payments/Payments";
 
+import PersonalData from "./components/PersonalData/PersonalData";
 window.store = store;
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <PrivateRoute path="/registerStudent" component={Register} />
           <PrivateRoute path="/registerHolder" component={Register} />
           <PrivateRoute path="/registerEmployee" component={Register} />
+          <PrivateRoute path="/employee-details" component={PersonalData} />
         </Switch>
       </BrowserRouter>
     </Provider>
