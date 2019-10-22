@@ -11,6 +11,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import DateFnsUtils from "@date-io/date-fns";
+import { useTheme } from "@material-ui/core/styles";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -23,9 +26,13 @@ const RegisterForm = props => {
   const [parents, setParents] = React.useState([]);
   const [open, setOpen] = React.useState(true);
   const [selectedDate, setSelectedDate] = React.useState();
-
+  const [servicesChosen, setServicesChosen] = React.useState([]);
+  const [servicesList, setServicesList] = React.useState([]);
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
   const classes = useStyles();
+
+  const theme = useTheme();
+
   useEffect(() => {
     if (path === "/registerStudent") {
       setValues({ ...values, rol: "Student" });
@@ -35,6 +42,17 @@ const RegisterForm = props => {
     } else {
       setValues({ ...values, rol: "Holder" });
     }
+  }, []);
+
+  useEffect(() => {
+    setServicesList([
+      {
+        name: "English Class"
+      },
+      {
+        name: "Portuguese Class"
+      }
+    ]);
   }, []);
 
   const handleDateChange = date => {
@@ -75,6 +93,21 @@ const RegisterForm = props => {
         parentId: "2"
       }
     ]);
+  };
+
+  const handlerClickServices = event => {
+    //setServicesChosen(event.currentTarget.value)
+  };
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250
+      }
+    }
   };
 
   return (
@@ -194,6 +227,29 @@ const RegisterForm = props => {
                   return (
                     <MenuItem key={index} value={type}>
                       {type}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <InputLabel htmlFor="select-multiple">Services</InputLabel>
+              <Select
+                multiple
+                value={servicesChosen}
+                fullWidth
+                input={<Input id="select-multiple-checkbox" />}
+                renderValue={selected => selected.join(", ")}
+                MenuProps={MenuProps}
+              >
+                {servicesList.map((service, index) => {
+                  return (
+                    <MenuItem key={index}>
+                      <Checkbox
+                        onClick={handlerClickServices}
+                        name={service.name}
+                      />
+                      {service.name}
                     </MenuItem>
                   );
                 })}
