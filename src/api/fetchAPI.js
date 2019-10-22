@@ -1,13 +1,23 @@
 export default (url, method, body) => {
-  if (method == "GET") {
-    return fetch(url);
-  } else {
-    return fetch(url, {
-      method: "POST",
+  let payload;
+
+  if (method === "POST" || method === "PUT") {
+    payload = {
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    };
   }
+
+  return fetch(url, {
+    method,
+    ...payload
+  }).then(response => {
+    if (response.status === 401) {
+      return Promise.reject();
+    } else {
+      return response.json();
+    }
+  });
 };

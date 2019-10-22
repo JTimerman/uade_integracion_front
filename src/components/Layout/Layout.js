@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,85 +13,15 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import Avatar from "react-avatar";
-import { Button, Icon } from "@material-ui/core";
-import styles from "./Layout.module.css";
-import { ROLES_NAVBAR_ITEMS } from "./config";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import authService from "./authService";
 
-import HouseIcon from "@material-ui/icons/House";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
-const drawerWidth = 240;
-const user = {
-  name: "Nombre",
-  rolId: "ADMIN",
-  rolDescription: "description"
-};
-const currentUserNavbarItems = user && ROLES_NAVBAR_ITEMS[user.rolId];
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex"
-  },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginLeft: -drawerWidth
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginLeft: 0
-  }
-}));
-
-const Layout = ({ children }) => {
-  const classes = useStyles();
+const Layout = ({ children, classes, name, lastname, role }) => {
   const [open, setOpen] = React.useState(true);
+  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role] || [];
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -145,13 +74,13 @@ const Layout = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <div className={styles.profile}>
-          <Avatar name={user.name} round="100px" />
+        <div className={classes.profile}>
+          <Avatar name={name} round="100px" />
           <Typography variant="h6" noWrap>
-            {user.name}
+            {`${name} ${lastname}`}
           </Typography>
           <Typography variant="subtitle1" noWrap>
-            {user.rolDescription}
+            {role}
           </Typography>
           <Button
             variant="contained"

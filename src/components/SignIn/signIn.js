@@ -16,8 +16,6 @@ import useStyles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 
-import signInService from "../../services/signIn";
-
 const SignIn = props => {
   const classes = useStyles();
   const [values, setValues] = React.useState({});
@@ -31,11 +29,11 @@ const SignIn = props => {
     event.preventDefault();
     const { username, password } = values;
 
-    signInService(username, password)
+    props
+      .authenticateUser(username, password)
       .then(() => {
         props.history.push("/");
       })
-
       .catch(() => setError(true));
   };
 

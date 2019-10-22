@@ -1,4 +1,4 @@
-export const NAVBAR_ITEMS = {
+const NAVBAR_ITEMS = {
   LOGOUT: { path: "/logout", name: "Salir" },
   REGISTERSTUDENT: {
     path: "/registerStudent",
@@ -35,20 +35,6 @@ export const NAVBAR_ITEMS = {
   }
 };
 
-export const ROLES = {
-  ADMIN: "ADMIN",
-  HOLDER: "HOLDER",
-  STUDENT: "STUDENT",
-  EMPLOYEE: "EMPLOYEE"
-};
-
-export const ROLES_DESCRIPTION = {
-  ADMIN: "Administrador",
-  HOLDER: "Titular",
-  STUDENT: "Estudiante",
-  EMPLOYEE: "Empleado"
-};
-
 export const ROLES_NAVBAR_ITEMS = {
   ADMIN: [
     NAVBAR_ITEMS.HOMEADMIN,
@@ -60,5 +46,3 @@ export const ROLES_NAVBAR_ITEMS = {
   STUDENT: [NAVBAR_ITEMS.STUDENT_DETAILS],
   EMPLOYEE: [NAVBAR_ITEMS.EMPLOYEE_DETAILS]
 };
-
-export const CURRENT_USER_KEY = "currentUser";
