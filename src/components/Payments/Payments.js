@@ -70,4 +70,4 @@ const Payments = () => {
   );
 };
 
-export default withStyles(useStyles)(Payments);
+export default withStyles()(Payments);

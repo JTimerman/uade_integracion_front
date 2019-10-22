@@ -16,7 +16,7 @@ import { withStyles } from "@material-ui/core/styles";
 import useStyles from "./styles";
 import Fab from "@material-ui/core/Fab";
 
-const HomeHolder = props => {
+const HomeHolder = () => {
   const classes = useStyles();
 
   const [students, setStudents] = React.useState([]);
@@ -98,4 +98,4 @@ const HomeHolder = props => {
     </Fragment>
   );
 };
-export default withStyles(useStyles)(HomeHolder);
+export default withStyles()(HomeHolder);
