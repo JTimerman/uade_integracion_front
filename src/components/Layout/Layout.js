@@ -23,7 +23,7 @@ import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 const Layout = ({ children, classes, name, lastname, roles }) => {
   const [open, setOpen] = React.useState(true);
   const currentUserNavbarItems = roles.reduce((items, role) => {
-    return [...items, ROLES_NAVBAR_ITEMS[role]];
+    return [...items, ...ROLES_NAVBAR_ITEMS[role]];
   }, []);
 
   const handleDrawerOpen = () => {
@@ -95,7 +95,7 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
         </div>
         <Divider />
         <List>
-          {currentUserNavbarItems.map(({ path, name, icon }, index) => {
+          {currentUserNavbarItems.map(({ path, name, icon }) => {
             let IconComponent;
 
             switch (icon) {
