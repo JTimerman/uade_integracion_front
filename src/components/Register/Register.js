@@ -17,26 +17,34 @@ import {
 } from "@material-ui/pickers";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { getDate } from "date-fns/esm";
 
 const RegisterForm = props => {
-  const [values, setValues] = React.useState({});
+  const initialValues = {
+    name: "",
+    lastName: "",
+    phone: "",
+    address: "",
+    salary: "",
+    scholarshipType: ""
+  };
+  const [values, setValues] = React.useState(initialValues);
   const [parents, setParents] = React.useState([]);
   const [open, setOpen] = React.useState(true);
   const [selectedDate, setSelectedDate] = React.useState();
+  const path = props.location.pathname;
 
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
   const classes = useStyles();
   useEffect(() => {
     if (path === "/registerStudent") {
-      setValues({ ...values, rol: "Student" });
+      setValues(currentValues => ({ ...currentValues, rol: "Student" }));
     }
     if (path === "/registerEmployee") {
-      setValues({ ...values, rol: "Employee" });
+      setValues(currentValues => ({ ...currentValues, rol: "Employee" }));
     } else {
-      setValues({ ...values, rol: "Holder" });
+      setValues(currentValues => ({ ...currentValues, rol: "Holder" }));
     }
-  }, []);
+  }, [path]);
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -58,9 +66,7 @@ const RegisterForm = props => {
     event.preventDefault();
   };
 
-  const path = props.location.pathname;
-
-  const handlerSearchParent = event => {
+  const handlerSearchParent = () => {
     setOpen(true);
     setParents([
       {
@@ -93,6 +99,7 @@ const RegisterForm = props => {
             fullWidth
             autoComplete="name"
             onChange={handleChange("name")}
+            value={values.name}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -102,8 +109,9 @@ const RegisterForm = props => {
             name="lastName"
             label="Last name"
             fullWidth
-            autoComplete="lastname"
-            onChange={handleChange("lastname")}
+            autoComplete="lastName"
+            onChange={handleChange("lastName")}
+            value={values.lastName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -115,10 +123,18 @@ const RegisterForm = props => {
             fullWidth
             type="number"
             onChange={handleChange("phone")}
+            value={values.phone}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="address" name="address" label="Address" fullWidth />
+          <TextField
+            id="address"
+            name="address"
+            label="Address"
+            fullWidth
+            value={values.address}
+            onChange={handleChange("address")}
+          />
         </Grid>
         {path === "/registerEmployee" && (
           <Fragment>
@@ -153,6 +169,7 @@ const RegisterForm = props => {
                 type="number"
                 className={classes.input}
                 onChange={handleChange("salary")}
+                value={values.salary}
                 startAdornment={
                   <InputAdornment position="start">$</InputAdornment>
                 }
@@ -203,7 +220,7 @@ const RegisterForm = props => {
           </Fragment>
         )}
 
-        {parents.length != 0 ? (
+        {parents.length !== 0 ? (
           <Dialog
             parents={parents}
             handleClose={handleClose}
