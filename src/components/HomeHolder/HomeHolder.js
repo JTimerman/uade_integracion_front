@@ -49,7 +49,7 @@ const HomeHolder = props => {
   }, []);
 
   const handlerClick = event => {
-    const mount = event.currentTarget.name;
+    const amount = event.currentTarget.name;
     setGoPay(true);
     //set redux mount
   };

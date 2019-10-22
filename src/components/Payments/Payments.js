@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Paper from "@material-ui/core/Paper";
+
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";

@@ -14,7 +14,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "react-avatar";
-import { Button, Icon } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import HomeIcon from "@material-ui/icons/Home";
