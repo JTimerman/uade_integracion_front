@@ -20,9 +20,11 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import HomeIcon from "@material-ui/icons/Home";
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
-const Layout = ({ children, classes, name, lastname, role }) => {
+const Layout = ({ children, classes, name, lastname, roles }) => {
   const [open, setOpen] = React.useState(true);
-  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role] || [];
+  const currentUserNavbarItems = roles.reduce((items, role) => {
+    return [...items, ROLES_NAVBAR_ITEMS[role]];
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -79,7 +81,7 @@ const Layout = ({ children, classes, name, lastname, role }) => {
             {`${name} ${lastname}`}
           </Typography>
           <Typography variant="subtitle1" noWrap>
-            {role}
+            {roles}
           </Typography>
           <Button
             variant="contained"
