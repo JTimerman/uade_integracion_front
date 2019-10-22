@@ -3,35 +3,37 @@ const NAVBAR_ITEMS = {
   REGISTERSTUDENT: {
     path: "/registerStudent",
     name: "Register Student",
-    icon: "GroupAddIcon"
+    icon: "group_add"
   },
   REGISTEREMPLOYEE: {
     path: "/registerEmployee",
     name: "Register Employee",
-    icon: "GroupAddIcon"
+    icon: "group_add"
   },
   REGISTERHOLDER: {
     path: "/registerHolder",
     name: "Register Holder",
-    icon: "GroupAddIcon"
+    icon: "group_add"
   },
   HOMEADMIN: {
     path: "/homeADMIN",
     name: "Home Admin",
-    icon: "HomeIcon"
+    icon: "home"
   },
   ASSOCIATE_STUDENT: {
     path: "/associate-student",
     name: "Asociar alumno"
   },
   STUDENT_DETAILS: {
-    path: "/student-details",
-    name: "Datos personales"
+    path: "/student-data",
+    name: "Student Data",
+    icon: "info"
   },
   EMPLOYEE_DETAILS: {
     id: "employeeDetails",
-    path: "/employee-details",
-    name: "Datos personales y laborales"
+    path: "/employee-data",
+    name: "Employee Data",
+    icon: "info"
   }
 };
 
