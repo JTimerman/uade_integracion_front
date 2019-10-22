@@ -6,9 +6,9 @@ import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Logout from "./components/Logout";
 import Register from "./components/Register";
+import EmployeeData from "./components/EmployeeData";
 
 import store from "./redux/store";
-import EmployeeData from "./components/EmployeeData/EmployeeData";
 import StudentData from "./components/StudentData/StudentData";
 window.store = store;
 
