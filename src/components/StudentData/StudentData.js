@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Divider,
@@ -10,8 +10,27 @@ import Avatar from "react-avatar";
 import styles from "./StudentData.module.css";
 import Icon from "@material-ui/core/Icon";
 import clsx from "clsx";
+import { getHolderById } from "../../services/holders";
 
-const StudentData = props => {
+const StudentData = ({ personalData }) => {
+  console.log("personalData: ", personalData);
+
+  const [holder, setHolder] = useState(null);
+
+  const {
+    name,
+    lastname,
+    phone,
+    scholarship_type: scholarshipType,
+    address,
+    email,
+    holder_id: holderId
+  } = personalData;
+  const fullName = `${name} ${lastname}`;
+
+  useEffect(() => {
+    getHolderById(holderId).then(_holder => setHolder(_holder));
+  }, [holderId]);
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -19,9 +38,9 @@ const StudentData = props => {
       </Typography>
       <div className={styles.container}>
         <div className={styles.header}>
-          <Avatar name="Pepe" round="100px" />
+          <Avatar name={fullName} round="100px" />
           <Typography className={styles.name} variant="h6" gutterBottom>
-            Pepe
+            {fullName}
           </Typography>
         </div>
         <Divider></Divider>
@@ -33,7 +52,9 @@ const StudentData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Parent</div>
-                <div className={styles.value}>José Gimenez</div>
+                <div className={styles.value}>
+                  {holder ? `${holder.name} ${holder.last_name}` : "Loading..."}
+                </div>
               </div>
             </ListItem>
             {/* Data */}
@@ -43,7 +64,7 @@ const StudentData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Email</div>
-                <div className={styles.value}>pepe@pepe.com</div>
+                <div className={styles.value}>{email || "-"}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -53,7 +74,7 @@ const StudentData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Address</div>
-                <div className={styles.value}>929 Pepe St, CO</div>
+                <div className={styles.value}>{address || "-"}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -63,7 +84,7 @@ const StudentData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Scholarship Type</div>
-                <div className={styles.value}>Full Time</div>
+                <div className={styles.value}>{scholarshipType || "-"}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -73,7 +94,7 @@ const StudentData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Phone</div>
-                <div className={styles.value}>+54 11 204455</div>
+                <div className={styles.value}>{phone || ""}</div>
               </div>
             </ListItem>
           </CardContent>
