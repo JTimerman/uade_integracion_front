@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import Dialog from "../Dialog/Dialog";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -17,33 +16,35 @@ import {
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-const RegisterForm = ({ location, classes, createStudent }) => {
+import Dialog from "../Dialog";
+
+const RegisterForm = ({ location, classes, createStudent, getHolders }) => {
   const initialValues = {
     name: "",
     lastname: "",
-    parentLastname: "",
-    parentid: "",
+    holderlastname: "",
+    holderid: "",
     phone: "",
     address: "",
     salary: "",
     scholarshipType: ""
   };
   const [values, setValues] = React.useState(initialValues);
-  const [parents, setParents] = React.useState([]);
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [selectedDate, setSelectedDate] = React.useState();
   const path = location.pathname;
 
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
   useEffect(() => {
     if (path === "/registerStudent") {
+      getHolders();
       setValues(currentValues => ({ ...currentValues, role: "Student" }));
     } else if (path === "/registerEmployee") {
       setValues(currentValues => ({ ...currentValues, role: "Employee" }));
     } else {
       setValues(currentValues => ({ ...currentValues, role: "Holder" }));
     }
-  }, [path]);
+  }, [path, getHolders]);
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -63,8 +64,8 @@ const RegisterForm = ({ location, classes, createStudent }) => {
   const handlerAccept = event => {
     setValues(currentValues => ({
       ...currentValues,
-      parentid: event.currentTarget.getAttribute("parentid"),
-      parentLastname: event.currentTarget.getAttribute("parentlastname")
+      holderid: event.currentTarget.getAttribute("holderid"),
+      holderlastname: event.currentTarget.getAttribute("holderlastname")
     }));
   };
 
@@ -79,19 +80,19 @@ const RegisterForm = ({ location, classes, createStudent }) => {
           phone,
           scholarshipType,
           address,
-          parentid
+          holderid
         } = values;
         const student = {
           name,
-          lastname,
+          last_name: lastname,
           phone,
-          scholarshipType,
+          scholarship_type: scholarshipType,
           address,
           email: `${name[0] + lastname}@school.edu.ar`,
-          holder_id: parentid
+          holder_id: holderid
         };
 
-        //createStudent(student);
+        createStudent(student);
         break;
       default:
         console.log(values.role);
@@ -99,22 +100,8 @@ const RegisterForm = ({ location, classes, createStudent }) => {
     }
   };
 
-  const handlerSearchParent = () => {
+  const handlerSearchHolder = () => {
     setOpen(true);
-    setParents([
-      {
-        name: "Juan",
-        lastName: "Perez",
-        address: "lima 778",
-        parentid: "1"
-      },
-      {
-        name: "Ana",
-        lastName: "Gomez",
-        address: "test 123",
-        parentid: "2"
-      }
-    ]);
   };
 
   return (
@@ -217,17 +204,17 @@ const RegisterForm = ({ location, classes, createStudent }) => {
               <TextField
                 className={classes.margin}
                 id="input-with-icon-textfield"
-                label="Parent"
+                label="Holder"
                 fullWidth
                 placeholder="Search by lastname.."
-                value={values.parentLastname}
-                onChange={handleChange("parentLastname")}
+                value={values.holderlastname}
+                onChange={handleChange("holderlastname")}
                 InputProps={{
                   startAdornment: (
                     <IconButton
                       color="secondary"
                       className={classes.button}
-                      onClick={handlerSearchParent}
+                      onClick={handlerSearchHolder}
                     >
                       <SearchIcon />
                     </IconButton>
@@ -254,17 +241,11 @@ const RegisterForm = ({ location, classes, createStudent }) => {
             </Grid>
           </Fragment>
         )}
-
-        {parents.length !== 0 ? (
-          <Dialog
-            parents={parents}
-            handleClose={handleClose}
-            open={open}
-            handlerAccept={handlerAccept}
-          />
-        ) : (
-          ""
-        )}
+        <Dialog
+          handleClose={handleClose}
+          open={open}
+          handlerAccept={handlerAccept}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <Button

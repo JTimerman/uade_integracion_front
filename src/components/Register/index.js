@@ -2,6 +2,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import { createStudent } from "../../redux/actions/students";
+import { getHolders } from "../../redux/actions/holders";
 
 import Register from "./Register";
 
@@ -33,7 +34,8 @@ const styles = theme => ({
 const styledComponent = withStyles(styles)(Register);
 
 const mapDispatchToProps = {
-  createStudent
+  createStudent,
+  getHolders
 };
 
 export default connect(
