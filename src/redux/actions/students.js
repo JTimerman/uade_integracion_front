@@ -1,4 +1,7 @@
-import { getStudents as getStudentsService } from "../../services/students";
+import {
+  getStudents as getStudentsService,
+  createStudent as createStudentService
+} from "../../services/students";
 
 import { SET_STUDENTS } from "./actionTypes.json";
 
@@ -13,5 +16,11 @@ export const getStudents = () => {
         dispatch(setStudents(students));
       })
       .catch(() => Promise.reject(false));
+  };
+};
+
+export const createStudent = student => {
+  return () => {
+    return createStudentService(student).catch(() => Promise.reject(false));
   };
 };

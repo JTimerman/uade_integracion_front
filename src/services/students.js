@@ -17,6 +17,6 @@ export const updateStudent = id => {
   return fetchAPI(BASE_URL + STUDENTS + "/" + id, "PUT");
 };
 
-export const createStudent = () => {
-  return fetchAPI(BASE_URL + STUDENTS, "POST");
+export const createStudent = student => {
+  return fetchAPI(BASE_URL + STUDENTS, "POST", student);
 };

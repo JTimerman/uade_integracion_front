@@ -17,6 +17,6 @@ export const updateHolder = id => {
   return fetchAPI(BASE_URL + HOLDERS + "/" + id, "PUT");
 };
 
-export const createHolder = () => {
-  return fetchAPI(BASE_URL + HOLDERS, "POST");
+export const createHolder = holder => {
+  return fetchAPI(BASE_URL + HOLDERS, "POST", holder);
 };
