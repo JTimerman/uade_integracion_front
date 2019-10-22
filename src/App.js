@@ -7,9 +7,9 @@ import Home from "./components/Home";
 import Logout from "./components/Logout";
 import Register from "./components/Register";
 import EmployeeData from "./components/EmployeeData";
-
 import store from "./redux/store";
-import StudentData from "./components/StudentData/StudentData";
+import StudentData from "./components/StudentData/";
+
 window.store = store;
 
 function App() {
