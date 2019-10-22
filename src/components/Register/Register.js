@@ -20,7 +20,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 const RegisterForm = ({ location, classes, createStudent }) => {
   const initialValues = {
     name: "",
-    lastName: "",
+    lastname: "",
+    parentLastname: "",
+    parentid: "",
     phone: "",
     address: "",
     salary: "",
@@ -36,8 +38,7 @@ const RegisterForm = ({ location, classes, createStudent }) => {
   useEffect(() => {
     if (path === "/registerStudent") {
       setValues(currentValues => ({ ...currentValues, role: "Student" }));
-    }
-    if (path === "/registerEmployee") {
+    } else if (path === "/registerEmployee") {
       setValues(currentValues => ({ ...currentValues, role: "Employee" }));
     } else {
       setValues(currentValues => ({ ...currentValues, role: "Holder" }));
@@ -49,7 +50,10 @@ const RegisterForm = ({ location, classes, createStudent }) => {
   };
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
+    setValues({
+      ...values,
+      [name]: event.target.value
+    });
   };
 
   const handleClose = () => {
@@ -57,7 +61,11 @@ const RegisterForm = ({ location, classes, createStudent }) => {
   };
 
   const handlerAccept = event => {
-    setValues({ ...values, parentId: event.currentTarget.name });
+    setValues(currentValues => ({
+      ...currentValues,
+      parentid: event.currentTarget.getAttribute("parentid"),
+      parentLastname: event.currentTarget.getAttribute("parentlastname")
+    }));
   };
 
   const handlerClickRegister = event => {
@@ -65,9 +73,28 @@ const RegisterForm = ({ location, classes, createStudent }) => {
 
     switch (values.role) {
       case "Student":
-        createStudent(values);
+        const {
+          name,
+          lastname,
+          phone,
+          scholarshipType,
+          address,
+          parentid
+        } = values;
+        const student = {
+          name,
+          lastname,
+          phone,
+          scholarshipType,
+          address,
+          email: `${name[0] + lastname}@school.edu.ar`,
+          holder_id: parentid
+        };
+
+        //createStudent(student);
         break;
       default:
+        console.log(values.role);
         break;
     }
   };
@@ -79,13 +106,13 @@ const RegisterForm = ({ location, classes, createStudent }) => {
         name: "Juan",
         lastName: "Perez",
         address: "lima 778",
-        parentId: "1"
+        parentid: "1"
       },
       {
         name: "Ana",
         lastName: "Gomez",
         address: "test 123",
-        parentId: "2"
+        parentid: "2"
       }
     ]);
   };
@@ -111,13 +138,13 @@ const RegisterForm = ({ location, classes, createStudent }) => {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lastName"
-            name="lastName"
+            id="lastname"
+            name="lastname"
             label="Last name"
             fullWidth
-            autoComplete="lastName"
-            onChange={handleChange("lastName")}
-            value={values.lastName}
+            autoComplete="lastname"
+            onChange={handleChange("lastname")}
+            value={values.lastname}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -192,7 +219,9 @@ const RegisterForm = ({ location, classes, createStudent }) => {
                 id="input-with-icon-textfield"
                 label="Parent"
                 fullWidth
-                placeholder="search by id"
+                placeholder="Search by lastname.."
+                value={values.parentLastname}
+                onChange={handleChange("parentLastname")}
                 InputProps={{
                   startAdornment: (
                     <IconButton
@@ -244,7 +273,7 @@ const RegisterForm = ({ location, classes, createStudent }) => {
           className={classes.button}
           onClick={handlerClickRegister}
         >
-          Send
+          Create
         </Button>
       </Grid>
     </React.Fragment>

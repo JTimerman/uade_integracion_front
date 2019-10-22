@@ -39,7 +39,8 @@ export default function Dialog(props) {
                 <IconButton
                   color="secondary"
                   className={classes.button}
-                  name={parent.parentId}
+                  parentlastname={parent.lastName}
+                  parentid={parent.parentid}
                   onClick={props.handlerAccept}
                 >
                   <CheckCircleIcon />
