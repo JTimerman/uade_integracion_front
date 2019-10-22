@@ -33,8 +33,6 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
     setOpen(false);
   };
 
-  const handlerClick = () => {};
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -94,15 +92,10 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
         </div>
         <Divider />
         <List>
-          {currentUserNavbarItems.map(({ path, name, icon }) => {
+          {currentUserNavbarItems.map(({ path, name, icon, display }) => {
+            if (display === false) return null;
             return (
-              <ListItem
-                button
-                component={Link}
-                to={path}
-                key={name}
-                onClick={handlerClick}
-              >
+              <ListItem button component={Link} to={path} key={name}>
                 {icon && (
                   <ListItemIcon>
                     <Icon>{icon}</Icon>

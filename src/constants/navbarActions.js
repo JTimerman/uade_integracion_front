@@ -23,12 +23,12 @@ const NAVBAR_ITEMS = {
   INVOICESANDDUES: {
     path: "/HomeHolder",
     name: "Fees and debts",
-    icon: "AttachMoneyIcon"
+    icon: "attach_money"
   },
   PAYMENTS: {
     path: "/Payments",
     name: "Payments",
-    icon: "ListIcon"
+    icon: "list"
   },
   PAYAMOUNT: {
     path: "/PayAmount",

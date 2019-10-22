@@ -33,7 +33,7 @@ function App() {
           <PrivateRoute path="/registerEmployee" component={Register} />
           <PrivateRoute path="/employee-data" component={EmployeeData} />
           <PrivateRoute path="/student-data" component={StudentData} />
-          <PrivateRoute component={Home} />>
+          <PrivateRoute component={Home} />
         </Switch>
       </BrowserRouter>
     </Provider>
