@@ -1,6 +1,6 @@
 {
-  "BASE_URL": "http://localhost:3200",
+  "BASE_URL": "https://int-school.herokuapp.com",
   "HOLDERS": "/holders",
-  "SIGN_IN": "/signin",
+  "SIGN_IN": "/auth/login",
   "STUDENTS": "/students"
 }
