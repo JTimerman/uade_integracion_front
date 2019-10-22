@@ -74,6 +74,7 @@ const RegisterForm = ({
       holderid: event.currentTarget.getAttribute("holderid"),
       holderlastname: event.currentTarget.getAttribute("holderlastname")
     }));
+    setOpen(false);
   };
 
   const handlerClickRegister = event => {
