@@ -1,5 +1,6 @@
 const jsonServer = require("json-server");
 const users = require("./mockData/users.json");
+const holders = require("./mockData/holders.json");
 
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
@@ -27,6 +28,42 @@ server.post("/signin", (req, res) => {
   } else {
     res.status(401).json([]);
   }
+});
+
+server.get("/holders", (req, res) => {
+  res.send(holders);
+});
+
+server.post("/holders", (req, res) => {
+  const { name, lastname, email, phone, address } = req.body;
+
+  holders.push({
+    name,
+    lastname,
+    email,
+    phone,
+    address,
+    id: "123",
+    role: "HOLDER"
+  });
+
+  const fs = require("fs");
+  fs.writeFile(
+    "./mockData/holders.json",
+    JSON.stringify(holders),
+    "utf8",
+    error => {
+      if (error) {
+        res
+          .status(300)
+          .send(`Error while creating holder ${name} ${lastname}.`);
+      } else {
+        console.log(`New holder ${name} ${lastname} created!`);
+
+        res.status(200).send(`New holder ${name} ${lastname} created!`);
+      }
+    }
+  );
 });
 
 server.listen(port, () => {
