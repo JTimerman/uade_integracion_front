@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Typography,
   Divider,
@@ -8,14 +7,15 @@ import {
   ListItem
 } from "@material-ui/core";
 import Avatar from "react-avatar";
-import styles from "./PersonalData.module.css";
+import styles from "./StudentData.module.css";
 import Icon from "@material-ui/core/Icon";
+import clsx from "clsx";
 
-const PersonalData = props => {
+const StudentData = props => {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Personal Data
+        Student Data
       </Typography>
       <div className={styles.container}>
         <div className={styles.header}>
@@ -29,11 +29,11 @@ const PersonalData = props => {
           <CardContent className={styles.content}>
             <ListItem divider className={styles.field}>
               <div className={styles.icon}>
-                <Icon color="primary">attach_money</Icon>
+                <Icon color="primary">face</Icon>
               </div>
               <div className="data">
-                <div className={styles.label}>Salary</div>
-                <div className={styles.value}>$20.000</div>
+                <div className={styles.label}>Parent</div>
+                <div className={styles.value}>José Gimenez</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -62,8 +62,8 @@ const PersonalData = props => {
                 <Icon color="primary">date_range</Icon>
               </div>
               <div className="data">
-                <div className={styles.label}>Start Date</div>
-                <div className={styles.value}>11/05/2016</div>
+                <div className={styles.label}>Scholarship Type</div>
+                <div className={styles.value}>Full Time</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -78,11 +78,32 @@ const PersonalData = props => {
             </ListItem>
           </CardContent>
         </Card>
+        {/* Services */}
+        <Card className={clsx(styles.data, styles.services)}>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="h2">
+              Services availables
+            </Typography>
+            <ListItem divider className={styles.field}>
+              <div className={styles.icon}>
+                <Icon color="primary">school</Icon>
+              </div>
+              <div className="data">
+                <div className={styles.label}>Name</div>
+                <div className={styles.value}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation
+                </div>
+              </div>
+            </ListItem>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
 };
 
-PersonalData.propTypes = {};
+StudentData.propTypes = {};
 
-export default PersonalData;
+export default StudentData;

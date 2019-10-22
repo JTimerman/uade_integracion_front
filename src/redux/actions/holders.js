@@ -1,4 +1,7 @@
-import { getHolders as getHoldersService } from "../../services/holders";
+import {
+  createHolder as createHolderService,
+  getHolders as getHoldersService
+} from "../../services/holders";
 
 import { SET_HOLDERS } from "./actionTypes.json";
 
@@ -13,5 +16,11 @@ export const getHolders = () => {
         dispatch(setHolders(holders));
       })
       .catch(() => Promise.reject(false));
+  };
+};
+
+export const createHolder = holder => {
+  return () => {
+    return createHolderService(holder).catch(error => Promise.reject(error));
   };
 };

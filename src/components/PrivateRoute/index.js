@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
 
-import { getUserRole } from "../../redux/selectors/role";
+import { getUserRoles } from "../../redux/selectors/roles";
 
 import { PrivateRoute } from "./PrivateRoute";
 import { setPersonalData } from "../../redux/actions/personalData";
-import { setRole } from "../../redux/actions/role";
+import { setRoles } from "../../redux/actions/roles";
 
 const mapStateToProps = state => ({
-  role: getUserRole(state)
+  roles: getUserRoles(state)
 });
 
 const mapDispatchToProps = {
   setPersonalData,
-  setRole
+  setRoles
 };
 
 export default connect(
