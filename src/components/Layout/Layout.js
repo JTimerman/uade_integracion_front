@@ -20,9 +20,11 @@ import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
 const Layout = ({ children, classes, name, lastname, roles }) => {
   const [open, setOpen] = React.useState(true);
-  const currentUserNavbarItems = roles.reduce((items, role) => {
-    return [...items, ...ROLES_NAVBAR_ITEMS[role]];
-  }, []);
+  // uncomment this to make this multiple roles work
+  // const currentUserNavbarItems = roles.reduce((items, role) => {
+  //   return [...items, ...ROLES_NAVBAR_ITEMS[role]];
+  // }, []);
+  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[roles[0]];
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -79,7 +81,7 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
             {`${name} ${lastname}`}
           </Typography>
           <Typography variant="subtitle1" noWrap>
-            {roles}
+            {roles[0]}
           </Typography>
           <Button
             variant="contained"
