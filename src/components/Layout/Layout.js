@@ -74,7 +74,7 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
         </div>
         <Divider />
         <div className={classes.profile}>
-          <Avatar name={name} round="100px" />
+          <Avatar name={`${name} ${lastname}`} round="100px" />
           <Typography variant="h6" noWrap>
             {`${name} ${lastname}`}
           </Typography>
