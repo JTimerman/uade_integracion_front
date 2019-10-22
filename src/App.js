@@ -7,7 +7,7 @@ import Home from "./components/Home";
 import Logout from "./components/Logout";
 
 import store from "./redux/store";
-import Register from "./components/Register/Register";
+import Register from "./components/Register";
 window.store = store;
 
 function App() {

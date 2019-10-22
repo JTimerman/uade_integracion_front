@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-import useStyles from "./styles";
 import SearchIcon from "@material-ui/icons/Search";
 import Dialog from "../Dialog/Dialog";
 import Button from "@material-ui/core/Button";
@@ -18,7 +17,7 @@ import {
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-const RegisterForm = props => {
+const RegisterForm = ({ location, classes, createStudent }) => {
   const initialValues = {
     name: "",
     lastName: "",
@@ -31,18 +30,17 @@ const RegisterForm = props => {
   const [parents, setParents] = React.useState([]);
   const [open, setOpen] = React.useState(true);
   const [selectedDate, setSelectedDate] = React.useState();
-  const path = props.location.pathname;
+  const path = location.pathname;
 
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
-  const classes = useStyles();
   useEffect(() => {
     if (path === "/registerStudent") {
-      setValues(currentValues => ({ ...currentValues, rol: "Student" }));
+      setValues(currentValues => ({ ...currentValues, role: "Student" }));
     }
     if (path === "/registerEmployee") {
-      setValues(currentValues => ({ ...currentValues, rol: "Employee" }));
+      setValues(currentValues => ({ ...currentValues, role: "Employee" }));
     } else {
-      setValues(currentValues => ({ ...currentValues, rol: "Holder" }));
+      setValues(currentValues => ({ ...currentValues, role: "Holder" }));
     }
   }, [path]);
 
@@ -64,6 +62,14 @@ const RegisterForm = props => {
 
   const handlerClickRegister = event => {
     event.preventDefault();
+
+    switch (values.role) {
+      case "Student":
+        createStudent(values);
+        break;
+      default:
+        break;
+    }
   };
 
   const handlerSearchParent = () => {
