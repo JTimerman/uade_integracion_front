@@ -8,14 +8,14 @@ import {
   ListItem
 } from "@material-ui/core";
 import Avatar from "react-avatar";
-import styles from "./PersonalData.module.css";
+import styles from "./EmployeeData.module.css";
 import Icon from "@material-ui/core/Icon";
 
-const PersonalData = props => {
+const EmployeeData = props => {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Personal Data
+        Employee Data
       </Typography>
       <div className={styles.container}>
         <div className={styles.header}>
@@ -83,6 +83,6 @@ const PersonalData = props => {
   );
 };
 
-PersonalData.propTypes = {};
+EmployeeData.propTypes = {};
 
-export default PersonalData;
+export default EmployeeData;

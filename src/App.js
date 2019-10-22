@@ -8,7 +8,8 @@ import Logout from "./components/Logout";
 
 import store from "./redux/store";
 import Register from "./components/Register/Register";
-import PersonalData from "./components/PersonalData/PersonalData";
+import EmployeeData from "./components/EmployeeData/EmployeeData";
+import StudentData from "./components/StudentData/StudentData";
 window.store = store;
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
           <PrivateRoute path="/registerStudent" component={Register} />
           <PrivateRoute path="/registerHolder" component={Register} />
           <PrivateRoute path="/registerEmployee" component={Register} />
-          <PrivateRoute path="/employee-details" component={PersonalData} />
+          <PrivateRoute path="/employee-data" component={EmployeeData} />
+          <PrivateRoute path="/student-data" component={StudentData} />
+          <PrivateRoute component={Home} />>
         </Switch>
       </BrowserRouter>
     </Provider>

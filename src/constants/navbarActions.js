@@ -25,13 +25,14 @@ const NAVBAR_ITEMS = {
     name: "Asociar alumno"
   },
   STUDENT_DETAILS: {
-    path: "/student-details",
-    name: "Datos personales"
+    path: "/student-data",
+    name: "Student Data",
+    icon: "info"
   },
   EMPLOYEE_DETAILS: {
     id: "employeeDetails",
-    path: "/employee-details",
-    name: "Personal Data",
+    path: "/employee-data",
+    name: "Employee Data",
     icon: "info"
   }
 };

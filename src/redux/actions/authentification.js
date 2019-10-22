@@ -9,7 +9,7 @@ export const authenticateUser = (username, password) => {
   return dispatch => {
     return signInService(username, password)
       .then(user => {
-        user.role = "EMPLOYEE";
+        user.role = "STUDENT";
         window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
         generateAuthClient(user.token);
         const { role, ...personalData } = user;
