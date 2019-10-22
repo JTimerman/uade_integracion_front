@@ -17,10 +17,9 @@ import Avatar from "react-avatar";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import ListIcon from "@material-ui/icons/List";
+
 import Icon from "@material-ui/core/Icon";
-const Layout = ({ children, classes, name, lastname, role }) => {
+const Layout = ({ children, classes, name, lastname, roles }) => {
   const [open, setOpen] = React.useState(true);
   const currentUserNavbarItems = roles.reduce((items, role) => {
     return [...items, ...ROLES_NAVBAR_ITEMS[role]];

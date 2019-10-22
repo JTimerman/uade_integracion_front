@@ -8,12 +8,10 @@ import Logout from "./components/Logout";
 import Register from "./components/Register";
 
 import store from "./redux/store";
-import Register from "./components/Register/Register";
 import HomeHolder from "./components/HomeHolder/HomeHolder";
 import PayAmount from "./components/PayAmount/PayAmount";
 import Payments from "./components/Payments/Payments";
 
-import PersonalData from "./components/PersonalData/PersonalData";
 import EmployeeData from "./components/EmployeeData/EmployeeData";
 import StudentData from "./components/StudentData/StudentData";
 window.store = store;
