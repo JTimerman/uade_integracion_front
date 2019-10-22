@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 
-import { getUserRole } from "../../redux/selectors/role";
+import { getUserRoles } from "../../redux/selectors/roles";
 
 import Home from "./Home";
 
 const mapStateToProps = store => ({
-  role: getUserRole(store)
+  roles: getUserRoles(store)
 });
 
 export default connect(mapStateToProps)(Home);

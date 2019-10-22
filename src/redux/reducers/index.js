@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
+import employees from "./employees";
 import holders from "./holders";
 import personalData from "./personalData";
-import role from "./role";
+import roles from "./roles";
+import students from "./students";
 
 export const reducers = combineReducers({
+  employees,
   holders,
   personalData,
-  role
+  roles,
+  students
 });
