@@ -14,7 +14,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "react-avatar";
-import { Button } from "@material-ui/core";
+import { Button, Icon } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import HomeIcon from "@material-ui/icons/Home";
@@ -94,18 +94,6 @@ const Layout = ({ children, classes, name, lastname, role }) => {
         <Divider />
         <List>
           {currentUserNavbarItems.map(({ path, name, icon }, index) => {
-            let IconComponent;
-
-            switch (icon) {
-              case "GroupAddIcon":
-                IconComponent = <GroupAddIcon />;
-                break;
-              case "HomeIcon":
-                IconComponent = <HomeIcon />;
-                break;
-              default:
-                IconComponent = null;
-            }
             return (
               <ListItem
                 button
@@ -114,7 +102,11 @@ const Layout = ({ children, classes, name, lastname, role }) => {
                 key={name}
                 onClick={handlerClick}
               >
-                <ListItemIcon>{IconComponent}</ListItemIcon>
+                {icon && (
+                  <ListItemIcon>
+                    <Icon>{icon}</Icon>
+                  </ListItemIcon>
+                )}
                 <ListItemText primary={name} />
               </ListItem>
             );

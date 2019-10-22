@@ -8,6 +8,7 @@ import Logout from "./components/Logout";
 
 import store from "./redux/store";
 import Register from "./components/Register/Register";
+import PersonalData from "./components/PersonalData/PersonalData";
 window.store = store;
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <PrivateRoute path="/registerStudent" component={Register} />
           <PrivateRoute path="/registerHolder" component={Register} />
           <PrivateRoute path="/registerEmployee" component={Register} />
+          <PrivateRoute path="/employee-details" component={PersonalData} />
         </Switch>
       </BrowserRouter>
     </Provider>
