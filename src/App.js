@@ -6,14 +6,16 @@ import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Logout from "./components/Logout";
 import Register from "./components/Register";
-
+import EmployeeData from "./components/EmployeeData";
 import store from "./redux/store";
 import HomeHolder from "./components/HomeHolder/HomeHolder";
 import PayAmount from "./components/PayAmount/PayAmount";
 import Payments from "./components/Payments/Payments";
 
 import EmployeeData from "./components/EmployeeData/EmployeeData";
-import StudentData from "./components/StudentData/StudentData";
+
+import StudentData from "./components/StudentData/";
+
 window.store = store;
 
 function App() {

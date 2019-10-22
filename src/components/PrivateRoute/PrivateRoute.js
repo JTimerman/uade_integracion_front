@@ -14,9 +14,9 @@ export const PrivateRoute = ({
   setRoles,
   ...rest
 }) => {
-  const [loading, setLoading] = useState(!roles);
+  const [loading, setLoading] = useState(!roles.length);
   useEffect(() => {
-    if (!roles) {
+    if (!roles.length) {
       const user = JSON.parse(window.localStorage.getItem(CURRENT_USER_KEY));
       if (!user) {
         setLoading(false);
@@ -36,7 +36,7 @@ export const PrivateRoute = ({
     <Route
       {...rest}
       render={props => {
-        if (!roles) {
+        if (!roles.length) {
           // not logged in so redirect to login page with the return url
           return (
             <Redirect
@@ -47,15 +47,13 @@ export const PrivateRoute = ({
 
         // check if route is restricted by role
         if (
-          roles === undefined ||
-          roles.length === 0 ||
-          (props.location.pathname !== "/" &&
-            !ROLES_NAVBAR_ITEMS[roles[0]].find(
-              ({ path }) => path === props.location.pathname
-            ))
+          props.location.pathname !== "/" &&
+          !ROLES_NAVBAR_ITEMS[roles[0]].find(
+            ({ path }) => path === props.location.pathname
+          )
         ) {
           // role not authorised so redirect to login page
-          return <Redirect to={{ pathname: "/login" }} />;
+          return <Redirect to={{ pathname: "/" }} />;
         }
         // authorised so return component
         return (
