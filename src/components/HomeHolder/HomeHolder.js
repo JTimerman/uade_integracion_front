@@ -51,9 +51,10 @@ const HomeHolder = props => {
   const handlerClick = event => {
     const mount = event.currentTarget.name;
     setGoPay(true);
+    //set redux mount
   };
 
-  if (goPay) return <Redirect to="/PayMount" />;
+  if (goPay) return <Redirect to="/PayAmount" />;
 
   if (students === undefined || students.length === 1) return null;
 

@@ -22,7 +22,7 @@ const NAVBAR_ITEMS = {
   },
   INVOICESANDDUES: {
     path: "/HomeHolder",
-    name: "Dues and invoices ",
+    name: "Fees and debts",
     icon: "AttachMoneyIcon"
   },
   PAYMENTS: {
@@ -30,9 +30,9 @@ const NAVBAR_ITEMS = {
     name: "Payments",
     icon: "ListIcon"
   },
-  PAYMOUNT: {
-    path: "/PayMount",
-    name: "Pay mount",
+  PAYAMOUNT: {
+    path: "/PayAmount",
+    name: "Pay Amount",
     display: false
   },
   STUDENT_DETAILS: {
@@ -56,7 +56,7 @@ export const ROLES_NAVBAR_ITEMS = {
   HOLDER: [
     NAVBAR_ITEMS.INVOICESANDDUES,
     NAVBAR_ITEMS.PAYMENTS,
-    NAVBAR_ITEMS.PAYMOUNT
+    NAVBAR_ITEMS.PAYAMOUNT
   ],
   STUDENT: [NAVBAR_ITEMS.STUDENT_DETAILS],
   EMPLOYEE: [NAVBAR_ITEMS.EMPLOYEE_DETAILS]

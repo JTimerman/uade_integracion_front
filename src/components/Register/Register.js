@@ -17,7 +17,6 @@ import {
 } from "@material-ui/pickers";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { getDate } from "date-fns/esm";
 
 const RegisterForm = props => {
   const [values, setValues] = React.useState({});
