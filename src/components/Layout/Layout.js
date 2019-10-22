@@ -32,9 +32,7 @@ const Layout = ({ children, classes, name, lastname, role }) => {
     setOpen(false);
   };
 
-  const handlerClick = () => {
-    console.log("aca");
-  };
+  const handlerClick = () => {};
 
   return (
     <div className={classes.root}>
