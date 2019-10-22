@@ -12,13 +12,15 @@ export const authenticateUser = (username, password) => {
         window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(response));
         const { user, token } = response;
         const roles = response.roles.map(role =>
-          role.substring(0, role.indexOf("_")).toUpperCase()
+          role.split("_")[0].toUpperCase()
         );
         const personalData = {
           ...user[response.roles[0]],
           lastname: user[response.roles[0]].last_name,
           last_name: undefined
         };
+
+        console.log("personalData: ", personalData);
 
         generateAuthClient(token);
         dispatch(setPersonalData(personalData));
