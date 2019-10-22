@@ -5,7 +5,7 @@ export const getHolders = () => {
   return fetchAPI(BASE_URL + HOLDERS, "GET");
 };
 
-export const getHoldersById = id => {
+export const getHolderById = id => {
   return fetchAPI(BASE_URL + HOLDERS + "/" + id, "GET");
 };
 
