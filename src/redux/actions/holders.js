@@ -1,9 +1,11 @@
 import {
   createHolder as createHolderService,
-  getHolders as getHoldersService
+  getHolders as getHoldersService,
+  getHolderInvoces
 } from "../../services/holders";
 
 import { SET_HOLDERS } from "./actionTypes.json";
+import { setInvoices } from "./invoices";
 import { toast } from "react-toastify";
 
 function setHolders(holders) {
@@ -26,5 +28,15 @@ export const createHolder = holder => {
       Promise.reject(error);
       toast.error("An error has ocurred while creating a holder!");
     });
+  };
+};
+
+export const getInvoices = () => {
+  return (dispatch, getState) => {
+    return getHolderInvoces(getState().personalData.id)
+      .then(invoices => {
+        dispatch(setInvoices(invoices));
+      })
+      .catch(() => Promise.reject(false));
   };
 };

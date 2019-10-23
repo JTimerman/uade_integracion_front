@@ -16,65 +16,41 @@ import { withStyles } from "@material-ui/core/styles";
 import useStyles from "./styles";
 import Fab from "@material-ui/core/Fab";
 
-const HomeHolder = () => {
+const HomeHolder = ({ getInvoices, invoices }) => {
   const classes = useStyles();
 
-  const [students, setStudents] = React.useState([]);
-  const [currentDate, setCurrentDate] = React.useState();
   const [goPay, setGoPay] = React.useState(false);
 
   useEffect(() => {
-    const date = new Date();
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    };
-
-    setCurrentDate(date.toLocaleDateString("en-US", options));
-  }, []);
-
-  useEffect(() => {
-    setStudents([
-      {
-        name: "Juan",
-        lastname: "Perez"
-      },
-      {
-        name: "Mariano",
-        lastname: "Perez"
-      }
-    ]);
-  }, []);
+    getInvoices();
+  }, [getInvoices]);
 
   const handlerClick = event => {
-    const amount = event.currentTarget.name;
+    const amount = event.currentTarget.amount;
+    console.log(amount);
     setGoPay(true);
     //set redux mount
   };
   if (goPay) return <Redirect to="/PayAmount" />;
 
-  if (students === undefined || students.length === 0) return null;
-
   return (
     <Fragment>
-      {students.map((student, index) => {
+      {invoices.map((invoice, index) => {
         return (
           <Fragment key={index}>
             <Card className={classes.CardHeader}>
               <CardHeader
                 avatar={
                   <Avatar aria-label="recipe" className={classes.avatar}>
-                    {student.name.charAt(0)}
+                    {invoice.name.charAt(0)}
                   </Avatar>
                 }
-                title={student.name + " " + student.lastname}
-                subheader={currentDate}
+                title={invoice.name + " " + invoice.lastname}
+                subheader={invoice.date}
               />
               <CardContent className={classes.CardContent}>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Total amount: $4000
+                  Total amount: ${invoice.amount}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
@@ -85,7 +61,7 @@ const HomeHolder = () => {
                   aria-label="add"
                   className={classes.margin}
                   onClick={handlerClick}
-                  name={4000}
+                  amount={invoice.amount}
                 >
                   <AttachMoneyIcon className={classes.AttachMoneyIcon} />
                   Pay amount

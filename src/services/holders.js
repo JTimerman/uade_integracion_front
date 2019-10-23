@@ -28,3 +28,11 @@ export const updateHolder = id => {
 export const createHolder = holder => {
   return fetchAPI(BASE_URL + HOLDERS, "POST", holder);
 };
+
+export const getHolderInvoces = id => {
+  return fetchAPI(BASE_URL + HOLDERS + `/${id}/invoices`, "GET");
+};
+
+export const getHolderFees = id => {
+  return fetchAPI(BASE_URL + HOLDERS + `/${id}/invoices`, "GET");
+};

@@ -1,39 +1,34 @@
 import React, { Fragment } from "react";
-
-import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import useStyles from "./styles";
 
 import Typography from "@material-ui/core/Typography";
 
-const envoices = [
+const recibos = [
   {
     date: "20/10/2019",
-    Amount: 4000,
-    PaymentMethod: "Credit Card Visa"
+    amount: 4000,
+    paymentMethod: "Credit Card Visa"
   },
   {
     date: "25/10/2019",
-    Amount: 3500,
-    PaymentMethod: "Credit Card Visa"
+    amount: 3500,
+    paymentMethod: "Credit Card Visa"
   },
   {
     date: "19/10/2019",
-    Amount: 1200,
-    PaymentMethod: "Credit Card Visa"
+    amount: 1200,
+    paymentMethod: "Credit Card Visa"
   }
 ];
 
-const Payments = () => {
-  const classes = useStyles();
-
+const Payments = ({ classes }) => {
   return (
     <div>
-      {envoices.map((envoice, index) => {
+      {recibos.map((recibo, index) => {
         return (
           <Fragment key={index}>
             <Card className={classes.CardHeader}>
@@ -44,7 +39,7 @@ const Payments = () => {
                     color="textSecondary"
                     component="p"
                   >
-                    Payment Method: {envoice.PaymentMethod}
+                    Payment Method: {recibo.paymentMethod}
                   </Typography>
                 </div>
                 <div>
@@ -54,14 +49,14 @@ const Payments = () => {
                     component="p"
                     className={classes.typography}
                   >
-                    Date: {envoice.date}
+                    Date: {recibo.date}
                   </Typography>
                 </div>
                 <CheckCircleOutlineRoundedIcon className={classes.CheckIcon} />
               </CardContent>
               <CardActions disableSpacing>
                 <AttachMoneyIcon className={classes.AttachMoneyIcon} />{" "}
-                {envoice.Amount}
+                {recibo.amount}
               </CardActions>
             </Card>
           </Fragment>
@@ -71,4 +66,4 @@ const Payments = () => {
   );
 };
 
-export default withStyles()(Payments);
+export default Payments;
