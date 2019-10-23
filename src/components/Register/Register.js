@@ -42,6 +42,8 @@ const RegisterForm = ({
   const [values, setValues] = React.useState(initialValues);
   const [open, setOpen] = React.useState(false);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [servicesList, setServicesList] = React.useState([]);
+  const [servicesChosen, setServicesChosen] = React.useState([]);
   const path = location.pathname;
 
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
@@ -109,6 +111,7 @@ const RegisterForm = ({
           last_name: lastname,
           phone,
           scholarship_type: scholarshipType,
+          services: servicesChosen,
           address,
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
           holder_id: holderid
@@ -154,7 +157,7 @@ const RegisterForm = ({
   };
 
   const handlerClickServices = event => {
-    //setServicesChosen(event.currentTarget.value)
+    setServicesChosen(event.target.value);
   };
 
   const ITEM_HEIGHT = 48;
@@ -309,18 +312,16 @@ const RegisterForm = ({
                 multiple
                 value={servicesChosen}
                 fullWidth
+                onChange={handlerClickServices}
                 input={<Input id="select-multiple-checkbox" />}
                 renderValue={selected => selected.join(", ")}
                 MenuProps={MenuProps}
               >
                 {servicesList.map((service, index) => {
                   return (
-                    <MenuItem key={index}>
-                      <Checkbox
-                        onClick={handlerClickServices}
-                        name={service.name}
-                      />
-                      {service.name}
+                    <MenuItem key={index} value={service.name}>
+                      <Checkbox />
+                      <ListItemText primary={service.name} />
                     </MenuItem>
                   );
                 })}
