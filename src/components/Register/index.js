@@ -5,6 +5,7 @@ import { createEmployee } from "../../redux/actions/employees";
 import { createStudent } from "../../redux/actions/students";
 import { createHolder } from "../../redux/actions/holders";
 import { getHolders } from "../../redux/actions/holders";
+import { addFilter } from "../../redux/actions/filters";
 
 import Register from "./Register";
 import { getServices } from "../../redux/actions/services";
@@ -47,7 +48,8 @@ const mapDispatchToProps = {
   createStudent,
   createHolder,
   getHolders,
-  getServices
+  getServices,
+  addFilter
 };
 
 const mapStateToProps = state => ({
