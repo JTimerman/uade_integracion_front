@@ -1,5 +1,5 @@
 const NAVBAR_ITEMS = {
-  LOGOUT: { path: "/logout", name: "Salir" },
+  LOGOUT: { path: "/logout", name: "Logout" },
   REGISTER_STUDENT: {
     path: "/registerStudent",
     name: "Register Student",
@@ -20,9 +20,20 @@ const NAVBAR_ITEMS = {
     name: "Home Admin",
     icon: "home"
   },
-  ASSOCIATE_STUDENT: {
-    path: "/associate-student",
-    name: "Asociar alumno"
+  INVOICESANDDUES: {
+    path: "/HomeHolder",
+    name: "Fees and debts",
+    icon: "attach_money"
+  },
+  PAYMENTS: {
+    path: "/Payments",
+    name: "Payments",
+    icon: "list"
+  },
+  PAYAMOUNT: {
+    path: "/PayAmount",
+    name: "Pay Amount",
+    display: false
   },
   STUDENT_DETAILS: {
     path: "/student-data",
@@ -44,7 +55,11 @@ export const ROLES_NAVBAR_ITEMS = {
     NAVBAR_ITEMS.REGISTER_EMPLOYEE,
     NAVBAR_ITEMS.REGISTER_HOLDER
   ],
-  HOLDER: [NAVBAR_ITEMS.ASSOCIATE_STUDENT],
+  HOLDER: [
+    NAVBAR_ITEMS.INVOICESANDDUES,
+    NAVBAR_ITEMS.PAYMENTS,
+    NAVBAR_ITEMS.PAYAMOUNT
+  ],
   STUDENT: [NAVBAR_ITEMS.STUDENT_DETAILS],
   EMPLOYEE: [NAVBAR_ITEMS.EMPLOYEE_DETAILS]
 };

@@ -14,10 +14,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "react-avatar";
-import { Button, Icon } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
 
+import Icon from "@material-ui/core/Icon";
 const Layout = ({ children, classes, name, lastname, roles }) => {
   const [open, setOpen] = React.useState(true);
   // uncomment this to make this multiple roles work
@@ -33,8 +34,6 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const handlerClick = () => {};
 
   return (
     <div className={classes.root}>
@@ -95,15 +94,10 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
         </div>
         <Divider />
         <List>
-          {currentUserNavbarItems.map(({ path, name, icon }) => {
+          {currentUserNavbarItems.map(({ path, name, icon, display }) => {
+            if (display === false) return null;
             return (
-              <ListItem
-                button
-                component={Link}
-                to={path}
-                key={name}
-                onClick={handlerClick}
-              >
+              <ListItem button component={Link} to={path} key={name}>
                 {icon && (
                   <ListItemIcon>
                     <Icon>{icon}</Icon>
