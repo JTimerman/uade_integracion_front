@@ -55,7 +55,7 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Escuela
+            School System
           </Typography>
         </Toolbar>
       </AppBar>
@@ -89,7 +89,7 @@ const Layout = ({ children, classes, name, lastname, roles }) => {
             component={Link}
             to={"/logout"}
           >
-            Salir
+            Logout
           </Button>
         </div>
         <Divider />
