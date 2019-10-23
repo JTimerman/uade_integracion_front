@@ -4,6 +4,7 @@ import {
 } from "../../services/students";
 
 import { SET_STUDENTS } from "./actionTypes.json";
+import { toast } from "react-toastify";
 
 function setStudents(students) {
   return { type: SET_STUDENTS, students };
@@ -21,6 +22,9 @@ export const getStudents = () => {
 
 export const createStudent = student => {
   return () => {
-    return createStudentService(student).catch(error => Promise.reject(error));
+    return createStudentService(student).catch(error => {
+      Promise.reject(error);
+      toast.error("An error has ocurred while creating a student!");
+    });
   };
 };

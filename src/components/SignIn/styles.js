@@ -30,5 +30,11 @@ export default makeStyles(theme => ({
     marginTop: "3%",
     textAlign: "center",
     fontSize: "13px"
+  },
+  loader: {
+    minHeight: "200px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }));
