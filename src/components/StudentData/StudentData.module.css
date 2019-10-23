@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name {
+  text-align: center;
+}
+
+.data {
+  display: flex;
+
+  width: 60%;
+}
+
+.data .content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.field {
+  flex: 1 0 50%;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+}
+
+.field .icon {
+  align-self: center;
+  padding: 0 20px;
+}
+.field .label {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.services {
+  margin-top: 5%;
+}

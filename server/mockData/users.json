@@ -1,0 +1,37 @@
+[
+  {
+    "id": "jtimerman",
+    "name": "Joaquin",
+    "lastname": "Timerman",
+    "password": "jtimerman",
+    "role": "ADMIN"
+  },
+  {
+    "id": "dbalestri",
+    "name": "Denis",
+    "lastname": "Balestri",
+    "password": "dbalestri",
+    "role": "HOLDER"
+  },
+  {
+    "id": "jantonaz",
+    "name": "Juan Pablo",
+    "lastname": "Antonaz",
+    "password": "jantonaz",
+    "role": "EMPLOYEE"
+  },
+  {
+    "id": "mberrueta",
+    "name": "Matias",
+    "lastname": "Berrueta",
+    "password": "mberrueta",
+    "role": "HOLDER"
+  },
+  {
+    "id": "dcrespi",
+    "name": "Damian",
+    "lastname": "Crespi",
+    "password": "dcrespi",
+    "role": "ADMIN"
+  }
+]
