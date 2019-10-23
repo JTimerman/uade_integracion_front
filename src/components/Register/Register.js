@@ -35,7 +35,8 @@ const RegisterForm = ({
   getServices,
   createEmployee,
   createHolder,
-  services
+  services,
+  addFilter
 }) => {
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
 
@@ -199,6 +200,13 @@ const RegisterForm = ({
   };
 
   const handlerSearchHolder = () => {
+    const filter = {
+      field: "holders",
+      type: "lastName",
+      filter: values.holderlastname
+    };
+
+    addFilter(filter);
     setOpen(true);
   };
 
