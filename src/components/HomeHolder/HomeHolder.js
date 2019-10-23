@@ -16,7 +16,7 @@ import { withStyles } from "@material-ui/core/styles";
 import useStyles from "./styles";
 import Fab from "@material-ui/core/Fab";
 
-const HomeHolder = ({ getInvoices, invoices }) => {
+const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
   const classes = useStyles();
 
   const [goPay, setGoPay] = React.useState(false);
@@ -26,10 +26,10 @@ const HomeHolder = ({ getInvoices, invoices }) => {
   }, [getInvoices]);
 
   const handlerClick = event => {
-    const amount = event.currentTarget.amount;
-    console.log(amount);
+    const id = event.currentTarget.invoiceid;
+
+    setInvoiceToPayById(id);
     setGoPay(true);
-    //set redux mount
   };
   if (goPay) return <Redirect to="/PayAmount" />;
 
@@ -61,7 +61,7 @@ const HomeHolder = ({ getInvoices, invoices }) => {
                   aria-label="add"
                   className={classes.margin}
                   onClick={handlerClick}
-                  amount={invoice.amount}
+                  invoiceid={invoice.id}
                 >
                   <AttachMoneyIcon className={classes.AttachMoneyIcon} />
                   Pay amount
