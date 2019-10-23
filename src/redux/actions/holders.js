@@ -4,6 +4,7 @@ import {
 } from "../../services/holders";
 
 import { SET_HOLDERS } from "./actionTypes.json";
+import { toast } from "react-toastify";
 
 function setHolders(holders) {
   return { type: SET_HOLDERS, holders };
@@ -21,6 +22,9 @@ export const getHolders = () => {
 
 export const createHolder = holder => {
   return () => {
-    return createHolderService(holder).catch(error => Promise.reject(error));
+    return createHolderService(holder).catch(error => {
+      Promise.reject(error);
+      toast.error("An error has ocurred while creating a holder!");
+    });
   };
 };

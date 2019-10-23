@@ -13,12 +13,15 @@ import PayAmount from "./components/PayAmount/PayAmount";
 import Payments from "./components/Payments/Payments";
 
 import StudentData from "./components/StudentData/";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 window.store = store;
 
 function App() {
   return (
     <Provider store={store}>
+      <ToastContainer />
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={SignIn} />

@@ -1,21 +1,21 @@
 const NAVBAR_ITEMS = {
-  LOGOUT: { path: "/logout", name: "Exit" },
-  REGISTERSTUDENT: {
+  LOGOUT: { path: "/logout", name: "Logout" },
+  REGISTER_STUDENT: {
     path: "/registerStudent",
     name: "Register Student",
     icon: "group_add"
   },
-  REGISTEREMPLOYEE: {
+  REGISTER_EMPLOYEE: {
     path: "/registerEmployee",
     name: "Register Employee",
     icon: "group_add"
   },
-  REGISTERHOLDER: {
+  REGISTER_HOLDER: {
     path: "/registerHolder",
     name: "Register Holder",
     icon: "group_add"
   },
-  HOMEADMIN: {
+  HOME_ADMIN: {
     path: "/homeADMIN",
     name: "Home Admin",
     icon: "home"
@@ -50,10 +50,10 @@ const NAVBAR_ITEMS = {
 
 export const ROLES_NAVBAR_ITEMS = {
   ADMIN: [
-    NAVBAR_ITEMS.HOMEADMIN,
-    NAVBAR_ITEMS.REGISTERSTUDENT,
-    NAVBAR_ITEMS.REGISTEREMPLOYEE,
-    NAVBAR_ITEMS.REGISTERHOLDER
+    NAVBAR_ITEMS.HOME_ADMIN,
+    NAVBAR_ITEMS.REGISTER_STUDENT,
+    NAVBAR_ITEMS.REGISTER_EMPLOYEE,
+    NAVBAR_ITEMS.REGISTER_HOLDER
   ],
   HOLDER: [
     NAVBAR_ITEMS.INVOICESANDDUES,
