@@ -11,11 +11,13 @@ import styles from "./StudentData.module.css";
 import Icon from "@material-ui/core/Icon";
 import clsx from "clsx";
 import { getHolderById } from "../../services/holders";
+import ServicesService from "../../services/services";
 
 const StudentData = ({ personalData }) => {
   console.log("personalData: ", personalData);
 
   const [holder, setHolder] = useState(null);
+  const [services, setServices] = useState([]);
 
   const {
     name,
@@ -30,7 +32,13 @@ const StudentData = ({ personalData }) => {
 
   useEffect(() => {
     getHolderById(holderId).then(_holder => setHolder(_holder));
-  }, [holderId]);
+    ServicesService.getByStudentId(personalData.id).then(services =>
+      setServices(services)
+    );
+  }, [holderId, personalData.id]);
+
+  console.log("services: ", services);
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -101,23 +109,21 @@ const StudentData = ({ personalData }) => {
         </Card>
         {/* Services */}
         <Card className={clsx(styles.data, styles.services)}>
-          <CardContent>
+          <CardContent style={{ width: "100%" }}>
             <Typography gutterBottom variant="h6" component="h2">
               Services availables
             </Typography>
-            <ListItem divider className={styles.field}>
-              <div className={styles.icon}>
-                <Icon color="primary">school</Icon>
-              </div>
-              <div className="data">
-                <div className={styles.label}>Name</div>
-                <div className={styles.value}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation
+            {services.map(({ name, description, id }) => (
+              <ListItem key={id} divider className={styles.field}>
+                <div className={styles.icon}>
+                  <Icon color="primary">school</Icon>
                 </div>
-              </div>
-            </ListItem>
+                <div className="data">
+                  <div className={styles.label}>{name}</div>
+                  <div className={styles.value}>{description}</div>
+                </div>
+              </ListItem>
+            ))}
           </CardContent>
         </Card>
       </div>
