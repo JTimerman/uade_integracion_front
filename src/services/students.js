@@ -18,5 +18,12 @@ export const updateStudent = id => {
 };
 
 export const createStudent = student => {
-  return fetchAPI(BASE_URL + STUDENTS, "POST", student);
+  const sentStudent = {
+    ...student,
+    service_ids: [
+      ...student.service_ids,
+      student.scholarship_type === "Medio Turno" ? 10001 : 10002
+    ]
+  };
+  return fetchAPI(BASE_URL + STUDENTS, "POST", sentStudent);
 };
