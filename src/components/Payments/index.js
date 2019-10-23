@@ -26,6 +26,12 @@ const styles = theme => ({
   },
   typography: {
     marginLeft: "5px"
+  },
+  loader: {
+    minHeight: "200px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

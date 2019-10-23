@@ -1,15 +1,20 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import { CircularProgress } from "@material-ui/core";
 
 import Typography from "@material-ui/core/Typography";
 
 const Payments = ({ classes, payments, getHolderPayments }) => {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    getHolderPayments();
+    getHolderPayments().then(response => {
+      setLoading(false);
+    });
   }, [getHolderPayments]);
 
   const dateOptions = {
@@ -19,7 +24,11 @@ const Payments = ({ classes, payments, getHolderPayments }) => {
     day: "numeric"
   };
 
-  return (
+  return loading ? (
+    <div className={classes.loader}>
+      <CircularProgress />
+    </div>
+  ) : (
     <div>
       {payments.map((payment, index) => {
         return (

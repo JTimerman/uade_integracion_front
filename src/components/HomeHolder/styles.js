@@ -29,5 +29,11 @@ export default makeStyles(theme => ({
   },
   CardContent: {
     marginTop: "2%"
+  },
+  loader: {
+    minHeight: "200px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }));
