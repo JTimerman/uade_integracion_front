@@ -25,7 +25,7 @@ const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
   }, [getInvoices]);
 
   const handlerClick = event => {
-    const id = event.currentTarget.invoiceid;
+    const id = event.currentTarget.getAttribute("invoiceid");
 
     setInvoiceToPayById(id);
     setGoPay(true);

@@ -35,10 +35,10 @@ export const getHolderInvoices = id => {
       invoices.map(invoice => ({
         ...invoice,
         name: invoice.student.name,
-        lastName: invoice.student.lastName,
-        amount: invoice.amount,
-        date: invoice.date,
-        id: invoice.id
+        lastname: invoice.student.last_name,
+        amount: invoice.total,
+        date: `${invoice.year}-${invoice.month}`,
+        id: `${invoice.id}`
       }))
   );
 };

@@ -7,7 +7,9 @@ export function setInvoiceToPay(invoice) {
 
 export const setInvoiceToPayById = id => {
   return (dispatch, getState) => {
-    const invoiceToPay = getInvoiceById(getState(), id);
+    const state = getState();
+
+    const invoiceToPay = getInvoiceById(state, id);
 
     dispatch(setInvoiceToPay(invoiceToPay));
   };
