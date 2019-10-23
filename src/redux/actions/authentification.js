@@ -1,6 +1,6 @@
 import signInService from "../../services/signIn";
 import { setPersonalData } from "./personalData";
-import { setRole } from "./role";
+import { setRoles } from "./roles";
 import { generateAuthClient } from "../../api/fetchAPI";
 
 export const CURRENT_USER_KEY = "currentUser";
@@ -8,14 +8,28 @@ export const CURRENT_USER_KEY = "currentUser";
 export const authenticateUser = (username, password) => {
   return dispatch => {
     return signInService(username, password)
-      .then(user => {
-        user.role = "HOLDER";
-        window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-        generateAuthClient(user.token);
-        const { role, ...personalData } = user;
+      .then(response => {
+        const { user, token } = response;
+        const roles = response.roles.map(role =>
+          role.split("_")[0].toUpperCase()
+        );
+        const personalData = {
+          ...user[response.roles[0]],
+          lastname: user[response.roles[0]].last_name,
+          last_name: undefined
+        };
+        window.localStorage.setItem(
+          CURRENT_USER_KEY,
+          JSON.stringify({ ...personalData, token, roles })
+        );
+
+        console.log("personalData: ", personalData);
+
+        generateAuthClient(token);
         dispatch(setPersonalData(personalData));
-        dispatch(setRole(role));
-        return user;
+        dispatch(setRoles(roles));
+
+        return Promise.resolve();
       })
       .catch(() => Promise.reject(false));
   };

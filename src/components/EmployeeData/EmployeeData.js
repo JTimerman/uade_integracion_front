@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Typography,
   Divider,
@@ -8,20 +7,28 @@ import {
   ListItem
 } from "@material-ui/core";
 import Avatar from "react-avatar";
-import styles from "./PersonalData.module.css";
+import styles from "./EmployeeData.module.css";
 import Icon from "@material-ui/core/Icon";
 
-const PersonalData = props => {
+const EmployeeData = ({
+  name,
+  lastname,
+  phone,
+  address,
+  email,
+  salary,
+  startDate
+}) => {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Personal Data
+        Employee Data
       </Typography>
       <div className={styles.container}>
         <div className={styles.header}>
-          <Avatar name="Pepe" round="100px" />
+          <Avatar name={`${name} ${lastname}`} round="100px" />
           <Typography className={styles.name} variant="h6" gutterBottom>
-            Pepe
+            {`${name} ${lastname}`}
           </Typography>
         </div>
         <Divider></Divider>
@@ -33,7 +40,7 @@ const PersonalData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Salary</div>
-                <div className={styles.value}>$20.000</div>
+                <div className={styles.value}>${salary}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -43,7 +50,7 @@ const PersonalData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Email</div>
-                <div className={styles.value}>pepe@pepe.com</div>
+                <div className={styles.value}>{email}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -53,7 +60,7 @@ const PersonalData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Address</div>
-                <div className={styles.value}>929 Pepe St, CO</div>
+                <div className={styles.value}>{address}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -63,7 +70,7 @@ const PersonalData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Start Date</div>
-                <div className={styles.value}>11/05/2016</div>
+                <div className={styles.value}>{startDate}</div>
               </div>
             </ListItem>
             {/* Data */}
@@ -73,7 +80,7 @@ const PersonalData = props => {
               </div>
               <div className="data">
                 <div className={styles.label}>Phone</div>
-                <div className={styles.value}>+54 11 204455</div>
+                <div className={styles.value}>{phone}</div>
               </div>
             </ListItem>
           </CardContent>
@@ -83,6 +90,6 @@ const PersonalData = props => {
   );
 };
 
-PersonalData.propTypes = {};
+EmployeeData.propTypes = {};
 
-export default PersonalData;
+export default EmployeeData;

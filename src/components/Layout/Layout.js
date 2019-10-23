@@ -16,15 +16,16 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "react-avatar";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import HomeIcon from "@material-ui/icons/Home";
 import { ROLES_NAVBAR_ITEMS } from "../../constants/navbarActions";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import ListIcon from "@material-ui/icons/List";
+
 import Icon from "@material-ui/core/Icon";
-const Layout = ({ children, classes, name, lastname, role }) => {
+const Layout = ({ children, classes, name, lastname, roles }) => {
   const [open, setOpen] = React.useState(true);
-  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[role] || [];
+  // uncomment this to make this multiple roles work
+  // const currentUserNavbarItems = roles.reduce((items, role) => {
+  //   return [...items, ...ROLES_NAVBAR_ITEMS[role]];
+  // }, []);
+  const currentUserNavbarItems = ROLES_NAVBAR_ITEMS[roles[0]];
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -33,8 +34,6 @@ const Layout = ({ children, classes, name, lastname, role }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const handlerClick = () => {};
 
   return (
     <div className={classes.root}>
@@ -76,12 +75,12 @@ const Layout = ({ children, classes, name, lastname, role }) => {
         </div>
         <Divider />
         <div className={classes.profile}>
-          <Avatar name={name} round="100px" />
+          <Avatar name={`${name} ${lastname}`} round="100px" />
           <Typography variant="h6" noWrap>
             {`${name} ${lastname}`}
           </Typography>
           <Typography variant="subtitle1" noWrap>
-            {role}
+            {roles[0]}
           </Typography>
           <Button
             variant="contained"
@@ -95,15 +94,10 @@ const Layout = ({ children, classes, name, lastname, role }) => {
         </div>
         <Divider />
         <List>
-          {currentUserNavbarItems.map(({ path, name, icon }, index) => {
+          {currentUserNavbarItems.map(({ path, name, icon, display }) => {
+            if (display === false) return null;
             return (
-              <ListItem
-                button
-                component={Link}
-                to={path}
-                key={name}
-                onClick={handlerClick}
-              >
+              <ListItem button component={Link} to={path} key={name}>
                 {icon && (
                   <ListItemIcon>
                     <Icon>{icon}</Icon>
@@ -113,7 +107,6 @@ const Layout = ({ children, classes, name, lastname, role }) => {
               </ListItem>
             );
           })}
-          }
         </List>
       </Drawer>
       <main

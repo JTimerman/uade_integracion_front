@@ -3,9 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
-import useStyles from "./styles";
 import SearchIcon from "@material-ui/icons/Search";
-import Dialog from "../Dialog/Dialog";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -21,28 +19,42 @@ import {
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-const RegisterForm = props => {
-  const [values, setValues] = React.useState({});
-  const [parents, setParents] = React.useState([]);
-  const [open, setOpen] = React.useState(true);
-  const [selectedDate, setSelectedDate] = React.useState();
-  const [servicesChosen, setServicesChosen] = React.useState([]);
-  const [servicesList, setServicesList] = React.useState([]);
+import Dialog from "../Dialog";
+
+const RegisterForm = ({
+  location,
+  classes,
+  createStudent,
+  getHolders,
+  createEmployee,
+  createHolder
+}) => {
+  const initialValues = {
+    name: "",
+    lastname: "",
+    holderlastname: "",
+    holderid: "",
+    phone: "",
+    address: "",
+    salary: "",
+    scholarshipType: ""
+  };
+  const [values, setValues] = React.useState(initialValues);
+  const [open, setOpen] = React.useState(false);
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const path = location.pathname;
+
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
-  const classes = useStyles();
-
-  const theme = useTheme();
-
   useEffect(() => {
     if (path === "/registerStudent") {
-      setValues({ ...values, rol: "Student" });
-    }
-    if (path === "/registerEmployee") {
-      setValues({ ...values, rol: "Employee" });
+      getHolders();
+      setValues(currentValues => ({ ...currentValues, role: "Student" }));
+    } else if (path === "/registerEmployee") {
+      setValues(currentValues => ({ ...currentValues, role: "Employee" }));
     } else {
-      setValues({ ...values, rol: "Holder" });
+      setValues(currentValues => ({ ...currentValues, role: "Holder" }));
     }
-  }, []);
+  }, [path, getHolders]);
 
   useEffect(() => {
     setServicesList([
@@ -60,7 +72,10 @@ const RegisterForm = props => {
   };
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
+    setValues({
+      ...values,
+      [name]: event.target.value
+    });
   };
 
   const handleClose = () => {
@@ -68,31 +83,74 @@ const RegisterForm = props => {
   };
 
   const handlerAccept = event => {
-    setValues({ ...values, parentId: event.currentTarget.name });
+    setValues(currentValues => ({
+      ...currentValues,
+      holderid: event.currentTarget.getAttribute("holderid"),
+      holderlastname: event.currentTarget.getAttribute("holderlastname")
+    }));
+    setOpen(false);
   };
 
   const handlerClickRegister = event => {
     event.preventDefault();
+    const {
+      name,
+      lastname,
+      phone,
+      scholarshipType,
+      address,
+      holderid
+    } = values;
+
+    switch (values.role) {
+      case "Student":
+        const student = {
+          name,
+          last_name: lastname,
+          phone,
+          scholarship_type: scholarshipType,
+          address,
+          email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
+          holder_id: holderid
+        };
+
+        createStudent(student);
+        break;
+
+      case "Employee":
+        const { salary } = values;
+        const employee = {
+          name,
+          last_name: lastname,
+          phone,
+          start_date: selectedDate.toISOString(),
+          address,
+          email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
+          salary
+        };
+
+        createEmployee(employee);
+        break;
+
+      case "Holder":
+        const holder = {
+          name,
+          last_name: lastname,
+          phone,
+          address,
+          email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
+        };
+
+        createHolder(holder);
+        break;
+      default:
+        console.log(values.role);
+        break;
+    }
   };
 
-  const path = props.location.pathname;
-
-  const handlerSearchParent = event => {
+  const handlerSearchHolder = () => {
     setOpen(true);
-    setParents([
-      {
-        name: "Juan",
-        lastName: "Perez",
-        address: "lima 778",
-        parentId: "1"
-      },
-      {
-        name: "Ana",
-        lastName: "Gomez",
-        address: "test 123",
-        parentId: "2"
-      }
-    ]);
   };
 
   const handlerClickServices = event => {
@@ -113,7 +171,7 @@ const RegisterForm = props => {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Register User
+        Register {values.role}
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -125,17 +183,19 @@ const RegisterForm = props => {
             fullWidth
             autoComplete="name"
             onChange={handleChange("name")}
+            value={values.name}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lastName"
-            name="lastName"
+            id="lastname"
+            name="lastname"
             label="Last name"
             fullWidth
             autoComplete="lastname"
             onChange={handleChange("lastname")}
+            value={values.lastname}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -147,10 +207,18 @@ const RegisterForm = props => {
             fullWidth
             type="number"
             onChange={handleChange("phone")}
+            value={values.phone}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="address" name="address" label="Address" fullWidth />
+          <TextField
+            id="address"
+            name="address"
+            label="Address"
+            fullWidth
+            value={values.address}
+            onChange={handleChange("address")}
+          />
         </Grid>
         {path === "/registerEmployee" && (
           <Fragment>
@@ -185,6 +253,7 @@ const RegisterForm = props => {
                 type="number"
                 className={classes.input}
                 onChange={handleChange("salary")}
+                value={values.salary}
                 startAdornment={
                   <InputAdornment position="start">$</InputAdornment>
                 }
@@ -199,15 +268,17 @@ const RegisterForm = props => {
               <TextField
                 className={classes.margin}
                 id="input-with-icon-textfield"
-                label="Parent"
+                label="Holder"
                 fullWidth
-                placeholder="search by id"
+                placeholder="Search by lastname.."
+                value={values.holderlastname}
+                onChange={handleChange("holderlastname")}
                 InputProps={{
                   startAdornment: (
                     <IconButton
                       color="secondary"
                       className={classes.button}
-                      onClick={handlerSearchParent}
+                      onClick={handlerSearchHolder}
                     >
                       <SearchIcon />
                     </IconButton>
@@ -257,17 +328,11 @@ const RegisterForm = props => {
             </Grid>
           </Fragment>
         )}
-
-        {parents.length != 0 ? (
-          <Dialog
-            parents={parents}
-            handleClose={handleClose}
-            open={open}
-            handlerAccept={handlerAccept}
-          />
-        ) : (
-          ""
-        )}
+        <Dialog
+          handleClose={handleClose}
+          open={open}
+          handlerAccept={handlerAccept}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <Button
@@ -276,7 +341,7 @@ const RegisterForm = props => {
           className={classes.button}
           onClick={handlerClickRegister}
         >
-          Send
+          Create
         </Button>
       </Grid>
     </React.Fragment>

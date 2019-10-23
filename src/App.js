@@ -5,19 +5,23 @@ import PrivateRoute from "./components/PrivateRoute";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Logout from "./components/Logout";
-
+import Register from "./components/Register";
+import EmployeeData from "./components/EmployeeData";
 import store from "./redux/store";
-import Register from "./components/Register/Register";
 import HomeHolder from "./components/HomeHolder/HomeHolder";
 import PayAmount from "./components/PayAmount/PayAmount";
 import Payments from "./components/Payments/Payments";
 
-import PersonalData from "./components/PersonalData/PersonalData";
+import StudentData from "./components/StudentData/";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 window.store = store;
 
 function App() {
   return (
     <Provider store={store}>
+      <ToastContainer />
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={SignIn} />
@@ -30,7 +34,9 @@ function App() {
           <PrivateRoute path="/registerStudent" component={Register} />
           <PrivateRoute path="/registerHolder" component={Register} />
           <PrivateRoute path="/registerEmployee" component={Register} />
-          <PrivateRoute path="/employee-details" component={PersonalData} />
+          <PrivateRoute path="/employee-data" component={EmployeeData} />
+          <PrivateRoute path="/student-data" component={StudentData} />
+          <PrivateRoute component={Home} />
         </Switch>
       </BrowserRouter>
     </Provider>

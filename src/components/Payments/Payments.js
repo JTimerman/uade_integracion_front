@@ -52,6 +52,7 @@ const Payments = () => {
                     variant="body2"
                     color="textSecondary"
                     component="p"
+                    className={classes.typography}
                   >
                     Date: {envoice.date}
                   </Typography>
@@ -70,4 +71,4 @@ const Payments = () => {
   );
 };
 
-export default withStyles(useStyles)(Payments);
+export default withStyles()(Payments);

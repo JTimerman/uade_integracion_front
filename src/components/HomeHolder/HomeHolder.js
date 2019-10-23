@@ -16,10 +16,10 @@ import { withStyles } from "@material-ui/core/styles";
 import useStyles from "./styles";
 import Fab from "@material-ui/core/Fab";
 
-const HomeHolder = props => {
+const HomeHolder = () => {
   const classes = useStyles();
 
-  const [students, setStudents] = React.useState([{}]);
+  const [students, setStudents] = React.useState([]);
   const [currentDate, setCurrentDate] = React.useState();
   const [goPay, setGoPay] = React.useState(false);
 
@@ -53,13 +53,12 @@ const HomeHolder = props => {
     setGoPay(true);
     //set redux mount
   };
-
   if (goPay) return <Redirect to="/PayAmount" />;
 
-  if (students === undefined || students.length === 1) return null;
+  if (students === undefined || students.length === 0) return null;
 
   return (
-    <div>
+    <Fragment>
       {students.map((student, index) => {
         return (
           <Fragment key={index}>
@@ -96,8 +95,7 @@ const HomeHolder = props => {
           </Fragment>
         );
       })}
-    </div>
+    </Fragment>
   );
 };
-
-export default withStyles(useStyles)(HomeHolder);
+export default withStyles()(HomeHolder);
