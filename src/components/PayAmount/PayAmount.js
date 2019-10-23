@@ -1,103 +1,62 @@
-import React, { Fragment } from "react";
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import useStyles from "./styles";
-import TextField from "@material-ui/core/TextField";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import DateFnsUtils from "@date-io/date-fns";
+import Button from "@material-ui/core/Button";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { toast } from "react-toastify";
 
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from "@material-ui/pickers";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import CreditCard from "./CreditCard";
+import DebitCard from "./DebitCard";
 
-const PayAmount = ({ payInvoice, invoiceToPay }) => {
-  const classes = useStyles();
-  const [values, setValues] = React.useState();
-  const [selectedDate, setSelectedDate] = React.useState();
-
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-  };
-
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
-
+export default function PayAmount({ payInvoice, classes }) {
+  const [paymentMethod, setPaymentMethod] = useState("");
   const handlerClickPay = () => {
     payInvoice().then(response => {
       toast.success("You paid successfully!");
     });
   };
 
-  return (
-    <Fragment>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="standard-name"
-            label="Number of credit card"
-            type="number"
-            onChange={handleChange("numberCreditCard")}
-            margin="normal"
-            fullWidth
+  if (paymentMethod === "") {
+    return (
+      <Grid item xs={12} sm={6}>
+        <FormLabel component="legend">PaymentMethod</FormLabel>
+        <RadioGroup
+          aria-label="paymentMethod"
+          name="paymentMethod"
+          id="paymentMethod"
+          value={paymentMethod}
+          onChange={event => setPaymentMethod(event.target.value)}
+        >
+          <FormControlLabel
+            value="creditCard"
+            control={<Radio />}
+            label="Credit Card"
           />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="standard-name"
-            label="Security code"
-            type="password"
-            onChange={handleChange("securityCode")}
-            margin="normal"
-            fullWidth
+          <FormControlLabel
+            value="debitCard"
+            control={<Radio />}
+            label="Debit Card"
           />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-around">
-              <KeyboardDatePicker
-                disableToolbar
-                fullWidth
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                label="Date of expery"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  "aria-label": "change date"
-                }}
-              />
-            </Grid>
-          </MuiPickersUtilsProvider>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Input
-            id="adornment-amount"
-            value={invoiceToPay.amount}
-            fullWidth
-            className={classes.input}
-            onChange={handleChange("amount")}
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            onClick={handlerClickPay}
-          >
-            Pay Amount
-          </Button>
-        </Grid>
+        </RadioGroup>
       </Grid>
-    </Fragment>
-  );
-};
+    );
+  }
 
-export default withStyles(useStyles)(PayAmount);
+  return (
+    <Grid container spacing={3}>
+      {paymentMethod === "creditCard" ? <CreditCard /> : <DebitCard />}
+      <Grid item xs={12} sm={6}>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={handlerClickPay}
+        >
+          Pay Amount
+        </Button>
+      </Grid>
+    </Grid>
+  );
+}

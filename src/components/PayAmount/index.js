@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
 import { payInvoice } from "../../redux/actions/invoices";
-import { getInvoiceToPay } from "../../redux/selectors/invoices";
 
 import PayAmount from "./PayAmount";
 
@@ -8,11 +8,22 @@ const mapDispatchToProps = {
   payInvoice
 };
 
-const mapStateToProps = store => ({
-  invoiceToPay: getInvoiceToPay(store)
+const styles = () => ({
+  dense: {
+    marginTop: 19
+  },
+  menu: {
+    width: 200
+  },
+  root: {
+    display: "flex",
+    flexWrap: "wrap"
+  }
 });
 
+const styledComponent = withStyles(styles)(PayAmount);
+
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
-)(PayAmount);
+)(styledComponent);
