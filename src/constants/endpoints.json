@@ -3,7 +3,8 @@
   "EMPLOYEES": "/employees",
   "HOLDERS": "/holders",
   "INVOICES": "/invoices",
+  "PAYMENTS": "/payments",
   "SIGN_IN": "/auth/login",
   "STUDENTS": "/students",
-  "PAYMENTS": "/payments"
+  "SERVICES": "/services"
 }

@@ -7,6 +7,7 @@ import payments from "./payments";
 import personalData from "./personalData";
 import roles from "./roles";
 import students from "./students";
+import services from "./services";
 
 export const reducers = combineReducers({
   employees,
@@ -16,5 +17,6 @@ export const reducers = combineReducers({
   payments,
   personalData,
   roles,
-  students
+  students,
+  services
 });

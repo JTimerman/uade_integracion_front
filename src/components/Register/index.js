@@ -7,6 +7,8 @@ import { createHolder } from "../../redux/actions/holders";
 import { getHolders } from "../../redux/actions/holders";
 
 import Register from "./Register";
+import { getServices } from "../../redux/actions/services";
+import { getServices as _getServices } from "../../redux/selectors/services";
 
 const styles = theme => ({
   root: {
@@ -39,10 +41,15 @@ const mapDispatchToProps = {
   createEmployee,
   createStudent,
   createHolder,
-  getHolders
+  getHolders,
+  getServices
 };
 
+const mapStateToProps = state => ({
+  services: _getServices(state)
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(styledComponent);
