@@ -9,5 +9,11 @@ export default makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: 120,
     marginTop: "5%"
+  },
+  dialogContent: {
+    width: "700px"
+  },
+  items: {
+    marginLeft: "-4%"
   }
 }));
