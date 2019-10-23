@@ -21,7 +21,7 @@ const initialValues = {
   absenteeismType: ""
 };
 
-const Absenteeism = ({ addFilter, getEmployees }) => {
+const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState(initialValues);
@@ -68,6 +68,14 @@ const Absenteeism = ({ addFilter, getEmployees }) => {
 
   const handlerClick = event => {
     event.preventDefault();
+    const absenteeism = {
+      id: selectedEmployee,
+      reason: values.absenteeismType,
+      start_date: selectedStartDate,
+      end_date: selectedEndDate
+    };
+
+    createAbsenteeism(absenteeism);
   };
 
   const absenteeismType = ["Vacation", "Medical day"];
