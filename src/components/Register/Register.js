@@ -215,6 +215,8 @@ const RegisterForm = ({
     }
   };
 
+  const employeesType = ["Teacher", "Janitor", "principal"];
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -341,25 +343,22 @@ const RegisterForm = ({
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <FormLabel component="legend">Gender</FormLabel>
-              <RadioGroup
-                aria-label="gender"
-                name="gender"
-                id="gender"
-                value={values.gender}
-                onChange={handleChange("gender")}
+              <InputLabel>Employee Type</InputLabel>
+              <Select
+                value={values.employeeType}
+                className={classes.select}
+                fullWidth
+                error={hasError}
+                onChange={handleChange("employeeType")}
               >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                />
-              </RadioGroup>
+                {employeesType.map((type, index) => {
+                  return (
+                    <MenuItem key={index} value={type}>
+                      {type}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
             </Grid>
             <Grid item xs={12} sm={6}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -380,6 +379,27 @@ const RegisterForm = ({
                   />
                 </Grid>
               </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormLabel component="legend">Gender</FormLabel>
+              <RadioGroup
+                aria-label="gender"
+                name="gender"
+                id="gender"
+                value={values.gender}
+                onChange={handleChange("gender")}
+              >
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
+              </RadioGroup>
             </Grid>
           </Fragment>
         )}
@@ -462,7 +482,7 @@ const RegisterForm = ({
           handlerAccept={handlerAccept}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={6} className={classes.grid}>
         <Button
           variant="contained"
           color="secondary"

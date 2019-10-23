@@ -32,6 +32,11 @@ const styles = theme => ({
   },
   input: {
     marginTop: "2%"
+  },
+  grid: {
+    display: "flex",
+    justifyContent: "flex-end",
+    marginTop: "1%"
   }
 });
 

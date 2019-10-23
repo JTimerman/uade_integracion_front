@@ -5,7 +5,7 @@ import useStyles from "./styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
-import Snackbar from "@material-ui/core/Snackbar";
+import { toast } from "react-toastify";
 
 import {
   MuiPickersUtilsProvider,
@@ -13,13 +13,12 @@ import {
 } from "@material-ui/pickers";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Alert from "../Alert/Alert";
 
-const PayAmount = ({ payInvoice }) => {
+const PayAmount = ({ payInvoice, invoiceToPay }) => {
   const classes = useStyles();
   const [values, setValues] = React.useState();
   const [selectedDate, setSelectedDate] = React.useState();
-  const [open, setOpen] = React.useState(false);
+
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -30,35 +29,12 @@ const PayAmount = ({ payInvoice }) => {
 
   const handlerClickPay = () => {
     payInvoice().then(response => {
-      setOpen(true);
+      toast.success("You paid successfully!");
     });
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
   return (
     <Fragment>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left"
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          variant="success"
-          message="You paid successfully!"
-        />
-      </Snackbar>
-
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -102,7 +78,7 @@ const PayAmount = ({ payInvoice }) => {
         <Grid item xs={12} sm={6}>
           <Input
             id="adornment-amount"
-            value={4000}
+            value={invoiceToPay.amount}
             fullWidth
             className={classes.input}
             onChange={handleChange("amount")}
