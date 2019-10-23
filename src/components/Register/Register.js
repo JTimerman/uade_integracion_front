@@ -9,9 +9,15 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import DateFnsUtils from "@date-io/date-fns";
-import { useTheme } from "@material-ui/core/styles";
+import { toast } from "react-toastify";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+
+import FormLabel from "@material-ui/core/FormLabel";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -37,15 +43,18 @@ const RegisterForm = ({
     phone: "",
     address: "",
     salary: "",
-    scholarshipType: ""
+    scholarshipType: "",
+    cuil: "",
+    employeeCode: "",
+    gender: ""
   };
   const [values, setValues] = React.useState(initialValues);
   const [open, setOpen] = React.useState(false);
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
+  const [selectedBirthdate, setSelectedBirthdate] = React.useState(new Date());
   const [servicesList, setServicesList] = React.useState([]);
   const [servicesChosen, setServicesChosen] = React.useState([]);
   const path = location.pathname;
-
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
   useEffect(() => {
     if (path === "/registerStudent") {
@@ -69,8 +78,12 @@ const RegisterForm = ({
     ]);
   }, []);
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+  const handleStartDateChange = date => {
+    setSelectedStartDate(date);
+  };
+
+  const handleBirthdateChange = date => {
+    setSelectedBirthdate(date);
   };
 
   const handleChange = name => event => {
@@ -117,22 +130,33 @@ const RegisterForm = ({
           holder_id: holderid
         };
 
-        createStudent(student);
+        createStudent(student).then(res => {
+          toast.success("The register was successfully!");
+          setValues(initialValues);
+        });
         break;
 
       case "Employee":
-        const { salary } = values;
         const employee = {
           name,
           last_name: lastname,
           phone,
-          start_date: selectedDate.toISOString(),
+          start_date: selectedStartDate.toISOString(),
+          birthdate: selectedBirthdate.toISOString(),
+          gender: values.gender,
+          employee_code: values.employeeCode,
+          cuil: values.cuil,
           address,
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
-          salary
+          salary: values.salary
         };
 
-        createEmployee(employee);
+        createEmployee(employee).then(res => {
+          toast.success("The register was successfully!");
+          setValues(initialValues);
+          setSelectedStartDate(new Date());
+          setSelectedBirthdate(new Date());
+        });
         break;
 
       case "Holder":
@@ -144,7 +168,10 @@ const RegisterForm = ({
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
         };
 
-        createHolder(holder);
+        createHolder(holder).then(res => {
+          toast.success("The register was successfully!");
+          setValues(initialValues);
+        });
         break;
       default:
         console.log(values.role);
@@ -235,8 +262,8 @@ const RegisterForm = ({
                     margin="normal"
                     label="Start date"
                     name="startDate"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={selectedStartDate}
+                    onChange={handleStartDateChange}
                     KeyboardButtonProps={{
                       "aria-label": "change date"
                     }}
@@ -261,6 +288,75 @@ const RegisterForm = ({
                   <InputAdornment position="start">$</InputAdornment>
                 }
               />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <InputLabel htmlFor="adornment-amount">Employee Code</InputLabel>
+              <Input
+                required
+                id="employeeCode"
+                name="employeeCode"
+                label="Employee Code"
+                fullWidth
+                type="number"
+                className={classes.input}
+                value={values.employeeCode}
+                onChange={handleChange("employeeCode")}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <InputLabel htmlFor="adornment-amount">CUIL</InputLabel>
+              <Input
+                required
+                id="cuil"
+                name="cuil"
+                label="cuil"
+                fullWidth
+                type="number"
+                value={values.cuil}
+                className={classes.input}
+                onChange={handleChange("cuil")}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormLabel component="legend">Gender</FormLabel>
+              <RadioGroup
+                aria-label="gender"
+                name="gender"
+                id="gender"
+                value={values.gender}
+                onChange={handleChange("gender")}
+              >
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
+              </RadioGroup>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Grid container justify="space-around">
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    margin="normal"
+                    label="Birthdate"
+                    name="birthdate"
+                    value={selectedBirthdate}
+                    onChange={handleBirthdateChange}
+                    KeyboardButtonProps={{
+                      "aria-label": "change date"
+                    }}
+                    fullWidth
+                  />
+                </Grid>
+              </MuiPickersUtilsProvider>
             </Grid>
           </Fragment>
         )}
