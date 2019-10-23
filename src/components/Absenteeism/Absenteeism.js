@@ -58,7 +58,6 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
   };
 
   const HandleSelectedStartDate = date => {
-    console.log(date);
     setSelectedStartDate(new Date(date).toISOString());
   };
 
