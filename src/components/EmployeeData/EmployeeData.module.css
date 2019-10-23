@@ -13,7 +13,10 @@
 .name {
   text-align: center;
 }
-
+.subtitle {
+  text-align: center;
+  font-style: italic;
+}
 .data {
   display: flex;
 

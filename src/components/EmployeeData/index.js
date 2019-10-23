@@ -18,7 +18,8 @@ const mapStateToProps = store => ({
   name: getUserName(store),
   phone: getUserPhone(store),
   salary: getUserSalary(store),
-  startDate: getUserStartDate(store)
+  startDate: getUserStartDate(store),
+  personalData: store.personalData
 });
 
 export default connect(mapStateToProps)(EmployeeData);
