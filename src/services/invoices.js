@@ -1,10 +1,6 @@
 import fetchAPI from "../api/fetchAPI";
-import { BASE_URL, INVOICES } from "../constants/endpoints.json";
+import { BASE_URL, PAYMENTS } from "../constants/endpoints.json";
 
-export const payInvoice = (invoiceID, payload) => {
-  return fetchAPI(
-    BASE_URL + INVOICES + `/${invoiceID}/payments`,
-    "POST",
-    payload
-  );
+export const payInvoice = payload => {
+  return fetchAPI(BASE_URL + PAYMENTS, "POST", payload);
 };

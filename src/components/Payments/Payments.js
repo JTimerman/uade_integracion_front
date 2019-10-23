@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
@@ -7,28 +7,21 @@ import CardActions from "@material-ui/core/CardActions";
 
 import Typography from "@material-ui/core/Typography";
 
-const recibos = [
-  {
-    date: "20/10/2019",
-    amount: 4000,
-    paymentMethod: "Credit Card Visa"
-  },
-  {
-    date: "25/10/2019",
-    amount: 3500,
-    paymentMethod: "Credit Card Visa"
-  },
-  {
-    date: "19/10/2019",
-    amount: 1200,
-    paymentMethod: "Credit Card Visa"
-  }
-];
+const Payments = ({ classes, payments, getHolderPayments }) => {
+  useEffect(() => {
+    getHolderPayments();
+  }, [getHolderPayments]);
 
-const Payments = ({ classes }) => {
+  const dateOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+
   return (
     <div>
-      {recibos.map((recibo, index) => {
+      {payments.map((payment, index) => {
         return (
           <Fragment key={index}>
             <Card className={classes.CardHeader}>
@@ -39,7 +32,7 @@ const Payments = ({ classes }) => {
                     color="textSecondary"
                     component="p"
                   >
-                    Payment Method: {recibo.paymentMethod}
+                    Payment Method: {payment.paymentMethod}
                   </Typography>
                 </div>
                 <div>
@@ -49,14 +42,18 @@ const Payments = ({ classes }) => {
                     component="p"
                     className={classes.typography}
                   >
-                    Date: {recibo.date}
+                    Date:{" "}
+                    {new Date(payment.date).toLocaleDateString(
+                      "en-US",
+                      dateOptions
+                    )}
                   </Typography>
                 </div>
                 <CheckCircleOutlineRoundedIcon className={classes.CheckIcon} />
               </CardContent>
               <CardActions disableSpacing>
                 <AttachMoneyIcon className={classes.AttachMoneyIcon} />{" "}
-                {recibo.amount}
+                {payment.amount}
               </CardActions>
             </Card>
           </Fragment>

@@ -1,5 +1,9 @@
-import Payments from "./Payments";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { getHolderPayments } from "../../redux/actions/holders";
+import { getPayments } from "../../redux/selectors/payments";
+
+import Payments from "./Payments";
 
 const styles = theme => ({
   CardContent: {
@@ -25,4 +29,17 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(Payments);
+const mapStateToProps = store => ({
+  payments: getPayments(store)
+});
+
+const mapDispatchToProps = {
+  getHolderPayments
+};
+
+const styledComponents = withStyles(styles)(Payments);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(styledComponents);

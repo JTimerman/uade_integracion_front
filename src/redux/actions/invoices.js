@@ -8,8 +8,12 @@ export function setInvoices(invoices) {
 export const payInvoice = () => {
   return (dispatch, getState) => {
     const invoiceToPay = getState().invoiceToPay;
+    const payload = {
+      invoice_id: invoiceToPay.id,
+      amount: invoiceToPay.amount
+    };
 
-    return payInvoiceService(invoiceToPay.id, {}).catch(error => {
+    return payInvoiceService(payload).catch(error => {
       Promise.reject(error);
     });
   };

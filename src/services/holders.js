@@ -43,6 +43,14 @@ export const getHolderInvoices = id => {
   );
 };
 
-export const getHolderFees = id => {
-  return fetchAPI(BASE_URL + HOLDERS + `/${id}/invoices`, "GET");
+export const getHolderPayments = id => {
+  return fetchAPI(BASE_URL + HOLDERS + `/${id}/payments`, "GET").then(
+    payments =>
+      payments.map(payment => ({
+        ...payment,
+        amount: payment.amount,
+        date: payment.date,
+        paymentMethod: payment.payment_method
+      }))
+  );
 };

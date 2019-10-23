@@ -4,5 +4,6 @@
   "HOLDERS": "/holders",
   "INVOICES": "/invoices",
   "SIGN_IN": "/auth/login",
-  "STUDENTS": "/students"
+  "STUDENTS": "/students",
+  "PAYMENTS": "/payments"
 }
