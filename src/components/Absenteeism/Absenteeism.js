@@ -75,9 +75,13 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
       end_date: selectedEndDate
     };
 
-    createAbsenteeism(absenteeism).then(response => {
-      toast.success("You paid successfully!");
-    });
+    createAbsenteeism(absenteeism)
+      .then(response => {
+        toast.success("You loaded the absences successfully!");
+      })
+      .catch(response => {
+        toast.failure("There was an error loading the absences!");
+      });
   };
 
   const absenteeismType = ["Vacation", "Medical day"];
