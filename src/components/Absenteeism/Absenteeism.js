@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
+import { toast } from "react-toastify";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -74,7 +75,9 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
       end_date: selectedEndDate
     };
 
-    createAbsenteeism(absenteeism);
+    createAbsenteeism(absenteeism).then(response => {
+      toast.success("You paid successfully!");
+    });
   };
 
   const absenteeismType = ["Vacation", "Medical day"];
