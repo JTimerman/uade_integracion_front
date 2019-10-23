@@ -12,7 +12,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import { withStyles } from "@material-ui/core/styles";
 import useStyles from "./styles";
 import Fab from "@material-ui/core/Fab";
 
@@ -74,4 +73,4 @@ const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
     </Fragment>
   );
 };
-export default withStyles()(HomeHolder);
+export default HomeHolder;
