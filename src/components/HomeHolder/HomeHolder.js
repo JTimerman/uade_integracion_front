@@ -32,6 +32,11 @@ const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
   };
   if (goPay) return <Redirect to="/PayAmount" />;
 
+  const dateOptions = {
+    month: "string",
+    year: "numeric"
+  };
+
   return (
     <Fragment>
       {invoices.map((invoice, index) => {
@@ -45,7 +50,7 @@ const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
                   </Avatar>
                 }
                 title={invoice.name + " " + invoice.lastname}
-                subheader={invoice.date}
+                subheader={new Date(invoice.date).toDateString(dateOptions)}
               />
               <CardContent className={classes.CardContent}>
                 <Typography variant="body2" color="textSecondary" component="p">
