@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useStyles from "./styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -14,21 +14,34 @@ import {
 } from "@material-ui/pickers";
 import SearchIcon from "@material-ui/icons/Search";
 import { withStyles } from "@material-ui/core/styles";
-import SimpleDialog from "../SimpleDialog/SimpleDialog";
+import SimpleDialog from "../SimpleDialog";
 import DateFnsUtils from "@date-io/date-fns";
 
 const initialValues = {
   absenteeismType: ""
 };
 
-const Absenteeism = () => {
+const Absenteeism = ({ addFilter, getEmployees }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [values, setValues] = React.useState(initialValues);
-  const [selectedEmployee, setSelectedEmployee] = React.useState();
-  const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
-  const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
+  const [open, setOpen] = useState(false);
+  const [values, setValues] = useState(initialValues);
+  const [employeeLastName, setEmployeeLastName] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState();
+  const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+  const [selectedEndDate, setSelectedEndDate] = useState(new Date());
+
+  useEffect(() => {
+    getEmployees();
+  }, [getEmployees]);
+
   const handlerSearchEmployee = () => {
+    const filter = {
+      field: "employees",
+      type: "last_name",
+      filter: employeeLastName
+    };
+
+    addFilter(filter);
     setOpen(true);
   };
 
@@ -143,6 +156,8 @@ const Absenteeism = () => {
           <InputBase
             className={classes.input}
             placeholder="Search by lastname"
+            value={employeeLastName}
+            onChange={event => setEmployeeLastName(event.target.value)}
           />
           <IconButton
             className={classes.iconButton}

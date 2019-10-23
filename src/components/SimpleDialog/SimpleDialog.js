@@ -1,7 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,14 +7,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
-import AddIcon from "@material-ui/icons/Add";
 import useStyles from "./styles";
-
-const emails = ["Empleado1", "empleado2"];
 
 const SimpleDialog = props => {
   const classes = useStyles();
-  const { onClose, selectedValue, open } = props;
+  const { onClose, selectedValue, open, employees } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -37,29 +31,20 @@ const SimpleDialog = props => {
         You can choose a employee
       </DialogTitle>
       <List>
-        {emails.map(email => (
+        {employees.map(employee => (
           <ListItem
             button
-            onClick={() => handleListItemClick(email)}
-            key={email}
+            onClick={() => handleListItemClick(employee.id)}
+            key={employee.id}
           >
             <ListItemAvatar>
               <Avatar className={classes.avatar}>
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={email} />
+            <ListItemText primary={`${employee.name} ${employee.last_name}`} />
           </ListItem>
         ))}
-
-        <ListItem button onClick={() => handleListItemClick("addAccount")}>
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="add account" />
-        </ListItem>
       </List>
     </Dialog>
   );

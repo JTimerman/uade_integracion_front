@@ -13,7 +13,7 @@ import Payments from "./components/Payments";
 import StudentData from "./components/StudentData";
 import HomeHolder from "./components/HomeHolder";
 import PayAmount from "./components/PayAmount";
-import Absenteeism from "./components/Absenteeism/Absenteeism";
+import Absenteeism from "./components/Absenteeism";
 import store from "./redux/store";
 
 import "react-toastify/dist/ReactToastify.css";
