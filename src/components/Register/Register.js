@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -32,9 +32,13 @@ const RegisterForm = ({
   classes,
   createStudent,
   getHolders,
+  getServices,
   createEmployee,
-  createHolder
+  createHolder,
+  services
 }) => {
+  const ScholarshipType = ["Doble Turno", "Medio Turno"];
+
   const initialValues = {
     name: "",
     lastname: "",
@@ -43,40 +47,33 @@ const RegisterForm = ({
     phone: "",
     address: "",
     salary: "",
-    scholarshipType: "",
     cuil: "",
     employeeCode: "",
-    gender: ""
+    gender: "",
+    scholarshipType: ScholarshipType[0]
   };
+
   const [values, setValues] = React.useState(initialValues);
   const [open, setOpen] = React.useState(false);
   const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
   const [selectedBirthdate, setSelectedBirthdate] = React.useState(new Date());
-  const [servicesList, setServicesList] = React.useState([]);
   const [servicesChosen, setServicesChosen] = React.useState([]);
+  const [hasError, setHasError] = useState(false);
   const path = location.pathname;
-  const ScholarshipType = ["Doble Turno", "Medio Turno"];
+
   useEffect(() => {
     if (path === "/registerStudent") {
       getHolders();
+      getServices();
       setValues(currentValues => ({ ...currentValues, role: "Student" }));
     } else if (path === "/registerEmployee") {
       setValues(currentValues => ({ ...currentValues, role: "Employee" }));
     } else {
       setValues(currentValues => ({ ...currentValues, role: "Holder" }));
     }
-  }, [path, getHolders]);
+  }, [path, getHolders, getServices]);
 
-  useEffect(() => {
-    setServicesList([
-      {
-        name: "English Class"
-      },
-      {
-        name: "Portuguese Class"
-      }
-    ]);
-  }, []);
+  console.log("Services: ", services);
 
   const handleStartDateChange = date => {
     setSelectedStartDate(date);
@@ -87,6 +84,7 @@ const RegisterForm = ({
   };
 
   const handleChange = name => event => {
+    setHasError(false);
     setValues({
       ...values,
       [name]: event.target.value
@@ -117,22 +115,41 @@ const RegisterForm = ({
       holderid
     } = values;
 
+    if (!name || !lastname || !phone) {
+      toast.error("All required fields should be filled up");
+      setHasError(true);
+      return;
+    }
+
     switch (values.role) {
       case "Student":
+        console.log("services chosen: ", servicesChosen);
+        if (!holderid) {
+          toast.error("You should select a holder");
+          setHasError(true);
+          return;
+        }
+        if (!servicesChosen.length) {
+          toast.error("You should select at least one service");
+          setHasError(true);
+          return;
+        }
+
         const student = {
           name,
           last_name: lastname,
           phone,
           scholarship_type: scholarshipType,
-          services: servicesChosen,
+          service_ids: servicesChosen.map(s => s.id),
           address,
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
           holder_id: holderid
         };
 
         createStudent(student).then(res => {
-          toast.success("The register was successfully!");
+          toast.success("The register was successfull!");
           setValues(initialValues);
+          setServicesChosen([]);
         });
         break;
 
@@ -210,6 +227,7 @@ const RegisterForm = ({
             id="name"
             name="name"
             label="First name"
+            error={hasError}
             fullWidth
             autoComplete="name"
             onChange={handleChange("name")}
@@ -222,6 +240,7 @@ const RegisterForm = ({
             id="lastname"
             name="lastname"
             label="Last name"
+            error={hasError}
             fullWidth
             autoComplete="lastname"
             onChange={handleChange("lastname")}
@@ -234,6 +253,7 @@ const RegisterForm = ({
             id="phone"
             name="phone"
             label="Phone number"
+            error={hasError}
             fullWidth
             type="number"
             onChange={handleChange("phone")}
@@ -245,6 +265,7 @@ const RegisterForm = ({
             id="address"
             name="address"
             label="Address"
+            error={hasError}
             fullWidth
             value={values.address}
             onChange={handleChange("address")}
@@ -261,6 +282,7 @@ const RegisterForm = ({
                     format="MM/dd/yyyy"
                     margin="normal"
                     label="Start date"
+                    error={hasError}
                     name="startDate"
                     value={selectedStartDate}
                     onChange={handleStartDateChange}
@@ -279,6 +301,7 @@ const RegisterForm = ({
                 id="salary"
                 name="salary"
                 label="Salary"
+                error={hasError}
                 fullWidth
                 type="number"
                 className={classes.input}
@@ -368,6 +391,8 @@ const RegisterForm = ({
                 className={classes.margin}
                 id="input-with-icon-textfield"
                 label="Holder"
+                required
+                error={hasError}
                 fullWidth
                 placeholder="Search by lastname.."
                 value={values.holderlastname}
@@ -391,6 +416,7 @@ const RegisterForm = ({
                 value={values.scholarshipType}
                 className={classes.select}
                 fullWidth
+                error={hasError}
                 onChange={handleChange("scholarshipType")}
               >
                 {ScholarshipType.map((type, index) => {
@@ -403,20 +429,25 @@ const RegisterForm = ({
               </Select>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <InputLabel htmlFor="select-multiple">Services</InputLabel>
+              <InputLabel htmlFor="services-select">Services*</InputLabel>
               <Select
                 multiple
                 value={servicesChosen}
                 fullWidth
+                name="services-select"
                 onChange={handlerClickServices}
+                required
+                error={hasError}
                 input={<Input id="select-multiple-checkbox" />}
-                renderValue={selected => selected.join(", ")}
+                renderValue={selected => selected.map(s => s.name).join(", ")}
                 MenuProps={MenuProps}
               >
-                {servicesList.map((service, index) => {
+                {services.map((service, index) => {
                   return (
-                    <MenuItem key={index} value={service.name}>
-                      <Checkbox />
+                    <MenuItem key={index} value={service}>
+                      <Checkbox
+                        checked={servicesChosen.some(s => s.id === service.id)}
+                      />
                       <ListItemText primary={service.name} />
                     </MenuItem>
                   );

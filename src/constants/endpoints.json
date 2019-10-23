@@ -3,5 +3,6 @@
   "EMPLOYEES": "/employees",
   "HOLDERS": "/holders",
   "SIGN_IN": "/auth/login",
-  "STUDENTS": "/students"
+  "STUDENTS": "/students",
+  "SERVICES": "/services"
 }
