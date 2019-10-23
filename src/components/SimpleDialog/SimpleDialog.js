@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
+import DialogContent from "@material-ui/core/DialogContent";
 import useStyles from "./styles";
 
 const SimpleDialog = props => {
@@ -26,26 +27,32 @@ const SimpleDialog = props => {
       onClose={handleClose}
       aria-labelledby="simple-dialog-title"
       open={open}
+      aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="simple-dialog-title">
-        You can choose a employee
+        You can choose a Employee
       </DialogTitle>
-      <List>
-        {employees.map(employee => (
-          <ListItem
-            button
-            onClick={() => handleListItemClick(employee.id)}
-            key={employee.id}
-          >
-            <ListItemAvatar>
-              <Avatar className={classes.avatar}>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={`${employee.name} ${employee.last_name}`} />
-          </ListItem>
-        ))}
-      </List>
+      <DialogContent className={classes.dialogContent}>
+        <List>
+          {employees.map(employee => (
+            <ListItem
+              button
+              onClick={() => handleListItemClick(employee.id)}
+              key={employee.id}
+              className={classes.items}
+            >
+              <ListItemAvatar>
+                <Avatar className={classes.avatar}>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={`${employee.name} ${employee.last_name}`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </DialogContent>
     </Dialog>
   );
 };
