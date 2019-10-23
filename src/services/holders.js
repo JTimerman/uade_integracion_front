@@ -28,3 +28,29 @@ export const updateHolder = id => {
 export const createHolder = holder => {
   return fetchAPI(BASE_URL + HOLDERS, "POST", holder);
 };
+
+export const getHolderInvoices = id => {
+  return fetchAPI(BASE_URL + HOLDERS + `/${id}/invoices`, "GET").then(
+    invoices =>
+      invoices.map(invoice => ({
+        ...invoice,
+        name: invoice.student.name,
+        lastname: invoice.student.last_name,
+        amount: invoice.total,
+        date: `${invoice.year}-${invoice.month}`,
+        id: `${invoice.id}`
+      }))
+  );
+};
+
+export const getHolderPayments = id => {
+  return fetchAPI(BASE_URL + HOLDERS + `/${id}/payments`, "GET").then(
+    payments =>
+      payments.map(payment => ({
+        ...payment,
+        amount: payment.amount,
+        date: payment.date,
+        paymentMethod: payment.payment_method
+      }))
+  );
+};

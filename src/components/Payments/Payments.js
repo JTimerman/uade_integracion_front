@@ -1,39 +1,36 @@
-import React, { Fragment } from "react";
-
-import { withStyles } from "@material-ui/core/styles";
+import React, { Fragment, useEffect, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import useStyles from "./styles";
+import { CircularProgress } from "@material-ui/core";
 
 import Typography from "@material-ui/core/Typography";
 
-const envoices = [
-  {
-    date: "20/10/2019",
-    Amount: 4000,
-    PaymentMethod: "Credit Card Visa"
-  },
-  {
-    date: "25/10/2019",
-    Amount: 3500,
-    PaymentMethod: "Credit Card Visa"
-  },
-  {
-    date: "19/10/2019",
-    Amount: 1200,
-    PaymentMethod: "Credit Card Visa"
-  }
-];
+const Payments = ({ classes, payments, getHolderPayments }) => {
+  const [loading, setLoading] = useState(true);
 
-const Payments = () => {
-  const classes = useStyles();
+  useEffect(() => {
+    getHolderPayments().then(response => {
+      setLoading(false);
+    });
+  }, [getHolderPayments]);
 
-  return (
+  const dateOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+
+  return loading ? (
+    <div className={classes.loader}>
+      <CircularProgress />
+    </div>
+  ) : (
     <div>
-      {envoices.map((envoice, index) => {
+      {payments.map((payment, index) => {
         return (
           <Fragment key={index}>
             <Card className={classes.CardHeader}>
@@ -44,7 +41,7 @@ const Payments = () => {
                     color="textSecondary"
                     component="p"
                   >
-                    Payment Method: {envoice.PaymentMethod}
+                    Payment Method: {payment.paymentMethod}
                   </Typography>
                 </div>
                 <div>
@@ -54,14 +51,18 @@ const Payments = () => {
                     component="p"
                     className={classes.typography}
                   >
-                    Date: {envoice.date}
+                    Date:{" "}
+                    {new Date(payment.date).toLocaleDateString(
+                      "en-US",
+                      dateOptions
+                    )}
                   </Typography>
                 </div>
                 <CheckCircleOutlineRoundedIcon className={classes.CheckIcon} />
               </CardContent>
               <CardActions disableSpacing>
                 <AttachMoneyIcon className={classes.AttachMoneyIcon} />{" "}
-                {envoice.Amount}
+                {payment.amount}
               </CardActions>
             </Card>
           </Fragment>
@@ -71,4 +72,4 @@ const Payments = () => {
   );
 };
 
-export default withStyles()(Payments);
+export default Payments;

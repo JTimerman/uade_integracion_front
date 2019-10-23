@@ -1,19 +1,21 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+
 import PrivateRoute from "./components/PrivateRoute";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import Logout from "./components/Logout";
 import Register from "./components/Register";
 import EmployeeData from "./components/EmployeeData";
-import store from "./redux/store";
-import HomeHolder from "./components/HomeHolder/HomeHolder";
-import PayAmount from "./components/PayAmount/PayAmount";
-import Payments from "./components/Payments/Payments";
+import Payments from "./components/Payments";
+import StudentData from "./components/StudentData";
+import HomeHolder from "./components/HomeHolder";
+import PayAmount from "./components/PayAmount";
 
-import StudentData from "./components/StudentData/";
-import { ToastContainer } from "react-toastify";
+import store from "./redux/store";
+
 import "react-toastify/dist/ReactToastify.css";
 
 window.store = store;

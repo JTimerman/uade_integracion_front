@@ -15,7 +15,7 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Alert from "../Alert/Alert";
 
-const PayAmount = () => {
+const PayAmount = ({ payInvoice }) => {
   const classes = useStyles();
   const [values, setValues] = React.useState();
   const [selectedDate, setSelectedDate] = React.useState();
@@ -29,7 +29,9 @@ const PayAmount = () => {
   };
 
   const handlerClickPay = () => {
-    setOpen(true);
+    payInvoice().then(response => {
+      setOpen(true);
+    });
   };
 
   const handleClose = (event, reason) => {
