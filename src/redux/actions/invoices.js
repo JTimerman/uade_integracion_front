@@ -5,12 +5,13 @@ export function setInvoices(invoices) {
   return { type: SET_INVOICES, invoices };
 }
 
-export const payInvoice = () => {
+export const payInvoice = cardData => {
   return (dispatch, getState) => {
     const invoiceToPay = getState().invoiceToPay;
     const payload = {
       invoice_id: invoiceToPay.id,
-      amount: invoiceToPay.amount
+      amount: invoiceToPay.amount,
+      cardData
     };
 
     return payInvoiceService(payload).catch(error => {

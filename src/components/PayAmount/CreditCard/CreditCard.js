@@ -1,5 +1,6 @@
 import React from "react";
 
+import { toast } from "react-toastify";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -8,9 +9,10 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import DateFnsUtils from "@date-io/date-fns";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
-export default function CreditCard({ invoiceToPay, classes }) {
+export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   const [selectedDate, setSelectedDate] = React.useState();
   const [values, setValues] = React.useState();
 
@@ -22,6 +24,12 @@ export default function CreditCard({ invoiceToPay, classes }) {
     setSelectedDate(date);
   };
 
+  const handlerClickPay = () => {
+    payInvoice({ ...values, cardType: "credit" }).then(response => {
+      toast.success("You paid successfully!");
+    });
+  };
+
   return (
     <>
       <Grid item xs={12} sm={6}>
@@ -29,7 +37,7 @@ export default function CreditCard({ invoiceToPay, classes }) {
           id="standard-name"
           label="Number of credit card"
           type="number"
-          onChange={handleChange("numberCreditCard")}
+          onChange={handleChange("cardNumber")}
           margin="normal"
           fullWidth
         />
@@ -72,6 +80,16 @@ export default function CreditCard({ invoiceToPay, classes }) {
           onChange={handleChange("amount")}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={handlerClickPay}
+        >
+          Pay Amount
+        </Button>
       </Grid>
     </>
   );
