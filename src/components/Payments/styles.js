@@ -17,5 +17,8 @@ export default makeStyles(theme => ({
     color: "green",
     marginLeft: "65%",
     fontSize: "45px"
+  },
+  typography: {
+    marginLeft: "5px"
   }
 }));

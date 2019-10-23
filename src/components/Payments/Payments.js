@@ -52,6 +52,7 @@ const Payments = () => {
                     variant="body2"
                     color="textSecondary"
                     component="p"
+                    className={classes.typography}
                   >
                     Date: {envoice.date}
                   </Typography>
