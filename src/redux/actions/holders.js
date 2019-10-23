@@ -1,7 +1,7 @@
 import {
   createHolder as createHolderService,
   getHolders as getHoldersService,
-  getHolderInvoces
+  getHolderInvoices
 } from "../../services/holders";
 
 import { SET_HOLDERS } from "./actionTypes.json";
@@ -33,7 +33,7 @@ export const createHolder = holder => {
 
 export const getInvoices = () => {
   return (dispatch, getState) => {
-    return getHolderInvoces(getState().personalData.id)
+    return getHolderInvoices(getState().personalData.id)
       .then(invoices => {
         dispatch(setInvoices(invoices));
       })

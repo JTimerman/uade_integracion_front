@@ -29,8 +29,18 @@ export const createHolder = holder => {
   return fetchAPI(BASE_URL + HOLDERS, "POST", holder);
 };
 
-export const getHolderInvoces = id => {
-  return fetchAPI(BASE_URL + HOLDERS + `/${id}/invoices`, "GET");
+export const getHolderInvoices = id => {
+  return fetchAPI(BASE_URL + HOLDERS + `/${id}/invoices`, "GET").then(
+    invoices =>
+      invoices.map(invoice => ({
+        ...invoice,
+        name: invoice.student.name,
+        lastName: invoice.student.lastName,
+        amount: invoice.amount,
+        date: invoice.date,
+        id: invoice.id
+      }))
+  );
 };
 
 export const getHolderFees = id => {
