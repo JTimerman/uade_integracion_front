@@ -112,6 +112,7 @@ const RegisterForm = ({
       phone,
       scholarshipType,
       address,
+      rol,
       holderid
     } = values;
 
@@ -164,6 +165,7 @@ const RegisterForm = ({
           employee_code: values.employeeCode,
           cuil: values.cuil,
           address,
+          rol,
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase(),
           salary: values.salary
         };
@@ -215,7 +217,7 @@ const RegisterForm = ({
     }
   };
 
-  const employeesType = ["Teacher", "Janitor", "principal"];
+  const employeesType = ["Teacher", "Janitor", "Principal"];
 
   return (
     <React.Fragment>
@@ -345,11 +347,11 @@ const RegisterForm = ({
             <Grid item xs={12} sm={6}>
               <InputLabel>Employee Type</InputLabel>
               <Select
-                value={values.employeeType}
+                value={values.rol}
                 className={classes.select}
                 fullWidth
                 error={hasError}
-                onChange={handleChange("employeeType")}
+                onChange={handleChange("rol")}
               >
                 {employeesType.map((type, index) => {
                   return (
