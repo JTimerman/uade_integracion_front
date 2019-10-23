@@ -17,8 +17,11 @@ const EmployeeData = ({
   address,
   email,
   salary,
-  startDate
+  startDate,
+  personalData
 }) => {
+  const { cuil, birthdate, employee_code, rol } = personalData;
+  console.log("personalData: ", personalData);
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -29,6 +32,9 @@ const EmployeeData = ({
           <Avatar name={`${name} ${lastname}`} round="100px" />
           <Typography className={styles.name} variant="h6" gutterBottom>
             {`${name} ${lastname}`}
+          </Typography>
+          <Typography className={styles.subtitle} variant="h7" gutterBottom>
+            {rol}
           </Typography>
         </div>
         <Divider></Divider>
@@ -74,13 +80,43 @@ const EmployeeData = ({
               </div>
             </ListItem>
             {/* Data */}
-            <ListItem className={styles.field}>
+            <ListItem divider className={styles.field}>
               <div className={styles.icon}>
                 <Icon color="primary">phone</Icon>
               </div>
               <div className="data">
                 <div className={styles.label}>Phone</div>
                 <div className={styles.value}>{phone}</div>
+              </div>
+            </ListItem>
+            {/* Data */}
+            <ListItem divider className={styles.field}>
+              <div className={styles.icon}>
+                <Icon color="primary">account_balance</Icon>
+              </div>
+              <div className="data">
+                <div className={styles.label}>Tax ID</div>
+                <div className={styles.value}>{cuil}</div>
+              </div>
+            </ListItem>
+            {/* Data */}
+            <ListItem className={styles.field}>
+              <div className={styles.icon}>
+                <Icon color="primary">cake</Icon>
+              </div>
+              <div className="data">
+                <div className={styles.label}>Birthday</div>
+                <div className={styles.value}>{birthdate}</div>
+              </div>
+            </ListItem>
+            {/* Data */}
+            <ListItem className={styles.field}>
+              <div className={styles.icon}>
+                <Icon color="primary">account_box</Icon>
+              </div>
+              <div className="data">
+                <div className={styles.label}>Employee Number</div>
+                <div className={styles.value}>{employee_code}</div>
               </div>
             </ListItem>
           </CardContent>
