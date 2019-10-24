@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select";
 
 export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   const [selectedDate, setSelectedDate] = React.useState();
-  const [values, setValues] = React.useState({ cuotes: 1 });
+  const [values, setValues] = React.useState({ payments: 1 });
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -31,7 +31,8 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
     payInvoice({
       ...values,
       payment_method: "CREDITO",
-      expiration_date: selectedDate
+      expiration_date: `${selectedDate.getUTCMonth() +
+        1}/${selectedDate.getUTCFullYear()}`
     })
       .then(() => {
         toast.success("You paid successfully!");
@@ -57,7 +58,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
           id="standard-name"
           label="Security code"
           type="password"
-          onChange={handleChange("security_code")}
+          onChange={handleChange("cvv")}
           margin="normal"
           fullWidth
         />
@@ -69,14 +70,15 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
               disableToolbar
               fullWidth
               variant="inline"
-              format="MM/dd/yyyy"
+              format="MM/yyyy"
               margin="normal"
-              label="Date of expery"
+              label="Expiration date"
               value={selectedDate}
               onChange={handleDateChange}
               KeyboardButtonProps={{
                 "aria-label": "change date"
               }}
+              views={["year", "month"]}
             />
           </Grid>
         </MuiPickersUtilsProvider>
@@ -96,7 +98,11 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <InputLabel htmlFor="cuotes-simple">Cuotes</InputLabel>
-        <Select value={values.cuotes} onChange={handleChange("cuotes")}>
+        <Select
+          value={values.payments}
+          onChange={handleChange("payments")}
+          style={{ width: "120px" }}
+        >
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
           <MenuItem value={3}>3</MenuItem>
