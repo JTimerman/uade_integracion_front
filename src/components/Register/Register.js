@@ -13,6 +13,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
 import Radio from "@material-ui/core/Radio";
+import CheckBox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import SearchIcon from "@material-ui/icons/Search";
 import Select from "@material-ui/core/Select";
@@ -39,18 +41,20 @@ const RegisterForm = ({
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
 
   const initialValues = {
-    name: "",
-    lastname: "",
-    holderlastname: "",
-    holderid: "",
-    phone: "",
     address: "",
-    salary: "",
+    CBU: "",
     cuil: "",
+    debitPayment: false,
     employeeCode: "",
     gender: "",
-    scholarshipType: ScholarshipType[0],
-    rol: "Teacher"
+    holderid: "",
+    holderlastname: "",
+    lastname: "",
+    name: "",
+    phone: "",
+    rol: "Teacher",
+    salary: "",
+    scholarshipType: ScholarshipType[0]
   };
 
   const [values, setValues] = React.useState(initialValues);
@@ -196,6 +200,16 @@ const RegisterForm = ({
           address,
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
         };
+
+        if (values.debitPayment) {
+          if (values.CBU.length === 0) {
+            toast.error("You should enter a CBU");
+            setHasError(true);
+            return;
+          }
+          holder.CBU = values.CBU;
+          holder.payment_method = "DEBITO_AUTOMATICO";
+        }
 
         createHolder(holder)
           .then(() => {
@@ -420,6 +434,42 @@ const RegisterForm = ({
               </RadioGroup>
             </Grid>
           </Fragment>
+        )}
+
+        {path === "/registerHolder" && (
+          <>
+            <Grid item xs={12} sm={6}>
+              <FormGroup
+                aria-label="debitPayment"
+                name="debitPayment"
+                id="debitPayment"
+                onChange={() => {
+                  setValues({ ...values, debitPayment: !values.debitPayment });
+                }}
+              >
+                <FormControlLabel
+                  control={<CheckBox />}
+                  label="Automatic debit Payment"
+                />
+              </FormGroup>
+            </Grid>
+            {values.debitPayment && (
+              <Grid item xs={12} sm={6}>
+                <InputLabel htmlFor="adornment-amount">CBU</InputLabel>
+                <Input
+                  required
+                  id="CBU"
+                  name="CBU"
+                  label="CBU"
+                  fullWidth
+                  error={hasError}
+                  value={values.CBU}
+                  className={classes.input}
+                  onChange={handleChange("CBU")}
+                />
+              </Grid>
+            )}
+          </>
         )}
 
         {path === "/registerStudent" && (
