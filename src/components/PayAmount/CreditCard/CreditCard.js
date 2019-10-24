@@ -72,7 +72,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
               variant="inline"
               format="MM/yyyy"
               margin="normal"
-              label="Date of expery"
+              label="Expiration date"
               value={selectedDate}
               onChange={handleDateChange}
               KeyboardButtonProps={{
