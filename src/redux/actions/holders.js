@@ -2,7 +2,9 @@ import {
   createHolder as createHolderService,
   getHolders as getHoldersService,
   getHolderPayments as getHolderPaymentsService,
-  getHolderInvoices
+  getHolderInvoices,
+  updateHolder as updateHolderService,
+  deleteHolder as deleteHolderService
 } from "../../services/holders";
 
 import { SET_HOLDERS } from "./actionTypes.json";
@@ -40,6 +42,22 @@ export const getInvoices = () => {
         dispatch(setInvoices(invoices));
       })
       .catch(() => Promise.reject(false));
+  };
+};
+
+export const updateHolder = (id, newHolder) => {
+  return () => {
+    return updateHolderService(id, newHolder).catch(error => {
+      Promise.reject(error);
+    });
+  };
+};
+
+export const deleteHolder = id => {
+  return () => {
+    return deleteHolderService(id).catch(error => {
+      Promise.reject(error);
+    });
   };
 };
 

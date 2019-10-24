@@ -1,6 +1,8 @@
 import {
   getEmployees as getEmployeesService,
-  createEmployee as createEmployeeService
+  createEmployee as createEmployeeService,
+  updateEmployee as updateEmployeeService,
+  deleteEmployee as deleteEmployeeService
 } from "../../services/employees";
 
 import { SET_EMPLOYEES } from "./actionTypes.json";
@@ -24,5 +26,21 @@ export const createEmployee = employee => {
     return createEmployeeService(employee).catch(error =>
       Promise.reject(error)
     );
+  };
+};
+
+export const updateEmployee = (id, newEmployee) => {
+  return () => {
+    return updateEmployeeService(id, newEmployee).catch(error => {
+      Promise.reject(error);
+    });
+  };
+};
+
+export const deleteEmployee = id => {
+  return () => {
+    return deleteEmployeeService(id).catch(error => {
+      Promise.reject(error);
+    });
   };
 };

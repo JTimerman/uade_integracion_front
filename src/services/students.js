@@ -13,8 +13,12 @@ export const deleteStudent = id => {
   return fetchAPI(BASE_URL + STUDENTS + "/" + id, "DELETE");
 };
 
-export const updateStudent = id => {
-  return fetchAPI(BASE_URL + STUDENTS + "/" + id, "PUT");
+export const updateStudent = (id, newStudent) => {
+  const sentStudent = {
+    ...newStudent,
+    last_name: newStudent.lastName
+  };
+  return fetchAPI(BASE_URL + STUDENTS + "/" + id, "PUT", sentStudent);
 };
 
 export const createStudent = student => {

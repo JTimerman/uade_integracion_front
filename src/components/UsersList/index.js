@@ -1,20 +1,38 @@
 import { connect } from "react-redux";
 
 import { getHolders as getHoldersSelector } from "../../redux/selectors/holders";
-import { getHolders } from "../../redux/actions/holders";
+import {
+  getHolders,
+  updateHolder,
+  deleteHolder
+} from "../../redux/actions/holders";
 
 import { getEmployees as getEmployeesSelector } from "../../redux/selectors/employees";
-import { getEmployees } from "../../redux/actions/employees";
+import {
+  getEmployees,
+  updateEmployee,
+  deleteEmployee
+} from "../../redux/actions/employees";
 
 import { getStudents as getStudentsSelector } from "../../redux/selectors/students";
-import { getStudents } from "../../redux/actions/students";
+import {
+  getStudents,
+  updateStudent,
+  deleteStudent
+} from "../../redux/actions/students";
 
 import UsersList from "./UsersList";
 
 const mapDispatchToProps = {
   getHolders,
   getEmployees,
-  getStudents
+  getStudents,
+  updateHolder,
+  updateStudent,
+  updateEmployee,
+  deleteEmployee,
+  deleteHolder,
+  deleteStudent
 };
 const mapStateToProps = store => ({
   holders: getHoldersSelector(store),
