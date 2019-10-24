@@ -10,11 +10,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import DialogContent from "@material-ui/core/DialogContent";
 import useStyles from "./styles";
 
-const emails = ["Juan Perez", "Emilia Perez"];
-
 const SimpleDialog = props => {
   const classes = useStyles();
-  const { onClose, selectedValue, open } = props;
+  const { onClose, selectedValue, open, employees } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -36,11 +34,11 @@ const SimpleDialog = props => {
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <List>
-          {emails.map(email => (
+          {employees.map(employee => (
             <ListItem
               button
-              onClick={() => handleListItemClick(email)}
-              key={email}
+              onClick={() => handleListItemClick(employee.id)}
+              key={employee.id}
               className={classes.items}
             >
               <ListItemAvatar>
@@ -48,7 +46,9 @@ const SimpleDialog = props => {
                   <PersonIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={email} />
+              <ListItemText
+                primary={`${employee.name} ${employee.last_name}`}
+              />
             </ListItem>
           ))}
         </List>

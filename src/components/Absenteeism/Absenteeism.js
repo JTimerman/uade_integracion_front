@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import useStyles from "./styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -8,27 +8,41 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
+import { toast } from "react-toastify";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import SearchIcon from "@material-ui/icons/Search";
 import { withStyles } from "@material-ui/core/styles";
-import SimpleDialog from "../SimpleDialog/SimpleDialog";
+import SimpleDialog from "../SimpleDialog";
 import DateFnsUtils from "@date-io/date-fns";
 
 const initialValues = {
   absenteeismType: ""
 };
 
-const Absenteeism = () => {
+const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [values, setValues] = React.useState(initialValues);
-  const [selectedEmployee, setSelectedEmployee] = React.useState();
-  const [selectedStartDate, setSelectedStartDate] = React.useState(new Date());
-  const [selectedEndDate, setSelectedEndDate] = React.useState(new Date());
+  const [open, setOpen] = useState(false);
+  const [values, setValues] = useState(initialValues);
+  const [employeeLastName, setEmployeeLastName] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState();
+  const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+  const [selectedEndDate, setSelectedEndDate] = useState(new Date());
+
+  useEffect(() => {
+    getEmployees();
+  }, [getEmployees]);
+
   const handlerSearchEmployee = () => {
+    const filter = {
+      field: "employees",
+      type: "last_name",
+      filter: employeeLastName
+    };
+
+    addFilter(filter);
     setOpen(true);
   };
 
@@ -45,7 +59,6 @@ const Absenteeism = () => {
   };
 
   const HandleSelectedStartDate = date => {
-    console.log(date);
     setSelectedStartDate(new Date(date).toISOString());
   };
 
@@ -55,6 +68,20 @@ const Absenteeism = () => {
 
   const handlerClick = event => {
     event.preventDefault();
+    const absenteeism = {
+      id: selectedEmployee,
+      reason: values.absenteeismType,
+      start_date: selectedStartDate,
+      end_date: selectedEndDate
+    };
+
+    createAbsenteeism(absenteeism)
+      .then(response => {
+        toast.success("You loaded the absences successfully!");
+      })
+      .catch(response => {
+        toast.failure("There was an error loading the absences!");
+      });
   };
 
   const absenteeismType = ["Vacation", "Medical day"];
@@ -143,6 +170,8 @@ const Absenteeism = () => {
           <InputBase
             className={classes.input}
             placeholder="Search by lastname"
+            value={employeeLastName}
+            onChange={event => setEmployeeLastName(event.target.value)}
           />
           <IconButton
             className={classes.iconButton}
