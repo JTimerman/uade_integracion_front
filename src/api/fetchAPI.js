@@ -17,7 +17,7 @@ export default (url, method, body) => {
     method,
     ...payload
   }).then(response => {
-    if (response.status === 401) {
+    if (response.status >= 300) {
       return Promise.reject();
     } else {
       return response.json();
