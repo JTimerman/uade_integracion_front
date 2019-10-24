@@ -7,9 +7,5 @@ export function setAbsenteeism(absenteeism) {
 }
 
 export const createAbsenteeism = absenteeism => {
-  return () => {
-    return createAbsenteeismService(absenteeism).catch(error =>
-      Promise.reject(error)
-    );
-  };
+  return () => createAbsenteeismService(absenteeism);
 };
