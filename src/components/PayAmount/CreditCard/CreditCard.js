@@ -25,9 +25,13 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   };
 
   const handlerClickPay = () => {
-    payInvoice({ ...values, cardType: "credit" }).then(response => {
-      toast.success("You paid successfully!");
-    });
+    payInvoice({ ...values, cardType: "credit" })
+      .then(response => {
+        toast.success("You paid successfully!");
+      })
+      .catch(() => {
+        toast.error("There was an error processing the payment!");
+      });
   };
 
   return (

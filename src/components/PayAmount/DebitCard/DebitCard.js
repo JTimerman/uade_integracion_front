@@ -15,9 +15,13 @@ export default function DebitCard({ invoiceToPay, classes, payInvoice }) {
   };
 
   const handlerClickPay = () => {
-    payInvoice({ ...values, cardType: "debit" }).then(response => {
-      toast.success("You paid successfully!");
-    });
+    payInvoice({ ...values, cardType: "debit" })
+      .then(() => {
+        toast.success("You paid successfully!");
+      })
+      .catch(() => {
+        toast.error("There was an error processing the payment!");
+      });
   };
 
   return (
