@@ -34,7 +34,7 @@ const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
     setInvoiceToPayById(id);
     setGoPay(true);
   };
-  if (goPay) return <Redirect to="/PayAmount" />;
+  if (goPay) return <Redirect to="/payAmount" />;
 
   const dateOptions = {
     month: "string",
