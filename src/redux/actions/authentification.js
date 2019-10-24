@@ -23,8 +23,6 @@ export const authenticateUser = (username, password) => {
           JSON.stringify({ ...personalData, token, roles })
         );
 
-        console.log("personalData: ", personalData);
-
         generateAuthClient(token);
         dispatch(setPersonalData(personalData));
         dispatch(setRoles(roles));

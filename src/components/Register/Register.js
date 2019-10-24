@@ -127,7 +127,6 @@ const RegisterForm = ({
 
     switch (values.role) {
       case "Student":
-        console.log("services chosen: ", servicesChosen);
         if (!holderid) {
           toast.error("You should select a holder");
           setHasError(true);
