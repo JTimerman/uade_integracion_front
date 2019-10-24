@@ -25,9 +25,13 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   };
 
   const handlerClickPay = () => {
-    payInvoice({ ...values, cardType: "credit" }).then(response => {
-      toast.success("You paid successfully!");
-    });
+    payInvoice({ ...values, cardType: "credit" })
+      .then(() => {
+        toast.success("You paid successfully!");
+      })
+      .catch(() => {
+        toast.error("There was an error processing the payment!");
+      });
   };
 
   return (
@@ -74,10 +78,12 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
       <Grid item xs={12} sm={6}>
         <Input
           id="adornment-amount"
-          value={invoiceToPay.amount}
+          value={new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "ARS"
+          }).format(invoiceToPay.amount)}
           fullWidth
           className={classes.input}
-          onChange={handleChange("amount")}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
       </Grid>

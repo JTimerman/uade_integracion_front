@@ -8,12 +8,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import DialogContent from "@material-ui/core/DialogContent";
-import useStyles from "./styles";
 
-const SimpleDialog = props => {
-  const classes = useStyles();
-  const { onClose, selectedValue, open, employees } = props;
-
+const SimpleDialog = ({ onClose, selectedValue, open, employees, classes }) => {
   const handleClose = () => {
     onClose(selectedValue);
   };

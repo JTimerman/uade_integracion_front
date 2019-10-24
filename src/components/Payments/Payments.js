@@ -1,21 +1,26 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Card from "@material-ui/core/Card";
-import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
-import { CircularProgress } from "@material-ui/core";
-
+import CardContent from "@material-ui/core/CardContent";
+import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import { toast } from "react-toastify";
 
 const Payments = ({ classes, payments, getHolderPayments }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getHolderPayments().then(response => {
-      setLoading(false);
-    });
-  }, [getHolderPayments]);
+    getHolderPayments()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("There was an error loading the payments!");
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const dateOptions = {
     weekday: "long",

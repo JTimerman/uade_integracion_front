@@ -1,29 +1,32 @@
 import React, { Fragment, useEffect, useState } from "react";
-import useStyles from "./styles";
-import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
+import { toast } from "react-toastify";
+import Button from "@material-ui/core/Button";
+import DateFnsUtils from "@date-io/date-fns";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
-import Button from "@material-ui/core/Button";
-import { toast } from "react-toastify";
+import MenuItem from "@material-ui/core/MenuItem";
+import Paper from "@material-ui/core/Paper";
+import SearchIcon from "@material-ui/icons/Search";
+import Select from "@material-ui/core/Select";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import SearchIcon from "@material-ui/icons/Search";
-import { withStyles } from "@material-ui/core/styles";
+
 import SimpleDialog from "../SimpleDialog";
-import DateFnsUtils from "@date-io/date-fns";
 
 const initialValues = {
   absenteeismType: ""
 };
 
-const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
-  const classes = useStyles();
+export default function Absenteeism({
+  classes,
+  addFilter,
+  getEmployees,
+  createAbsenteeism
+}) {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState(initialValues);
   const [employeeLastName, setEmployeeLastName] = useState("");
@@ -33,9 +36,10 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
 
   useEffect(() => {
     getEmployees();
-  }, [getEmployees]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handlerSearchEmployee = () => {
+  const handleSearchEmployee = () => {
     const filter = {
       field: "employees",
       type: "last_name",
@@ -58,15 +62,15 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
     });
   };
 
-  const HandleSelectedStartDate = date => {
+  const handleSelectedStartDate = date => {
     setSelectedStartDate(new Date(date).toISOString());
   };
 
-  const HandleSelectedEndDate = date => {
+  const handleSelectedEndDate = date => {
     setSelectedEndDate(new Date(date).toISOString());
   };
 
-  const handlerClick = event => {
+  const handleClick = event => {
     event.preventDefault();
     const absenteeism = {
       id: selectedEmployee,
@@ -76,11 +80,11 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
     };
 
     createAbsenteeism(absenteeism)
-      .then(response => {
+      .then(() => {
         toast.success("You loaded the absences successfully!");
       })
-      .catch(response => {
-        toast.failure("There was an error loading the absences!");
+      .catch(() => {
+        toast.error("There was an error loading the absences!");
       });
   };
 
@@ -101,7 +105,7 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
                     label="Start date"
                     name="startDate"
                     value={selectedStartDate}
-                    onChange={HandleSelectedStartDate}
+                    onChange={handleSelectedStartDate}
                     KeyboardButtonProps={{
                       "aria-label": "change date"
                     }}
@@ -121,7 +125,7 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
                     label="End Date"
                     name="endDate"
                     value={selectedEndDate}
-                    onChange={HandleSelectedEndDate}
+                    onChange={handleSelectedEndDate}
                     KeyboardButtonProps={{
                       "aria-label": "change date"
                     }}
@@ -153,7 +157,7 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
               variant="contained"
               color="secondary"
               className={classes.button}
-              onClick={handlerClick}
+              onClick={handleClick}
             >
               Send
             </Button>
@@ -172,11 +176,12 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
             placeholder="Search by lastname"
             value={employeeLastName}
             onChange={event => setEmployeeLastName(event.target.value)}
+            onKeyPress={ev => ev.key === "Enter" && handleSearchEmployee()}
           />
           <IconButton
             className={classes.iconButton}
             aria-label="search"
-            onClick={handlerSearchEmployee}
+            onClick={handleSearchEmployee}
           >
             <SearchIcon />
           </IconButton>
@@ -184,6 +189,4 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
       )}
     </Fragment>
   );
-};
-
-export default withStyles()(Absenteeism);
+}

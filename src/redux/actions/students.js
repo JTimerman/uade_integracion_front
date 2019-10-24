@@ -4,7 +4,6 @@ import {
 } from "../../services/students";
 
 import { SET_STUDENTS } from "./actionTypes.json";
-import { toast } from "react-toastify";
 
 function setStudents(students) {
   return { type: SET_STUDENTS, students };
