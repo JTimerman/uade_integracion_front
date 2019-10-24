@@ -29,7 +29,6 @@ const SignIn = ({ authenticateUser, history, classes }) => {
     authenticateUser(username, password)
       .then(() => {
         history.push("/");
-        setLoading(false);
       })
       .catch(() => {
         setError(true);
