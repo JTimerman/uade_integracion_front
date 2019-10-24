@@ -16,13 +16,17 @@ export default (url, method, body) => {
   return fetch(url, {
     method,
     ...payload
-  }).then(response => {
-    if (response.status >= 300) {
+  })
+    .then(response => {
+      if (response.status >= 300) {
+        return Promise.reject();
+      } else {
+        return response.json();
+      }
+    })
+    .catch(() => {
       return Promise.reject();
-    } else {
-      return response.json();
-    }
-  });
+    });
 };
 
 let AuthClient;

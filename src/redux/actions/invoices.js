@@ -14,8 +14,6 @@ export const payInvoice = cardData => {
       ...cardData
     };
 
-    return payInvoiceService(payload).catch(error => {
-      Promise.reject(error);
-    });
+    return payInvoiceService(payload).catch(error => Promise.reject(error));
   };
 };
