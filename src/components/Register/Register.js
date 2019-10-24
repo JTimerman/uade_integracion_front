@@ -96,7 +96,7 @@ const RegisterForm = ({
     setOpen(false);
   };
 
-  const handlerAccept = event => {
+  const handleAccept = event => {
     setValues(currentValues => ({
       ...currentValues,
       holderid: event.currentTarget.getAttribute("holderid"),
@@ -501,7 +501,7 @@ const RegisterForm = ({
         <Dialog
           handleClose={handleClose}
           open={open}
-          handlerAccept={handlerAccept}
+          handleAccept={handleAccept}
         />
       </Grid>
       <Grid item xs={12} sm={6} className={classes.grid}>

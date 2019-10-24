@@ -6,25 +6,28 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import useStyles from "./styles";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 
-export default function Dialog(props) {
-  const classes = useStyles();
-
-  if (props.holders === undefined || props.holders.length === 0) return null;
+export default function Dialog({
+  classes,
+  holders,
+  open,
+  handleClose,
+  handleAccept
+}) {
+  if (holders === undefined || holders.length === 0) return null;
 
   return (
     <DialogUI
-      open={props.open}
-      onClose={props.handleClose}
+      open={open}
+      onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">{""}</DialogTitle>
       <DialogContent>
-        {props.holders.map((holder, index) => {
+        {holders.map((holder, index) => {
           return (
             <Fragment key={index}>
               <Grid item xs={12} className={classes.grid}>
@@ -43,7 +46,7 @@ export default function Dialog(props) {
                   className={classes.button}
                   holderlastname={holder.lastName}
                   holderid={holder.holderid}
-                  onClick={props.handlerAccept}
+                  onClick={handleAccept}
                 >
                   <CheckCircleIcon />
                 </IconButton>
@@ -53,7 +56,7 @@ export default function Dialog(props) {
         })}
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.handleClose} color="primary" autoFocus>
+        <Button onClick={handleClose} color="primary" autoFocus>
           Close
         </Button>
       </DialogActions>
