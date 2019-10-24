@@ -19,7 +19,8 @@ const Payments = ({ classes, payments, getHolderPayments }) => {
       .catch(() => {
         toast.error("There was an error loading the payments!");
       });
-  }, [getHolderPayments]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const dateOptions = {
     weekday: "long",

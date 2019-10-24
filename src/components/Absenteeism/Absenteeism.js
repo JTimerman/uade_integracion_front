@@ -36,7 +36,8 @@ export default function Absenteeism({
 
   useEffect(() => {
     getEmployees();
-  }, [getEmployees]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSearchEmployee = () => {
     const filter = {

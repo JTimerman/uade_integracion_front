@@ -26,7 +26,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
 
   const handlerClickPay = () => {
     payInvoice({ ...values, cardType: "credit" })
-      .then(response => {
+      .then(() => {
         toast.success("You paid successfully!");
       })
       .catch(() => {

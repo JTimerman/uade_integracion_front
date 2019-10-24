@@ -28,7 +28,8 @@ const HomeHolder = ({
       .catch(() => {
         toast.error("There was an error loading the invoices!");
       });
-  }, [getInvoices]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlerClick = event => {
     const id = event.currentTarget.getAttribute("invoiceid");
