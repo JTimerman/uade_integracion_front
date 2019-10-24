@@ -67,7 +67,10 @@ const Payments = ({ classes, payments, getHolderPayments }) => {
               </CardContent>
               <CardActions disableSpacing>
                 <AttachMoneyIcon className={classes.AttachMoneyIcon} />{" "}
-                {payment.amount}
+                {new Intl.NumberFormat("de-DE", {
+                  style: "currency",
+                  currency: "ARS"
+                }).format(payment.amount)}
               </CardActions>
             </Card>
           </Fragment>
