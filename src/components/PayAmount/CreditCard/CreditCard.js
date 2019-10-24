@@ -25,7 +25,11 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   };
 
   const handlerClickPay = () => {
-    payInvoice({ ...values, cardType: "credit" })
+    payInvoice({
+      ...values,
+      payment_method: "CREDITO",
+      expiration_date: selectedDate
+    })
       .then(() => {
         toast.success("You paid successfully!");
       })
@@ -41,7 +45,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
           id="standard-name"
           label="Number of credit card"
           type="number"
-          onChange={handleChange("cardNumber")}
+          onChange={handleChange("card_number")}
           margin="normal"
           fullWidth
         />
@@ -51,7 +55,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
           id="standard-name"
           label="Security code"
           type="password"
-          onChange={handleChange("securityCode")}
+          onChange={handleChange("security_code")}
           margin="normal"
           fullWidth
         />
