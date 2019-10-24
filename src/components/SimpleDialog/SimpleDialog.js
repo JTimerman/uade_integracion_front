@@ -10,7 +10,16 @@ import PersonIcon from "@material-ui/icons/Person";
 import DialogContent from "@material-ui/core/DialogContent";
 import useStyles from "./styles";
 
-const emails = ["Juan Perez", "Emilia Perez"];
+const emails = [
+  "Juan Perez",
+  "Emilia Perez",
+  "Pepito pereeeeeeeeeeeez",
+  "El test nuevo",
+  "Juan Perez",
+  "Juan Perez",
+  "Juan Perez",
+  "Juan Perez"
+];
 
 const SimpleDialog = props => {
   const classes = useStyles();
