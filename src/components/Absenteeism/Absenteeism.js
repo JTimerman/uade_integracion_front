@@ -1,20 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
+import { toast } from "react-toastify";
+import Button from "@material-ui/core/Button";
+import DateFnsUtils from "@date-io/date-fns";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
-import Button from "@material-ui/core/Button";
-import { toast } from "react-toastify";
+import MenuItem from "@material-ui/core/MenuItem";
+import Paper from "@material-ui/core/Paper";
+import SearchIcon from "@material-ui/icons/Search";
+import Select from "@material-ui/core/Select";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import SearchIcon from "@material-ui/icons/Search";
+
 import SimpleDialog from "../SimpleDialog";
-import DateFnsUtils from "@date-io/date-fns";
 
 const initialValues = {
   absenteeismType: ""
@@ -37,7 +38,7 @@ export default function Absenteeism({
     getEmployees();
   }, [getEmployees]);
 
-  const handlerSearchEmployee = () => {
+  const handleSearchEmployee = () => {
     const filter = {
       field: "employees",
       type: "last_name",
@@ -60,15 +61,15 @@ export default function Absenteeism({
     });
   };
 
-  const HandleSelectedStartDate = date => {
+  const handleSelectedStartDate = date => {
     setSelectedStartDate(new Date(date).toISOString());
   };
 
-  const HandleSelectedEndDate = date => {
+  const handleSelectedEndDate = date => {
     setSelectedEndDate(new Date(date).toISOString());
   };
 
-  const handlerClick = event => {
+  const handleClick = event => {
     event.preventDefault();
     const absenteeism = {
       id: selectedEmployee,
@@ -78,10 +79,10 @@ export default function Absenteeism({
     };
 
     createAbsenteeism(absenteeism)
-      .then(response => {
+      .then(() => {
         toast.success("You loaded the absences successfully!");
       })
-      .catch(response => {
+      .catch(() => {
         toast.failure("There was an error loading the absences!");
       });
   };
@@ -103,7 +104,7 @@ export default function Absenteeism({
                     label="Start date"
                     name="startDate"
                     value={selectedStartDate}
-                    onChange={HandleSelectedStartDate}
+                    onChange={handleSelectedStartDate}
                     KeyboardButtonProps={{
                       "aria-label": "change date"
                     }}
@@ -123,7 +124,7 @@ export default function Absenteeism({
                     label="End Date"
                     name="endDate"
                     value={selectedEndDate}
-                    onChange={HandleSelectedEndDate}
+                    onChange={handleSelectedEndDate}
                     KeyboardButtonProps={{
                       "aria-label": "change date"
                     }}
@@ -155,7 +156,7 @@ export default function Absenteeism({
               variant="contained"
               color="secondary"
               className={classes.button}
-              onClick={handlerClick}
+              onClick={handleClick}
             >
               Send
             </Button>
@@ -174,11 +175,12 @@ export default function Absenteeism({
             placeholder="Search by lastname"
             value={employeeLastName}
             onChange={event => setEmployeeLastName(event.target.value)}
+            onKeyPress={ev => ev.key === "Enter" && handleSearchEmployee()}
           />
           <IconButton
             className={classes.iconButton}
             aria-label="search"
-            onClick={handlerSearchEmployee}
+            onClick={handleSearchEmployee}
           >
             <SearchIcon />
           </IconButton>
