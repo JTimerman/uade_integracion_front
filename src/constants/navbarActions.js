@@ -16,12 +16,12 @@ const NAVBAR_ITEMS = {
     icon: "group_add"
   },
   HOME_ADMIN: {
-    path: "/homeADMIN",
+    path: "/homeAdmin",
     name: "Home Admin",
     icon: "home"
   },
   INVOICESANDDUES: {
-    path: "/HomeHolder",
+    path: "/homeHolder",
     name: "Fees and debts",
     icon: "attach_money"
   },
@@ -36,23 +36,23 @@ const NAVBAR_ITEMS = {
     icon: "list"
   },
   PAYMENTS: {
-    path: "/Payments",
+    path: "/payments",
     name: "Payments",
     icon: "list"
   },
   PAYAMOUNT: {
-    path: "/PayAmount",
+    path: "/payAmount",
     name: "Pay Amount",
     display: false
   },
   STUDENT_DETAILS: {
-    path: "/student-data",
+    path: "/studentPersonalData",
     name: "Student Data",
     icon: "info"
   },
   EMPLOYEE_DETAILS: {
     id: "employeeDetails",
-    path: "/employee-data",
+    path: "/employeePersonalData",
     name: "Employee Data",
     icon: "info"
   }

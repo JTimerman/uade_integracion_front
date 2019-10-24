@@ -16,14 +16,18 @@ export default (url, method, body) => {
   return fetch(url, {
     method,
     ...payload
-  }).then(response => {
-    if (response.status === 401) {
+  })
+    .then(response => {
+      if (response.status >= 300) {
+        return Promise.reject();
+      } else {
+        if (method === "DELETE") return Promise.resolve();
+        return response.json();
+      }
+    })
+    .catch(() => {
       return Promise.reject();
-    } else {
-      if (method === "DELETE") return Promise.resolve();
-    }
-    return response.json();
-  });
+    });
 };
 
 let AuthClient;

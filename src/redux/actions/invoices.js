@@ -11,11 +11,9 @@ export const payInvoice = cardData => {
     const payload = {
       invoice_id: invoiceToPay.id,
       amount: invoiceToPay.amount,
-      cardData
+      ...cardData
     };
 
-    return payInvoiceService(payload).catch(error => {
-      Promise.reject(error);
-    });
+    return payInvoiceService(payload).catch(error => Promise.reject(error));
   };
 };

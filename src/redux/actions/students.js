@@ -23,9 +23,7 @@ export const getStudents = () => {
 
 export const createStudent = student => {
   return () => {
-    return createStudentService(student).catch(error => {
-      Promise.reject(error);
-    });
+    return createStudentService(student).catch(error => Promise.reject(error));
   };
 };
 

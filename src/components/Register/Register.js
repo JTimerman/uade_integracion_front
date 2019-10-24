@@ -1,31 +1,31 @@
 import React, { useEffect, Fragment, useState } from "react";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import DateFnsUtils from "@date-io/date-fns";
 import { toast } from "react-toastify";
-import ListItemText from "@material-ui/core/ListItemText";
+import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-
+import DateFnsUtils from "@date-io/date-fns";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-
 import FormLabel from "@material-ui/core/FormLabel";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import InputLabel from "@material-ui/core/InputLabel";
+import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
+import Radio from "@material-ui/core/Radio";
+import CheckBox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import SearchIcon from "@material-ui/icons/Search";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
 } from "@material-ui/pickers";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
 
-import Dialog from "../Dialog";
+import Dialog from "./Dialog";
 
 const RegisterForm = ({
   location,
@@ -41,16 +41,19 @@ const RegisterForm = ({
   const ScholarshipType = ["Doble Turno", "Medio Turno"];
 
   const initialValues = {
-    name: "",
-    lastname: "",
-    holderlastname: "",
-    holderid: "",
-    phone: "",
     address: "",
-    salary: "",
+    CBU: "",
     cuil: "",
+    debitPayment: false,
     employeeCode: "",
     gender: "",
+    holderid: "",
+    holderlastname: "",
+    lastname: "",
+    name: "",
+    phone: "",
+    rol: "Teacher",
+    salary: "",
     scholarshipType: ScholarshipType[0]
   };
 
@@ -64,17 +67,20 @@ const RegisterForm = ({
 
   useEffect(() => {
     if (path === "/registerStudent") {
-      getHolders();
-      getServices();
+      getHolders().catch(() => {
+        toast.error("There was an error loading the holders!");
+      });
+      getServices().catch(() => {
+        toast.error("There was an error loading the services!");
+      });
       setValues(currentValues => ({ ...currentValues, role: "Student" }));
     } else if (path === "/registerEmployee") {
       setValues(currentValues => ({ ...currentValues, role: "Employee" }));
     } else {
       setValues(currentValues => ({ ...currentValues, role: "Holder" }));
     }
-  }, [path, getHolders, getServices]);
-
-  console.log("Services: ", services);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleStartDateChange = date => {
     setSelectedStartDate(date);
@@ -96,7 +102,7 @@ const RegisterForm = ({
     setOpen(false);
   };
 
-  const handlerAccept = event => {
+  const handleAccept = event => {
     setValues(currentValues => ({
       ...currentValues,
       holderid: event.currentTarget.getAttribute("holderid"),
@@ -125,7 +131,6 @@ const RegisterForm = ({
 
     switch (values.role) {
       case "Student":
-        console.log("services chosen: ", servicesChosen);
         if (!holderid) {
           toast.error("You should select a holder");
           setHasError(true);
@@ -149,12 +154,12 @@ const RegisterForm = ({
         };
 
         createStudent(student)
-          .then(res => {
+          .then(() => {
             toast.success("The register was successfull!");
             setValues(initialValues);
             setServicesChosen([]);
           })
-          .catch(err => {
+          .catch(() => {
             toast.error("An error has ocurred while creating a student!");
           });
         break;
@@ -176,13 +181,13 @@ const RegisterForm = ({
         };
 
         createEmployee(employee)
-          .then(res => {
+          .then(() => {
             toast.success("The register was successfully!");
             setValues(initialValues);
             setSelectedStartDate(new Date());
             setSelectedBirthdate(new Date());
           })
-          .catch(err => {
+          .catch(() => {
             toast.error("An error has ocurred while creating a employee!");
           });
         break;
@@ -196,17 +201,28 @@ const RegisterForm = ({
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
         };
 
+        if (values.debitPayment) {
+          if (values.CBU.length === 0) {
+            toast.error("You should enter a CBU");
+            setHasError(true);
+            return;
+          }
+          holder.CBU = values.CBU;
+          holder.payment_method = "DEBITO_AUTOMATICO";
+        } else {
+          holder.payment_method = "OTROS";
+        }
+
         createHolder(holder)
-          .then(res => {
-            toast.success("The register was successfully!");
+          .then(() => {
+            toast.success("The register was successful!");
             setValues(initialValues);
           })
-          .catch(err => {
+          .catch(() => {
             toast.error("An error has ocurred while creating a holder!");
           });
         break;
       default:
-        console.log(values.role);
         break;
     }
   };
@@ -279,7 +295,6 @@ const RegisterForm = ({
             label="Phone number"
             error={hasError}
             fullWidth
-            type="number"
             onChange={handleChange("phone")}
             value={values.phone}
           />
@@ -327,7 +342,6 @@ const RegisterForm = ({
                 label="Salary"
                 error={hasError}
                 fullWidth
-                type="number"
                 className={classes.input}
                 onChange={handleChange("salary")}
                 value={values.salary}
@@ -344,7 +358,6 @@ const RegisterForm = ({
                 name="employeeCode"
                 label="Employee Code"
                 fullWidth
-                type="number"
                 className={classes.input}
                 value={values.employeeCode}
                 onChange={handleChange("employeeCode")}
@@ -358,7 +371,6 @@ const RegisterForm = ({
                 name="cuil"
                 label="cuil"
                 fullWidth
-                type="number"
                 value={values.cuil}
                 className={classes.input}
                 onChange={handleChange("cuil")}
@@ -424,6 +436,42 @@ const RegisterForm = ({
               </RadioGroup>
             </Grid>
           </Fragment>
+        )}
+
+        {path === "/registerHolder" && (
+          <>
+            <Grid item xs={12} sm={6}>
+              <FormGroup
+                aria-label="debitPayment"
+                name="debitPayment"
+                id="debitPayment"
+                onChange={() => {
+                  setValues({ ...values, debitPayment: !values.debitPayment });
+                }}
+              >
+                <FormControlLabel
+                  control={<CheckBox />}
+                  label="Automatic debit Payment"
+                />
+              </FormGroup>
+            </Grid>
+            {values.debitPayment && (
+              <Grid item xs={12} sm={6}>
+                <InputLabel htmlFor="adornment-amount">CBU</InputLabel>
+                <Input
+                  required
+                  id="CBU"
+                  name="CBU"
+                  label="CBU"
+                  fullWidth
+                  error={hasError}
+                  value={values.CBU}
+                  className={classes.input}
+                  onChange={handleChange("CBU")}
+                />
+              </Grid>
+            )}
+          </>
         )}
 
         {path === "/registerStudent" && (
@@ -501,7 +549,7 @@ const RegisterForm = ({
         <Dialog
           handleClose={handleClose}
           open={open}
-          handlerAccept={handlerAccept}
+          handleAccept={handleAccept}
         />
       </Grid>
       <Grid item xs={12} sm={6} className={classes.grid}>
