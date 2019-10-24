@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import Dialog from "./Dialog";
 
-import { getHolders } from "../../redux/selectors/holders";
+import { getFilteredHolders } from "../../redux/selectors/holders";
 
 const mapStateToProps = store => ({
-  holders: getHolders(store)
+  holders: getFilteredHolders(store)
 });
 
 export default connect(mapStateToProps)(Dialog);
