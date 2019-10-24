@@ -215,7 +215,7 @@ const RegisterForm = ({
 
         createHolder(holder)
           .then(() => {
-            toast.success("The register was successfully!");
+            toast.success("The register was successful!");
             setValues(initialValues);
           })
           .catch(() => {
