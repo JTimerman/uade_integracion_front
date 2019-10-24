@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import isEmpty from "lodash/isEmpty";
 
 import Button from "@material-ui/core/Button";
 import DialogUI from "@material-ui/core/Dialog";
@@ -16,7 +17,7 @@ export default function Dialog({
   handleClose,
   handleAccept
 }) {
-  if (holders === undefined || holders.length === 0) return null;
+  if (isEmpty(holders)) return null;
 
   return (
     <DialogUI

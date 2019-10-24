@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 
-import { getFilteredHolders } from "../../redux/selectors/holders";
+import { getFilteredHolders } from "../../../redux/selectors/holders";
 
 import Dialog from "./Dialog";
 

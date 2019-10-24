@@ -25,7 +25,7 @@ import {
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-import Dialog from "../Dialog";
+import Dialog from "./Dialog";
 
 const RegisterForm = ({
   location,
