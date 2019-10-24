@@ -83,7 +83,7 @@ export default function Absenteeism({
         toast.success("You loaded the absences successfully!");
       })
       .catch(() => {
-        toast.failure("There was an error loading the absences!");
+        toast.error("There was an error loading the absences!");
       });
   };
 

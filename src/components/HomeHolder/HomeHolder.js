@@ -1,31 +1,33 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Redirect } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import { CircularProgress } from "@material-ui/core";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-
-import Avatar from "@material-ui/core/Avatar";
-
-import Typography from "@material-ui/core/Typography";
-import { CircularProgress } from "@material-ui/core";
-
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import useStyles from "./styles";
 import Fab from "@material-ui/core/Fab";
+import Typography from "@material-ui/core/Typography";
 
-const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
-  const classes = useStyles();
-
+const HomeHolder = ({
+  getInvoices,
+  invoices,
+  setInvoiceToPayById,
+  classes
+}) => {
   const [goPay, setGoPay] = React.useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getInvoices().then(response => {
-      setLoading(false);
-    });
+    getInvoices()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("There was an error loading the invoices!");
+      });
   }, [getInvoices]);
 
   const handlerClick = event => {
@@ -68,7 +70,11 @@ const HomeHolder = ({ getInvoices, invoices, setInvoiceToPayById }) => {
                     color="textSecondary"
                     component="p"
                   >
-                    Total amount: ${invoice.amount}
+                    Total amount: $
+                    {new Intl.NumberFormat("de-DE", {
+                      style: "currency",
+                      currency: "ARS"
+                    }).format(invoice.amount)}
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>

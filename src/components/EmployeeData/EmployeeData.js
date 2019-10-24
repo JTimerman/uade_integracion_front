@@ -55,7 +55,6 @@ const EmployeeData = ({
                 </div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem divider className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">email</Icon>
@@ -65,7 +64,6 @@ const EmployeeData = ({
                 <div className={classes.value}>{email}</div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem divider className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">person_pin</Icon>
@@ -75,7 +73,6 @@ const EmployeeData = ({
                 <div className={classes.value}>{address}</div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem divider className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">date_range</Icon>
@@ -85,7 +82,6 @@ const EmployeeData = ({
                 <div className={classes.value}>{startDate}</div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem divider className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">phone</Icon>
@@ -95,7 +91,6 @@ const EmployeeData = ({
                 <div className={classes.value}>{phone}</div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem divider className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">account_balance</Icon>
@@ -105,7 +100,6 @@ const EmployeeData = ({
                 <div className={classes.value}>{cuil}</div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">cake</Icon>
@@ -115,7 +109,6 @@ const EmployeeData = ({
                 <div className={classes.value}>{birthdate}</div>
               </div>
             </ListItem>
-            {/* Data */}
             <ListItem className={classes.field}>
               <div className={classes.icon}>
                 <Icon color="primary">account_box</Icon>
