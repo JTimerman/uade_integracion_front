@@ -38,7 +38,6 @@ export const PrivateRoute = ({
       {...rest}
       render={props => {
         if (!roles.length) {
-          // not logged in so redirect to login page with the return url
           return (
             <Redirect
               to={{ pathname: "/login", state: { from: props.location } }}
@@ -46,17 +45,14 @@ export const PrivateRoute = ({
           );
         }
 
-        // check if route is restricted by role
         if (
           props.location.pathname !== "/" &&
           !ROLES_NAVBAR_ITEMS[roles[0]].find(
             ({ path }) => path === props.location.pathname
           )
         ) {
-          // role not authorised so redirect to login page
           return <Redirect to={{ pathname: "/" }} />;
         }
-        // authorised so return component
         return (
           <Layout>
             <Component {...props} />
