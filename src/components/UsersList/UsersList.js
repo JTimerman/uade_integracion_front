@@ -1,54 +1,62 @@
-import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "./styles";
 
 import MaterialTable from "material-table";
 
-const UsersList = () => {
+const UsersList = ({
+  holders,
+  getHolders,
+  employees,
+  getEmployees,
+  getStudents,
+  students
+}) => {
   const classes = useStyles();
 
-  const [state, setState] = React.useState({
-    columns: [
-      { title: "First name", field: "firstName" },
-      { title: "Last name", field: "lastName" },
-      { title: "Phone number", field: "phone", type: "numeric" },
-      {
-        title: "Address",
-        field: "address"
-      },
-      {
-        title: "Rol",
-        field: "rol"
-      },
-      {
-        title: "Email",
-        field: "email"
-      }
-    ],
-    data: [
-      {
-        firstName: "Pablo",
-        lastName: "Baran",
-        phone: 198666677,
-        address: "lima 667",
-        rol: "Teacher",
-        email: "pbaran@school.edu.ar"
-      },
-      {
-        firstName: "Zerya",
-        lastName: "Baran",
-        phone: 202294683917,
-        address: "Catamarca 566",
-        rol: "Teacher",
-        email: "zbaran@school.edu.ar"
-      }
-    ]
-  });
+  const holdersWithRol = holders.map(holder => ({ ...holder, rol: "Holder" }));
+  const studentsWithRol = students.map(student => ({
+    ...student,
+    rol: "Student"
+  }));
+  var users = employees;
+  users = holdersWithRol.concat(employees);
+  users = users.concat(studentsWithRol);
+
+  useEffect(() => {
+    getHolders();
+  }, []);
+
+  useEffect(() => {
+    getEmployees();
+  }, []);
+
+  useEffect(() => {
+    getStudents();
+  }, []);
+
+  const columns = [
+    { title: "First name", field: "name" },
+    { title: "Last name", field: "lastName" },
+    { title: "Phone number", field: "phone" },
+    {
+      title: "Address",
+      field: "address"
+    },
+    {
+      title: "Rol",
+      field: "rol"
+    },
+    {
+      title: "Email",
+      field: "email"
+    }
+  ];
 
   return (
     <Paper className={classes.root}>
-      <MaterialTable title="Users" columns={state.columns} data={state.data} />
+      <MaterialTable title="Users" columns={columns} data={users} />
     </Paper>
   );
 };

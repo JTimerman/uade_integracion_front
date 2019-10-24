@@ -14,7 +14,7 @@ import StudentData from "./components/StudentData";
 import HomeHolder from "./components/HomeHolder";
 import PayAmount from "./components/PayAmount";
 import Absenteeism from "./components/Absenteeism";
-import UsersList from "./components/UsersList/UsersList";
+import UsersList from "./components/UsersList";
 import store from "./redux/store";
 
 import "react-toastify/dist/ReactToastify.css";
