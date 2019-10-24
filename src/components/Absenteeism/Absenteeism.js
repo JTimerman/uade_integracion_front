@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import useStyles from "./styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
@@ -14,7 +13,6 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 import SearchIcon from "@material-ui/icons/Search";
-import { withStyles } from "@material-ui/core/styles";
 import SimpleDialog from "../SimpleDialog";
 import DateFnsUtils from "@date-io/date-fns";
 
@@ -22,8 +20,12 @@ const initialValues = {
   absenteeismType: ""
 };
 
-const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
-  const classes = useStyles();
+export default function Absenteeism({
+  classes,
+  addFilter,
+  getEmployees,
+  createAbsenteeism
+}) {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState(initialValues);
   const [employeeLastName, setEmployeeLastName] = useState("");
@@ -184,6 +186,4 @@ const Absenteeism = ({ addFilter, getEmployees, createAbsenteeism }) => {
       )}
     </Fragment>
   );
-};
-
-export default withStyles()(Absenteeism);
+}
