@@ -14,6 +14,7 @@ import StudentData from "./components/StudentData";
 import HomeHolder from "./components/HomeHolder";
 import PayAmount from "./components/PayAmount";
 import Absenteeism from "./components/Absenteeism";
+import UsersList from "./components/UsersList/UsersList";
 import store from "./redux/store";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +40,7 @@ function App() {
           <PrivateRoute path="/employee-data" component={EmployeeData} />
           <PrivateRoute path="/student-data" component={StudentData} />
           <PrivateRoute path="/absenteeism" component={Absenteeism} />
+          <PrivateRoute path="/usersList" component={UsersList} />
           <PrivateRoute component={Home} />
         </Switch>
       </BrowserRouter>
