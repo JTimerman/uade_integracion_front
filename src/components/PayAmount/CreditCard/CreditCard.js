@@ -11,10 +11,13 @@ import DateFnsUtils from "@date-io/date-fns";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
 export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   const [selectedDate, setSelectedDate] = React.useState();
-  const [values, setValues] = React.useState();
+  const [values, setValues] = React.useState({ cuotes: 1 });
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -25,7 +28,11 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   };
 
   const handlerClickPay = () => {
-    payInvoice({ ...values, cardType: "credit" })
+    payInvoice({
+      ...values,
+      payment_method: "CREDITO",
+      expiration_date: selectedDate
+    })
       .then(() => {
         toast.success("You paid successfully!");
       })
@@ -40,8 +47,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
         <TextField
           id="standard-name"
           label="Number of credit card"
-          type="number"
-          onChange={handleChange("cardNumber")}
+          onChange={handleChange("card_number")}
           margin="normal"
           fullWidth
         />
@@ -51,7 +57,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
           id="standard-name"
           label="Security code"
           type="password"
-          onChange={handleChange("securityCode")}
+          onChange={handleChange("security_code")}
           margin="normal"
           fullWidth
         />
@@ -78,6 +84,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
       <Grid item xs={12} sm={6}>
         <Input
           id="adornment-amount"
+          disabled
           value={new Intl.NumberFormat("de-DE", {
             style: "currency",
             currency: "ARS"
@@ -86,6 +93,16 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
           className={classes.input}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <InputLabel htmlFor="cuotes-simple">Cuotes</InputLabel>
+        <Select value={values.cuotes} onChange={handleChange("cuotes")}>
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={12}>12</MenuItem>
+        </Select>
       </Grid>
       <Grid item xs={12} sm={6}>
         <Button

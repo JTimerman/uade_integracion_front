@@ -15,7 +15,7 @@ export default function DebitCard({ invoiceToPay, classes, payInvoice }) {
   };
 
   const handlerClickPay = () => {
-    payInvoice({ ...values, cardType: "debit" })
+    payInvoice({ ...values, payment_method: "DEBITO" })
       .then(() => {
         toast.success("You paid successfully!");
       })
