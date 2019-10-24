@@ -209,6 +209,8 @@ const RegisterForm = ({
           }
           holder.CBU = values.CBU;
           holder.payment_method = "DEBITO_AUTOMATICO";
+        } else {
+          holder.payment_method = "OTROS";
         }
 
         createHolder(holder)
