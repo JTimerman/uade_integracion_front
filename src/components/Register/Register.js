@@ -148,11 +148,15 @@ const RegisterForm = ({
           holder_id: holderid
         };
 
-        createStudent(student).then(res => {
-          toast.success("The register was successfull!");
-          setValues(initialValues);
-          setServicesChosen([]);
-        });
+        createStudent(student)
+          .then(res => {
+            toast.success("The register was successfull!");
+            setValues(initialValues);
+            setServicesChosen([]);
+          })
+          .catch(err => {
+            toast.error("An error has ocurred while creating a student!");
+          });
         break;
 
       case "Employee":
@@ -171,12 +175,16 @@ const RegisterForm = ({
           salary: values.salary
         };
 
-        createEmployee(employee).then(res => {
-          toast.success("The register was successfully!");
-          setValues(initialValues);
-          setSelectedStartDate(new Date());
-          setSelectedBirthdate(new Date());
-        });
+        createEmployee(employee)
+          .then(res => {
+            toast.success("The register was successfully!");
+            setValues(initialValues);
+            setSelectedStartDate(new Date());
+            setSelectedBirthdate(new Date());
+          })
+          .catch(err => {
+            toast.error("An error has ocurred while creating a employee!");
+          });
         break;
 
       case "Holder":
@@ -188,10 +196,14 @@ const RegisterForm = ({
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
         };
 
-        createHolder(holder).then(res => {
-          toast.success("The register was successfully!");
-          setValues(initialValues);
-        });
+        createHolder(holder)
+          .then(res => {
+            toast.success("The register was successfully!");
+            setValues(initialValues);
+          })
+          .catch(err => {
+            toast.error("An error has ocurred while creating a holder!");
+          });
         break;
       default:
         console.log(values.role);

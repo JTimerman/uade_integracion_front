@@ -24,7 +24,6 @@ export const createStudent = student => {
   return () => {
     return createStudentService(student).catch(error => {
       Promise.reject(error);
-      toast.error("An error has ocurred while creating a student!");
     });
   };
 };
