@@ -153,6 +153,14 @@ const UsersList = ({
       field: "rol"
     },
     {
+      title: "Salary",
+      field: "salary"
+    },
+    {
+      title: "Fecha de Ingreso",
+      field: "start_date"
+    },
+    {
       title: "Email",
       field: "email",
       editable: "never"
