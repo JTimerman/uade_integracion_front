@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
-import { Typography, CardContent, Card, Divider } from "@material-ui/core";
+import {
+  Typography,
+  CardContent,
+  Card,
+  Divider,
+  Icon
+} from "@material-ui/core";
 import styles from "./Payroll.module.css";
+import clsx from "clsx";
 
 const monthNames = [
   "January",
@@ -36,56 +43,46 @@ const Payroll = ({ payroll, getPayroll }) => {
 
   console.log("months: ", months);
 
+  const { total, facturada: billed, fecha } = payroll;
+  const monthName = useMemo(() => {
+    const date = new Date(fecha);
+    const monthNumber = date.getMonth();
+    return monthNames[monthNumber];
+  }, [fecha]);
+
+  const icon = billed ? (
+    <Icon className={clsx(styles.icon, styles.ok)}>done</Icon>
+  ) : (
+    <Icon className={clsx(styles.icon, styles.pending)}>av_timer</Icon>
+  );
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
         Payroll
       </Typography>
       <div className={styles.payrolls}>
-        {months.length === 0
-          ? "There are no payments recorded"
-          : months.map(({ month, total, billed, pending }) => [
-              <Card key={month} className={styles.card}>
-                <CardContent className={styles.content}>
-                  <div>
-                    <Typography bold variant="h6" gutterBottom>
-                      Month
-                    </Typography>
-                    <Typography variant="h8" gutterBottom>
-                      {month}
-                    </Typography>
-                    <Divider></Divider>
-                  </div>
-                  <div>
-                    <Typography bold variant="h6" gutterBottom>
-                      Total to pay
-                    </Typography>
-                    <Typography variant="h8" gutterBottom>
-                      ${total}
-                    </Typography>
-                    <Divider></Divider>
-                  </div>
-                  <div>
-                    <Typography bold variant="h6" gutterBottom>
-                      Salaries payed
-                    </Typography>
-                    <Typography color="green" variant="h8" gutterBottom>
-                      {billed}
-                    </Typography>
-                    <Divider></Divider>
-                  </div>
-                  <div>
-                    <Typography bold variant="h6" gutterBottom>
-                      Salaries pending to pay
-                    </Typography>
-                    <Typography color="red" variant="h8" gutterBottom>
-                      {pending}
-                    </Typography>
-                    <Divider></Divider>
-                  </div>
-                </CardContent>
-              </Card>
-            ])}
+        <Card className={styles.card}>
+          <CardContent className={styles.content}>
+            <div>
+              <Typography bold variant="h6" gutterBottom>
+                Month
+              </Typography>
+              <Typography variant="h8" gutterBottom>
+                {monthName}
+              </Typography>
+            </div>
+            <div>
+              <Typography bold variant="h6" gutterBottom>
+                Total to pay
+              </Typography>
+              <Typography variant="h8" gutterBottom>
+                ${total}
+              </Typography>
+            </div>
+            <div>{icon}</div>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
