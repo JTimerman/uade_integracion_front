@@ -21,8 +21,13 @@ export const deleteHolder = id => {
   return fetchAPI(BASE_URL + HOLDERS + "/" + id, "DELETE");
 };
 
-export const updateHolder = id => {
-  return fetchAPI(BASE_URL + HOLDERS + "/" + id, "PUT");
+export const updateHolder = (id, newHolder) => {
+  const sentHolder = {
+    ...newHolder,
+    last_name: newHolder.lastName
+  };
+
+  return fetchAPI(BASE_URL + HOLDERS + "/" + id, "PUT", sentHolder);
 };
 
 export const createHolder = holder => {

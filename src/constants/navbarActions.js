@@ -16,35 +16,56 @@ const NAVBAR_ITEMS = {
     icon: "group_add"
   },
   HOME_ADMIN: {
-    path: "/homeADMIN",
+    path: "/homeAdmin",
     name: "Home Admin",
     icon: "home"
   },
   INVOICESANDDUES: {
-    path: "/HomeHolder",
+    path: "/homeHolder",
     name: "Fees and debts",
     icon: "attach_money"
   },
+  ABSENTEEISM: {
+    path: "/absenteeism",
+    name: "Absenteeism",
+    icon: "access_time"
+  },
+  USERSLIST: {
+    path: "/usersList",
+    name: "Users list",
+    icon: "list"
+  },
+  PAYMENTSLIST: {
+    path: "/paymentsList",
+    name: "Payments list",
+    icon: "list"
+  },
   PAYMENTS: {
-    path: "/Payments",
+    path: "/payments",
     name: "Payments",
     icon: "list"
   },
   PAYAMOUNT: {
-    path: "/PayAmount",
+    path: "/payAmount",
     name: "Pay Amount",
     display: false
   },
   STUDENT_DETAILS: {
-    path: "/student-data",
+    path: "/studentPersonalData",
     name: "Student Data",
     icon: "info"
   },
   EMPLOYEE_DETAILS: {
     id: "employeeDetails",
-    path: "/employee-data",
+    path: "/employeePersonalData",
     name: "Employee Data",
     icon: "info"
+  },
+  PAYROLL: {
+    id: "payroll",
+    path: "/payroll",
+    name: "Payroll",
+    icon: "money"
   }
 };
 
@@ -53,7 +74,11 @@ export const ROLES_NAVBAR_ITEMS = {
     NAVBAR_ITEMS.HOME_ADMIN,
     NAVBAR_ITEMS.REGISTER_STUDENT,
     NAVBAR_ITEMS.REGISTER_EMPLOYEE,
-    NAVBAR_ITEMS.REGISTER_HOLDER
+    NAVBAR_ITEMS.REGISTER_HOLDER,
+    NAVBAR_ITEMS.ABSENTEEISM,
+    NAVBAR_ITEMS.USERSLIST,
+    NAVBAR_ITEMS.PAYMENTSLIST,
+    NAVBAR_ITEMS.PAYROLL
   ],
   HOLDER: [
     NAVBAR_ITEMS.INVOICESANDDUES,

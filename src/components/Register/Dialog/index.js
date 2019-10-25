@@ -1,6 +1,11 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
 
-export default makeStyles(theme => ({
+import { getFilteredHolders } from "../../../redux/selectors/holders";
+
+import Dialog from "./Dialog";
+
+const styles = theme => ({
   button: {
     margin: theme.spacing(1)
   },
@@ -29,4 +34,12 @@ export default makeStyles(theme => ({
       }
     }
   }
-}));
+});
+
+const styledComponent = withStyles(styles)(Dialog);
+
+const mapStateToProps = store => ({
+  holders: getFilteredHolders(store)
+});
+
+export default connect(mapStateToProps)(styledComponent);

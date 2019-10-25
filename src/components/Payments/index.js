@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   CheckIcon: {
     color: "green",
-    marginLeft: "65%",
+    marginLeft: "auto",
     fontSize: "45px"
   },
   typography: {

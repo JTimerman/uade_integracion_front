@@ -6,5 +6,6 @@
   "PAYMENTS": "/payments",
   "SIGN_IN": "/auth/login",
   "STUDENTS": "/students",
-  "SERVICES": "/services"
+  "SERVICES": "/services",
+  "PAYROLL": "/payroll"
 }
