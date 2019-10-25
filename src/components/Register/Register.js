@@ -196,10 +196,17 @@ const RegisterForm = ({
         const holder = {
           name,
           last_name: lastname,
+          cuil: values.cuil,
           phone,
           address,
           email: `${name[0] + lastname}@school.edu.ar`.toLowerCase()
         };
+
+        if (values.cuil.length === 0) {
+          toast.error("You should enter a CUIL");
+          setHasError(true);
+          return;
+        }
 
         if (values.debitPayment) {
           if (values.cbu.length === 0) {
@@ -450,10 +457,23 @@ const RegisterForm = ({
                 }}
               >
                 <FormControlLabel
-                  control={<CheckBox />}
+                  control={<CheckBox checked={values.debitPayment} />}
                   label="Automatic debit Payment"
                 />
               </FormGroup>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <InputLabel htmlFor="adornment-amount">CUIL</InputLabel>
+              <Input
+                required
+                id="cuil"
+                name="cuil"
+                label="cuil"
+                fullWidth
+                value={values.cuil}
+                className={classes.input}
+                onChange={handleChange("cuil")}
+              />
             </Grid>
             {values.debitPayment && (
               <Grid item xs={12} sm={6}>
