@@ -42,7 +42,7 @@ export default function Absenteeism({
   const handleSearchEmployee = () => {
     const filter = {
       field: "employees",
-      type: "last_name",
+      type: "lastName",
       filter: employeeLastName
     };
 

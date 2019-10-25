@@ -42,9 +42,7 @@ const SimpleDialog = ({ onClose, selectedValue, open, employees, classes }) => {
                   <PersonIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary={`${employee.name} ${employee.last_name}`}
-              />
+              <ListItemText primary={`${employee.name} ${employee.lastName}`} />
             </ListItem>
           ))}
         </List>
