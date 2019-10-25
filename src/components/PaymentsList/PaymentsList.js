@@ -11,8 +11,6 @@ const PaymentsList = ({ getPayments, payments }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(payments);
-
   const columns = [
     { title: "First name", field: "holderName" },
     { title: "Last name", field: "holderLastName" },
