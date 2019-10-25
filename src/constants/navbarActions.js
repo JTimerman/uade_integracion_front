@@ -35,6 +35,11 @@ const NAVBAR_ITEMS = {
     name: "Users list",
     icon: "list"
   },
+  PAYMENTSLIST: {
+    path: "/paymentsList",
+    name: "Payments list",
+    icon: "list"
+  },
   PAYMENTS: {
     path: "/payments",
     name: "Payments",
@@ -65,7 +70,8 @@ export const ROLES_NAVBAR_ITEMS = {
     NAVBAR_ITEMS.REGISTER_EMPLOYEE,
     NAVBAR_ITEMS.REGISTER_HOLDER,
     NAVBAR_ITEMS.ABSENTEEISM,
-    NAVBAR_ITEMS.USERSLIST
+    NAVBAR_ITEMS.USERSLIST,
+    NAVBAR_ITEMS.PAYMENTSLIST
   ],
   HOLDER: [
     NAVBAR_ITEMS.INVOICESANDDUES,
