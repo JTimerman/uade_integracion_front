@@ -18,6 +18,7 @@ import StudentData from "./components/StudentData";
 import UsersList from "./components/UsersList";
 import PaymentsList from "./components/PaymentsList";
 import store from "./redux/store";
+import Payroll from "./components/Payroll";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
           <PrivateRoute path="/registerHolder" component={Register} />
           <PrivateRoute path="/registerStudent" component={Register} />
           <PrivateRoute path="/studentPersonalData" component={StudentData} />
+          <PrivateRoute path="/payroll" component={Payroll} />
           <PrivateRoute component={Home} />
         </Switch>
       </BrowserRouter>

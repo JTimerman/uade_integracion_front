@@ -60,6 +60,12 @@ const NAVBAR_ITEMS = {
     path: "/employeePersonalData",
     name: "Employee Data",
     icon: "info"
+  },
+  PAYROLL: {
+    id: "payroll",
+    path: "/payroll",
+    name: "Payroll",
+    icon: "money"
   }
 };
 
@@ -71,7 +77,8 @@ export const ROLES_NAVBAR_ITEMS = {
     NAVBAR_ITEMS.REGISTER_HOLDER,
     NAVBAR_ITEMS.ABSENTEEISM,
     NAVBAR_ITEMS.USERSLIST,
-    NAVBAR_ITEMS.PAYMENTSLIST
+    NAVBAR_ITEMS.PAYMENTSLIST,
+    NAVBAR_ITEMS.PAYROLL
   ],
   HOLDER: [
     NAVBAR_ITEMS.INVOICESANDDUES,
