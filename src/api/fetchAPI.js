@@ -4,7 +4,7 @@ import { BASE_URL } from "../constants/endpoints.json";
 export default (url, method, body) => {
   let payload;
 
-  if (method === "POST" || method === "PUT") {
+  if (method === "POST" || method === "PUT" || method === "PATCH") {
     payload = {
       body: JSON.stringify(body),
       headers: {
@@ -17,6 +17,9 @@ export default (url, method, body) => {
     method,
     ...payload
   }).then(response => {
+    if (response.status >= 300)
+      return Promise.reject("Error in connecting to the server!");
+    if (method === "DELETE") return Promise.resolve();
     if (response.ok) return response.json();
     return response.json().then(json => {
       throw json;

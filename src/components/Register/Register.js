@@ -42,7 +42,7 @@ const RegisterForm = ({
 
   const initialValues = {
     address: "",
-    CBU: "",
+    cbu: "",
     cuil: "",
     debitPayment: false,
     employeeCode: "",
@@ -202,12 +202,12 @@ const RegisterForm = ({
         };
 
         if (values.debitPayment) {
-          if (values.CBU.length === 0) {
-            toast.error("You should enter a CBU");
+          if (values.cbu.length === 0) {
+            toast.error("You should enter a cbu");
             setHasError(true);
             return;
           }
-          holder.CBU = values.CBU;
+          holder.cbu = values.cbu;
           holder.payment_method = "DEBITO_AUTOMATICO";
         } else {
           holder.payment_method = "OTROS";
@@ -460,14 +460,14 @@ const RegisterForm = ({
                 <InputLabel htmlFor="adornment-amount">CBU</InputLabel>
                 <Input
                   required
-                  id="CBU"
-                  name="CBU"
-                  label="CBU"
+                  id="cbu"
+                  name="cbu"
+                  label="cbu"
                   fullWidth
                   error={hasError}
-                  value={values.CBU}
+                  value={values.cbu}
                   className={classes.input}
-                  onChange={handleChange("CBU")}
+                  onChange={handleChange("cbu")}
                 />
               </Grid>
             )}

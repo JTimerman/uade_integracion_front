@@ -1,6 +1,8 @@
 import {
   getStudents as getStudentsService,
-  createStudent as createStudentService
+  createStudent as createStudentService,
+  updateStudent as updateStudentService,
+  deleteStudent as deleteStudentService
 } from "../../services/students";
 
 import { SET_STUDENTS } from "./actionTypes.json";
@@ -22,5 +24,19 @@ export const getStudents = () => {
 export const createStudent = student => {
   return () => {
     return createStudentService(student).catch(error => Promise.reject(error));
+  };
+};
+
+export const updateStudent = (id, newStudent) => {
+  return () => {
+    return updateStudentService(id, newStudent).catch(error =>
+      Promise.reject(error)
+    );
+  };
+};
+
+export const deleteStudent = id => {
+  return () => {
+    return deleteStudentService(id).catch(error => Promise.reject(error));
   };
 };

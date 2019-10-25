@@ -1,5 +1,6 @@
 import get from "lodash/get";
 
+export const getEmployees = store => get(store, "employees");
 export const getFilteredEmployees = store =>
   get(store, "employees").filter(employee => {
     const filterForEmployee = get(store, "filters.employees");

@@ -29,9 +29,9 @@ export default function DebitCard({ invoiceToPay, classes, payInvoice }) {
       <Grid item xs={12} sm={6}>
         <TextField
           id="standard-name"
-          label="CBU"
+          label="cbu"
           type="number"
-          onChange={handleChange("CBU")}
+          onChange={handleChange("cbu")}
           margin="normal"
           fullWidth
         />

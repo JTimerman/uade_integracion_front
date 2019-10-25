@@ -12,6 +12,7 @@
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
     "lodash": "^4.17.15",
+    "material-table": "^1.53.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-pickers": "^2.2.4",
     "prettier": "^1.18.2",

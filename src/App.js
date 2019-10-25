@@ -15,7 +15,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Register from "./components/Register";
 import SignIn from "./components/SignIn";
 import StudentData from "./components/StudentData";
-
+import UsersList from "./components/UsersList";
 import store from "./redux/store";
 
 export default function App() {
@@ -28,6 +28,7 @@ export default function App() {
           <Route exact path="/logout" component={Logout} />
           <PrivateRoute exact path="/" component={Home} />>
           <PrivateRoute path="/absenteeism" component={Absenteeism} />
+          <PrivateRoute path="/usersList" component={UsersList} />
           <PrivateRoute path="/employeePersonalData" component={EmployeeData} />
           <PrivateRoute path="/homeAdmin" component={Home} />
           <PrivateRoute path="/homeHolder" component={HomeHolder} />
