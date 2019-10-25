@@ -70,12 +70,12 @@ const UsersList = ({
             toast.error("An error has ocurred while updating a student!");
           });
         break;
-      case "Maestro" ||
-        "Director" ||
-        "Secretaria" ||
-        "Teacher" ||
-        "Janitor" ||
-        "Principal":
+      case "Maestro":
+      case "Director":
+      case "Secretaria":
+      case "Teacher":
+      case "Janitor":
+      case "Principal":
         updateEmployee(newData.id, newData)
           .then(() => {
             toast.success("The update was successful!");
@@ -112,12 +112,12 @@ const UsersList = ({
             toast.error("An error has ocurred while deleting a student!");
           });
         break;
-      case "Maestro" ||
-        "Director" ||
-        "Secretaria" ||
-        "Teacher" ||
-        "Janitor" ||
-        "Principal":
+      case "Maestro":
+      case "Director":
+      case "Secretaria":
+      case "Teacher":
+      case "Janitor":
+      case "Principal":
         deleteEmployee(data.id)
           .then(() => {
             toast.success("The delete was successful!");
