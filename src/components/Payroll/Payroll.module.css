@@ -14,3 +14,13 @@
   display: flex;
   flex-direction: column;
 }
+
+.icon {
+  font-size: 10px;
+}
+.icon.ok {
+  color: green;
+}
+.icon.pending {
+  color: orange;
+}
