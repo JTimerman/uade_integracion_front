@@ -1,6 +1,7 @@
 import React from "react";
-
+import { Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
+import isEmpty from "lodash/isEmpty";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -18,16 +19,25 @@ import Select from "@material-ui/core/Select";
 export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
   const [selectedDate, setSelectedDate] = React.useState();
   const [values, setValues] = React.useState({ payments: 1 });
+  const [hasError, setHasError] = React.useState(false);
+  const [correctPayment, setCorrectPayment] = React.useState(false);
 
   const handleChange = name => event => {
+    setHasError(false);
     setValues({ ...values, [name]: event.target.value });
   };
 
   const handleDateChange = date => {
+    setHasError(false);
     setSelectedDate(date);
   };
 
   const handlerClickPay = () => {
+    if (isEmpty(values.card_number) || isEmpty(values.cvv)) {
+      setHasError(true);
+      toast.error("There are missing fields!");
+      return;
+    }
     payInvoice({
       ...values,
       payment_method: "CREDITO",
@@ -36,16 +46,20 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
     })
       .then(() => {
         toast.success("You paid successfully!");
+        setCorrectPayment(true);
       })
       .catch(() => {
         toast.error("There was an error processing the payment!");
       });
   };
 
+  if (correctPayment) return <Redirect to={{ pathname: "/payments" }} />;
+
   return (
     <>
       <Grid item xs={12} sm={6}>
         <TextField
+          error={hasError}
           id="standard-name"
           label="Number of credit card"
           onChange={handleChange("card_number")}
@@ -55,6 +69,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
+          error={hasError}
           id="standard-name"
           label="Security code"
           type="password"
@@ -69,6 +84,7 @@ export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
             <KeyboardDatePicker
               disableToolbar
               fullWidth
+              error={hasError}
               variant="inline"
               format="MM/yyyy"
               margin="normal"
