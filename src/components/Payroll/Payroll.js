@@ -30,25 +30,20 @@ const Payroll = ({ payroll, getPayroll }) => {
   useEffect(() => {
     getPayroll().then(s => console.log(s));
   }, [getPayroll]);
-
-  const months = useMemo(() => {
-    return Object.keys(payroll).map(monthNumber => {
-      const month = monthNames[monthNumber - 1];
-      return {
-        month,
-        ...payroll[monthNumber]
-      };
-    });
-  }, [payroll]);
-
-  console.log("months: ", months);
-
+  if (!payroll)
+    return (
+      <Typography variant="h6" gutterBottom>
+        There are no payrolls for this month
+      </Typography>
+    );
   const { total, facturada: billed, fecha } = payroll;
-  const monthName = useMemo(() => {
+
+  let monthName;
+  if (fecha) {
     const date = new Date(fecha);
     const monthNumber = date.getMonth();
-    return monthNames[monthNumber];
-  }, [fecha]);
+    monthName = monthNames[monthNumber];
+  }
 
   const icon = billed ? (
     <Icon className={clsx(styles.icon, styles.ok)}>done</Icon>

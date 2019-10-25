@@ -4,6 +4,7 @@ import PayrollService from "../../services/payroll";
 export const getPayroll = () => {
   return dispatch => {
     return PayrollService.getMonthly().then(payroll => {
+      if (!payroll) return Promise.reject();
       dispatch(setPayroll(payroll));
     });
   };
