@@ -1,6 +1,6 @@
 import { SET_PAYROLL } from "../actions/actionTypes.json";
 
-const initialState = [];
+const initialState = null;
 
 export default function payroll(state = initialState, action) {
   switch (action.type) {
