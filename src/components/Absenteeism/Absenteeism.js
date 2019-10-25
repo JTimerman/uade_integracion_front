@@ -83,8 +83,12 @@ export default function Absenteeism({
       .then(() => {
         toast.success("You loaded the absences successfully!");
       })
-      .catch(() => {
-        toast.error("There was an error loading the absences!");
+      .catch(response => {
+        if (response.error)
+          return toast.error(
+            `There was an error creating the absence: '${response.error}'`
+          );
+        return toast.error("There was an error loading the absences!");
       });
   };
 
