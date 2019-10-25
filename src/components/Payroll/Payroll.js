@@ -80,9 +80,7 @@ const Payroll = ({ payroll, getPayroll }) => {
                 ${total}
               </Typography>
             </div>
-            <div>
-              <Icon>{icon}</Icon>
-            </div>
+            <div>{icon}</div>
           </CardContent>
         </Card>
       </div>
