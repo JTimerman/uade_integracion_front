@@ -2,7 +2,13 @@ import fetchAPI from "../api/fetchAPI";
 import { BASE_URL, STUDENTS } from "../constants/endpoints.json";
 
 export const getStudents = () => {
-  return fetchAPI(BASE_URL + STUDENTS, "GET");
+  return fetchAPI(BASE_URL + STUDENTS, "GET").then(students =>
+    students.map(student => ({
+      ...student,
+      lastName: student.last_name,
+      last_name: undefined
+    }))
+  );
 };
 
 export const getStudentById = id => {

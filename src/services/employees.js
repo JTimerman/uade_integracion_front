@@ -2,7 +2,13 @@ import fetchAPI from "../api/fetchAPI";
 import { BASE_URL, EMPLOYEES } from "../constants/endpoints.json";
 
 export const getEmployees = () => {
-  return fetchAPI(BASE_URL + EMPLOYEES, "GET");
+  return fetchAPI(BASE_URL + EMPLOYEES, "GET").then(employees =>
+    employees.map(employee => ({
+      ...employee,
+      lastName: employee.last_name,
+      last_name: undefined
+    }))
+  );
 };
 
 export const getEmployeeById = id => {

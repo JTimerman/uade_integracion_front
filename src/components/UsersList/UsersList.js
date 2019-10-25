@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "./styles";
 import { toast } from "react-toastify";
@@ -23,7 +22,6 @@ const UsersList = ({
   const [state, setState] = React.useState({
     data: holders.concat(students.concat(employees))
   });
-  const [editedUser, setEditedUser] = React.useState({});
   const holdersWithRol = holders.map(holder => ({ ...holder, rol: "Holder" }));
 
   const studentsWithRol = students.map(student => ({
@@ -37,51 +35,58 @@ const UsersList = ({
 
   useEffect(() => {
     getHolders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     getEmployees();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     getStudents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlerEditUser = newData => {
     switch (newData.rol) {
       case "Holder":
         updateHolder(newData.holderid, newData)
-          .then(res => {
-            toast.success("The update was successfull!");
+          .then(() => {
+            toast.success("The update was successful!");
             getHolders();
           })
-          .catch(err => {
+          .catch(() => {
             toast.error("An error has ocurred while updating a holder!");
           });
         break;
       case "Student":
-        updateStudent(newData.studentid, newData)
-          .then(res => {
-            toast.success("The update was successfull!");
+        updateStudent(newData.id, newData)
+          .then(() => {
+            toast.success("The update was successful!");
             getStudents();
           })
-          .catch(err => {
+          .catch(() => {
             toast.error("An error has ocurred while updating a student!");
           });
+        break;
       case "Maestro" ||
         "Director" ||
         "Secretaria" ||
         "Teacher" ||
         "Janitor" ||
         "Principal":
-        updateEmployee(newData.employeeid, newData)
-          .then(res => {
-            toast.success("The update was successfull!");
+        updateEmployee(newData.id, newData)
+          .then(() => {
+            toast.success("The update was successful!");
             getEmployees();
           })
-          .catch(err => {
-            toast.error("An error has ocurred while updating a student!");
+          .catch(() => {
+            toast.error("An error has ocurred while updating an employee!");
           });
+        break;
+      default:
+        break;
     }
   };
 
@@ -89,37 +94,41 @@ const UsersList = ({
     switch (data.rol) {
       case "Holder":
         deleteHolder(data.holderid)
-          .then(res => {
-            toast.success("The update was successfull!");
+          .then(() => {
+            toast.success("The delete was successful!");
             getHolders();
           })
-          .catch(err => {
-            toast.error("An error has ocurred while updating a holder!");
+          .catch(() => {
+            toast.error("An error has ocurred while deleting a holder!");
           });
         break;
       case "Student":
-        deleteStudent(data.studentid)
-          .then(res => {
-            toast.success("The update was successfull!");
+        deleteStudent(data.id)
+          .then(() => {
+            toast.success("The delete was successful!");
             getStudents();
           })
-          .catch(err => {
-            toast.error("An error has ocurred while updating a student!");
+          .catch(() => {
+            toast.error("An error has ocurred while deleting a student!");
           });
+        break;
       case "Maestro" ||
         "Director" ||
         "Secretaria" ||
         "Teacher" ||
         "Janitor" ||
         "Principal":
-        deleteEmployee(data.employeeid)
-          .then(res => {
-            toast.success("The update was successfull!");
+        deleteEmployee(data.id)
+          .then(() => {
+            toast.success("The delete was successful!");
             getEmployees();
           })
-          .catch(err => {
-            toast.error("An error has ocurred while updating a student!");
+          .catch(() => {
+            toast.error("An error has ocurred while deleting an employee!");
           });
+        break;
+      default:
+        break;
     }
   };
 
@@ -138,7 +147,7 @@ const UsersList = ({
     {
       title: "Email",
       field: "email",
-      editable: false
+      editable: "never"
     }
   ];
 
@@ -156,7 +165,6 @@ const UsersList = ({
                 const data = [...state.data];
                 data[data.indexOf(oldData)] = newData;
                 const newUser = newData;
-                setEditedUser(newUser);
                 handlerEditUser(newUser);
               }, 600);
             }),
@@ -175,4 +183,4 @@ const UsersList = ({
     </Paper>
   );
 };
-export default withStyles()(UsersList);
+export default UsersList;

@@ -29,16 +29,14 @@ export const createStudent = student => {
 
 export const updateStudent = (id, newStudent) => {
   return () => {
-    return updateStudentService(id, newStudent).catch(error => {
-      Promise.reject(error);
-    });
+    return updateStudentService(id, newStudent).catch(error =>
+      Promise.reject(error)
+    );
   };
 };
 
 export const deleteStudent = id => {
   return () => {
-    return deleteStudentService(id).catch(error => {
-      Promise.reject(error);
-    });
+    return deleteStudentService(id).catch(error => Promise.reject(error));
   };
 };

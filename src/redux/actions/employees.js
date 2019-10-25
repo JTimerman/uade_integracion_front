@@ -31,16 +31,14 @@ export const createEmployee = employee => {
 
 export const updateEmployee = (id, newEmployee) => {
   return () => {
-    return updateEmployeeService(id, newEmployee).catch(error => {
-      Promise.reject(error);
-    });
+    return updateEmployeeService(id, newEmployee).catch(error =>
+      Promise.reject(error)
+    );
   };
 };
 
 export const deleteEmployee = id => {
   return () => {
-    return deleteEmployeeService(id).catch(error => {
-      Promise.reject(error);
-    });
+    return deleteEmployeeService(id).catch(error => Promise.reject(error));
   };
 };

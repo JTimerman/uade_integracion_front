@@ -10,7 +10,6 @@ import {
 import { SET_HOLDERS } from "./actionTypes.json";
 import { setPayments } from "./payments";
 import { setInvoices } from "./invoices";
-import { toast } from "react-toastify";
 
 function setHolders(holders) {
   return { type: SET_HOLDERS, holders };
@@ -28,10 +27,7 @@ export const getHolders = () => {
 
 export const createHolder = holder => {
   return () => {
-    return createHolderService(holder).catch(error => {
-      Promise.reject(error);
-      toast.error("An error has ocurred while creating a holder!");
-    });
+    return createHolderService(holder).catch(error => Promise.reject(error));
   };
 };
 
@@ -47,17 +43,15 @@ export const getInvoices = () => {
 
 export const updateHolder = (id, newHolder) => {
   return () => {
-    return updateHolderService(id, newHolder).catch(error => {
-      Promise.reject(error);
-    });
+    return updateHolderService(id, newHolder).catch(error =>
+      Promise.reject(error)
+    );
   };
 };
 
 export const deleteHolder = id => {
   return () => {
-    return deleteHolderService(id).catch(error => {
-      Promise.reject(error);
-    });
+    return deleteHolderService(id).catch(error => Promise.reject(error));
   };
 };
 
