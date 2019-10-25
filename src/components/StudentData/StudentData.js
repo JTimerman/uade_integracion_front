@@ -57,7 +57,7 @@ export default function StudentData({ personalData, classes }) {
               <div className="data">
                 <div className={classes.label}>Parent</div>
                 <div className={classes.value}>
-                  {holder ? `${holder.name} ${holder.lastName}` : "Loading..."}
+                  {holder ? `${holder.name} ${holder.last_name}` : "Loading..."}
                 </div>
               </div>
             </ListItem>
