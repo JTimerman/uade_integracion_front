@@ -17,7 +17,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
 export default function CreditCard({ invoiceToPay, classes, payInvoice }) {
-  const [selectedDate, setSelectedDate] = React.useState();
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
   const [values, setValues] = React.useState({ payments: 1 });
   const [hasError, setHasError] = React.useState(false);
   const [correctPayment, setCorrectPayment] = React.useState(false);

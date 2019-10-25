@@ -9,22 +9,22 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
 export default function DebitCard({ invoiceToPay, classes, payInvoice }) {
-  const [values, setValues] = React.useState();
+  const [cbu, setCbu] = React.useState("");
   const [hasError, setHasError] = React.useState(false);
   const [correctPayment, setCorrectPayment] = React.useState(false);
 
-  const handleChange = name => event => {
+  const handleCbuChange = event => {
     setHasError(false);
-    setValues({ ...values, [name]: event.target.value });
+    setCbu(event.target.value);
   };
 
   const handlerClickPay = () => {
-    if (isEmpty(values.cbu)) {
+    if (isEmpty(cbu)) {
       setHasError(true);
       toast.error("There are missing fields!");
       return;
     }
-    payInvoice({ ...values, payment_method: "DEBITO" })
+    payInvoice({ cbu, payment_method: "DEBITO" })
       .then(() => {
         toast.success("You paid successfully!");
         setCorrectPayment(true);
@@ -42,9 +42,8 @@ export default function DebitCard({ invoiceToPay, classes, payInvoice }) {
         <TextField
           error={hasError}
           id="standard-name"
-          label="cbu"
-          type="number"
-          onChange={handleChange("cbu")}
+          label="CBU"
+          onChange={handleCbuChange}
           margin="normal"
           fullWidth
         />
