@@ -156,7 +156,7 @@ const RegisterForm = ({
         createStudent(student)
           .then(() => {
             toast.success("The register was successfull!");
-            setValues(initialValues);
+            setValues({ ...initialValues, role: "Student" });
             setServicesChosen([]);
           })
           .catch(() => {
@@ -183,7 +183,7 @@ const RegisterForm = ({
         createEmployee(employee)
           .then(() => {
             toast.success("The register was successfully!");
-            setValues(initialValues);
+            setValues({ ...initialValues, role: "Employee" });
             setSelectedStartDate(new Date());
             setSelectedBirthdate(new Date());
           })
@@ -223,7 +223,7 @@ const RegisterForm = ({
         createHolder(holder)
           .then(() => {
             toast.success("The register was successful!");
-            setValues(initialValues);
+            setValues({ ...initialValues, role: "Holder" });
           })
           .catch(() => {
             toast.error("An error has ocurred while creating a holder!");
