@@ -141,6 +141,14 @@ const UsersList = ({
       field: "address"
     },
     {
+      title: "CBU",
+      field: "cbu"
+    },
+    {
+      title: "CUIL",
+      field: "cuil"
+    },
+    {
       title: "Rol",
       field: "rol"
     },
