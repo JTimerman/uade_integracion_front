@@ -80,7 +80,7 @@ const RegisterForm = ({
       setValues(currentValues => ({ ...currentValues, role: "Holder" }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location.pathname]);
 
   const handleStartDateChange = date => {
     setSelectedStartDate(date);

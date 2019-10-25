@@ -63,7 +63,7 @@ const HomeHolder = ({
                     </Avatar>
                   }
                   title={invoice.name + " " + invoice.lastname}
-                  subheader={new Date(invoice.date).toDateString(dateOptions)}
+                  subheader={invoice.date}
                 />
                 <CardContent className={classes.CardContent}>
                   <Typography
